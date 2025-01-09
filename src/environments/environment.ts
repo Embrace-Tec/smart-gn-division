@@ -4,7 +4,7 @@ import { initializeApp } from "firebase/app";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyAXpCI30WIYYtutk64tyIS_cZZsl1-YOwA",
   authDomain: "smart-hapurudeniya.firebaseapp.com",
   projectId: "smart-hapurudeniya",
