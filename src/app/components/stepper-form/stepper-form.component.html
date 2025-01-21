@@ -1,0 +1,1444 @@
+<div class="wrapper p-8 bg-gray-50 rounded-lg shadow-xl max-w-7xl mx-auto mt-10">
+  <h1 class="text-3xl font-bold text-gray-800 mb-4 text-center">SMART - හපුරුදෙණිය</h1>
+  <h2 class="text-2xl font-semibold text-gray-700 mb-8 text-center">පවුල් තොරතුරු දත්ත පත්‍රිකාව</h2>
+
+  <mat-horizontal-stepper [linear]="true" #stepper class="space-y-8">
+<!--    Step 1-->
+    <mat-step [stepControl]="firstFormGroup" #step1>
+      <form [formGroup]="firstFormGroup" class="space-y-6">
+        <ng-template matStepLabel class="text-lg font-semibold text-gray-700">මූලික තොරතුරු</ng-template>
+
+        <!-- First row with two fields -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <mat-form-field appearance="fill" class="w-full">
+            <mat-label class="text-sm">ගෘහ මූලික අංකය</mat-label>
+            <input matInput placeholder="65" formControlName="firstCtrl" required class="input-text" />
+            <mat-error *ngIf="firstFormGroup.get('firstCtrl')?.hasError('required')" class="text-red-500 text-sm">
+              අංකය අවශ්‍යයි.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="w-full">
+            <mat-label class="text-sm">ගම</mat-label>
+            <input matInput placeholder="හපුරුදෙණිය" formControlName="secondCtrl" required class="input-text" />
+            <mat-error *ngIf="firstFormGroup.get('secondCtrl')?.hasError('required')" class="text-red-500 text-sm">
+              ගම අවශ්‍යයි.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Second row with one field -->
+        <div class="space-y-6">
+          <mat-form-field appearance="fill" class="w-full">
+            <mat-label class="text-sm">ගෘහ මූලිකයාගේ නම</mat-label>
+            <input matInput placeholder="මුල් නම , අවසාන නම " formControlName="thirdCtrl" required class="input-text" />
+            <mat-error *ngIf="firstFormGroup.get('thirdCtrl')?.hasError('required')" class="text-red-500 text-sm">
+              නම අවශ්‍යයි.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="w-full">
+            <mat-label class="text-sm">ලිපිනය</mat-label>
+            <input matInput placeholder="නම , හපුරුදෙණිය" formControlName="fourthCtrl" required class="input-text" />
+            <mat-error *ngIf="firstFormGroup.get('fourthCtrl')?.hasError('required')" class="text-red-500 text-sm">
+              ලිපිනය අවශ්‍යයි.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Fourth row with two fields -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <mat-form-field appearance="fill" class="w-full">
+            <mat-label class="text-sm">දුරකථන අංකය</mat-label>
+            <input matInput placeholder="දුරකථන අංකය" formControlName="fifthCtrl" required class="input-text" />
+            <mat-error *ngIf="firstFormGroup.get('fifthCtrl')?.hasError('required')" class="text-red-500 text-sm">
+              දුරකථන අංකය අවශ්‍යයි.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="w-full">
+            <mat-label class="text-sm">වට්ස්ඇප් අංකය</mat-label>
+            <input matInput placeholder="වට්ස්ඇප් අංකය" formControlName="sixthCtrl" required class="input-text" />
+            <mat-error *ngIf="firstFormGroup.get('sixthCtrl')?.hasError('required')" class="text-red-500 text-sm">
+              වට්ස්ඇප් අංකය අවශ්‍යයි.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="flex justify-end space-x-4">
+          <button mat-button matStepperNext (click)="markStepComplete(step1)" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all">
+            Next
+          </button>
+        </div>
+      </form>
+    </mat-step>
+
+<!--Step 2-->
+    <mat-step [stepControl]="secondFormGroup" #step2>
+      <form [formGroup]="secondFormGroup" class="space-y-6">
+        <ng-template matStepLabel class="text-lg font-semibold text-gray-700">පුද්ගල තොරතුරු</ng-template>
+
+        <!-- First row with two fields -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <mat-form-field appearance="fill" class="w-full">
+            <mat-label class="text-sm">නම</mat-label>
+            <input matInput placeholder="මුල් නම , අවසාන නම" formControlName="firstCtrl" required class="input-text" />
+            <mat-error *ngIf="secondFormGroup.get('firstCtrl')?.hasError('required')" class="text-red-500 text-sm">
+              නම අවශ්‍යයි.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="w-full">
+            <mat-label class="text-sm">ගෘහ මූලිකයොට ඇති නෑකම</mat-label>
+            <mat-select formControlName="relationCtrl" required class="input-text">
+              <mat-option value="" disabled>නෑකම තෝරන්න</mat-option>
+              <mat-option value="ගෘහ මූලික">ගෘහ මූලික</mat-option>
+              <mat-option value="තාත්තා">තාත්තා</mat-option>
+              <mat-option value="මව">මව</mat-option>
+              <mat-option value="සැමියා/බිරිඳ">සැමියා/බිරිඳ</mat-option>
+              <mat-option value="දරුවා">දරුවා</mat-option>
+              <mat-option value="සොයුරා/සොයුරිය">සොයුරා/සොයුරිය</mat-option>
+              <mat-option value="ඥාතී">ඥාතී</mat-option>
+              <mat-option value="වෙනත්">වෙනත්</mat-option>
+            </mat-select>
+            <mat-error *ngIf="secondFormGroup.get('relationCtrl')?.hasError('required')" class="text-red-500 text-sm">
+              නෑ කම තෙරිය යුතුයි.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Second row with one field -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <mat-form-field appearance="fill" class="w-full">
+            <mat-label class="text-sm">උපන් දිනය</mat-label>
+            <input matInput [matDatepicker]="picker" placeholder="07/11/2002" formControlName="thirdCtrl" required class="input-text" />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="secondFormGroup.get('thirdCtrl')?.hasError('required')" class="text-red-500 text-sm">
+              උපන් දිනය අවශ්‍යයි.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="w-full">
+            <mat-label class="text-sm">ජා.හැ. අංකය</mat-label>
+            <input matInput placeholder="200219300925" formControlName="fourthCtrl" required class="input-text" />
+            <mat-error *ngIf="secondFormGroup.get('fourthCtrl')?.hasError('required')" class="text-red-500 text-sm">
+              ජා.හැ. අංකය අවශ්‍යයි.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Fourth row with two fields -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <mat-form-field appearance="fill" class="w-full">
+            <mat-label class="text-sm">ජාතිය</mat-label>
+            <mat-select formControlName="fifthCtrl" required class="input-text">
+              <mat-option value="සිංහල">සිංහල</mat-option>
+              <mat-option value="දෙමළ">දෙමළ</mat-option>
+              <mat-option value="මුස්ලිම්">මුස්ලිම්</mat-option>
+              <mat-option value="බර්ගර්">බර්ගර්</mat-option>
+              <mat-option value="වෙනත්">වෙනත්</mat-option>
+            </mat-select>
+            <mat-error *ngIf="secondFormGroup.get('fifthCtrl')?.hasError('required')" class="text-red-500 text-sm">
+              ජාතිය අවශ්‍යයි.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="w-full">
+            <mat-label class="text-sm">ආගම</mat-label>
+            <mat-select formControlName="sixthCtrl" required class="input-text">
+              <mat-option value="බෞද්ධ">බෞද්ධ</mat-option>
+              <mat-option value="හින්දු">හින්දු</mat-option>
+              <mat-option value="ඉස්ලාම්">ඉස්ලාම්</mat-option>
+              <mat-option value="ක්‍රිස්තු">ක්‍රිස්තු</mat-option>
+              <mat-option value="වෙනත්">වෙනත්</mat-option>
+            </mat-select>
+            <mat-error *ngIf="secondFormGroup.get('sixthCtrl')?.hasError('required')" class="text-red-500 text-sm">
+              ආගම අවශ්‍යයි.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Fifth row with two fields -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <mat-form-field appearance="fill" class="w-full">
+            <mat-label class="text-sm">අධ්‍යාපන මට්ටම/දැනට අධ්‍යාපනය ලබන ශ්‍රෙනිය</mat-label>
+            <input matInput placeholder="උසස් පෙළ සමත්" formControlName="seventhCtrl" class="input-text" />
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="w-full">
+            <mat-label class="text-sm">රැකියාව/තනතුර</mat-label>
+            <input matInput placeholder="පොලිස්" formControlName="eighthCtrl" class="input-text" />
+          </mat-form-field>
+        </div>
+
+        <!-- Sixth row with two fields -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <mat-form-field appearance="fill" class="w-full">
+            <mat-label class="text-sm">මාසික වැටුප/ආදායම</mat-label>
+            <input matInput placeholder="Rs:50,000" formControlName="ninthCtrl" class="input-text" />
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="w-full">
+            <mat-label class="text-sm">රෝගාබාධ</mat-label>
+            <input matInput placeholder="රෝගාබාධ නැත" formControlName="tenthCtrl" class="input-text" />
+          </mat-form-field>
+        </div>
+
+        <!-- Seventh row with one field -->
+        <div class="grid grid-cols-1 gap-6">
+          <mat-form-field appearance="fill" class="w-full">
+            <mat-label class="text-sm">ආබාධිත විස්තර</mat-label>
+            <input matInput placeholder="ආබාධිත නැත" formControlName="eleventhCtrl" class="input-text" />
+          </mat-form-field>
+        </div>
+
+        <div class="flex justify-between space-x-4">
+          <button mat-button (click)="addToTable()" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all">
+            Add to Table
+          </button>
+        </div>
+
+        <div class="mt-6">
+          <table class="min-w-full table-auto bg-white border-collapse shadow-lg rounded-lg overflow-hidden">
+            <!-- Table Header -->
+            <thead class="bg-[#038763] text-white">
+            <tr>
+              <th class="px-6 py-3 text-left text-sm font-semibold">නම</th>
+              <th class="px-6 py-3 text-left text-sm font-semibold">ගෘහ මූලිකයොට ඇති නෑකම</th>
+              <th class="px-6 py-3 text-left text-sm font-semibold">උපන් දිනය</th>
+              <th class="px-6 py-3 text-left text-sm font-semibold">ජා.හැ. අංකය</th>
+              <th class="px-6 py-3 text-left text-sm font-semibold">ජාතිය</th>
+              <th class="px-6 py-3 text-left text-sm font-semibold">ආගම</th>
+              <th class="px-6 py-3 text-left text-sm font-semibold">ආබාධිත විස්තර</th>
+            </tr>
+            </thead>
+
+            <!-- Table Data -->
+            <tbody>
+            <tr *ngFor="let person of peopleData; let i = index" class="hover:bg-gray-50 border-t">
+              <td class="px-6 py-4 text-sm text-gray-700">{{ person.name }}</td>
+              <td class="px-6 py-4 text-sm text-gray-700">{{ person.relation }}</td>
+              <td class="px-6 py-4 text-sm text-gray-700">{{ person.dob | date }}</td>
+              <td class="px-6 py-4 text-sm text-gray-700">{{ person.nic }}</td>
+              <td class="px-6 py-4 text-sm text-gray-700">{{ person.ethnicity }}</td>
+              <td class="px-6 py-4 text-sm text-gray-700">{{ person.religion }}</td>
+              <td class="px-6 py-4 text-sm text-gray-700">{{ person.remarks }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="flex justify-between space-x-4">
+          <button mat-button matStepperPrevious class="bg-gray-400 text-white px-6 py-2 rounded-md hover:bg-gray-500 transition-all">
+            Back
+          </button>
+          <button mat-button matStepperNext (click)="markStepComplete(step2)" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all">
+            Next
+          </button>
+        </div>
+
+
+      </form>
+    </mat-step>
+
+<!--Step 3-->
+    <mat-step [stepControl]="thirdFormGroup" #step3>
+      <form [formGroup]="thirdFormGroup" class="space-y-6">
+        <ng-template matStepLabel class="text-lg font-semibold text-gray-700">නිවාස තොරතුරු</ng-template>
+
+        <!-- First row with two fields -->
+        <div class="grid grid-cols-1 gap-4 p-4 bg-white rounded-lg shadow-md">
+          <mat-label class="text-xl font-bold text-gray-800 mb-3">නිවාස වර්ගය</mat-label>
+          <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-6">
+            <!-- Radio Group -->
+            <mat-radio-group
+              formControlName="housingType"
+              aria-label="Select an option" class="flex flex-wrap items-center space-x-6">
+              <mat-radio-button value="1" class="flex items-center p-3 border border-gray-300 rounded-md hover:bg-blue-100 transition duration-200">
+                <span class="ml-2 text-gray-700">ස්ථිර</span>
+              </mat-radio-button>
+              <mat-radio-button value="2" class="flex items-center p-3 border border-gray-300 rounded-md hover:bg-blue-100 transition duration-200">
+                <span class="ml-2 text-gray-700">අර්ධ ස්ථිර</span>
+              </mat-radio-button>
+              <mat-radio-button value="3" class="flex items-center p-3 border border-gray-300 rounded-md hover:bg-blue-100 transition duration-200">
+                <span class="ml-2 text-gray-700">තාවකාලික</span>
+              </mat-radio-button>
+              <mat-radio-button value="4" class="flex items-center p-3 border border-gray-300 rounded-md hover:bg-blue-100 transition duration-200">
+                <span class="ml-2 text-gray-700">පැල්පත්</span>
+              </mat-radio-button>
+              <mat-radio-button value="5" class="flex items-center p-3 border border-gray-300 rounded-md hover:bg-blue-100 transition duration-200">
+                <span class="ml-2 text-gray-700">ලයිම් කාමර</span>
+              </mat-radio-button>
+              <mat-radio-button value="6" class="flex items-center p-3 border border-gray-300 rounded-md hover:bg-blue-100 transition duration-200">
+                <span class="ml-2 text-gray-700">නැත</span>
+              </mat-radio-button>
+            </mat-radio-group>
+
+            <div class="flex flex-col sm:mt-0 mt-4">
+              <label for="description1" class="text-sm font-medium text-gray-700 mb-1">විස්තරය:</label>
+              <textarea
+                formControlName="housingTypeDescription"
+                id="description1" rows="3" placeholder="මෙතන විස්තරයක් ඇතුලත් කරන්න..."
+                        class="border border-gray-300 rounded-md p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-200"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-4 p-4 bg-white rounded-lg shadow-md">
+          <mat-label class="text-lg font-semibold mb-2">බිත්ති වල ස්වභාවය</mat-label>
+          <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-6">
+
+          <mat-radio-group
+            formControlName="wallType"
+            aria-label="Select an option" class="flex flex-wrap items-center space-x-4">
+            <mat-radio-button value="1" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+              <span class="ml-2">බ්ලොක් ගල්</span>
+            </mat-radio-button>
+            <mat-radio-button value="2" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+              <span class="ml-2">මැටි ගඩොල්</span>
+            </mat-radio-button>
+            <mat-radio-button value="3" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+              <span class="ml-2">වරිච්චි</span>
+            </mat-radio-button>
+            <mat-radio-button value="4" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+              <span class="ml-2">ලෑළි</span>
+            </mat-radio-button>
+            <mat-radio-button value="5" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+              <span class="ml-2">ටකරන්</span>
+            </mat-radio-button>
+            <mat-radio-button value="6" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+              <span class="ml-2">වෙනත්</span>
+            </mat-radio-button>
+          </mat-radio-group>
+          <div class="flex flex-col sm:mt-0 mt-4">
+            <label for="description2" class="text-sm font-medium text-gray-700 mb-1">විස්තරය:</label>
+            <textarea id="description2"
+                      formControlName="wallTypeDescription"
+                      rows="3" placeholder="මෙතන විස්තරයක් ඇතුලත් කරන්න..."
+                      class="border border-gray-300 rounded-md p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-200"></textarea>
+          </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-4 p-4 bg-white rounded-lg shadow-md">
+          <mat-label class="text-lg font-semibold mb-2">ගෙබිම ස්වභාවය</mat-label>
+          <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-6">
+
+            <mat-radio-group formControlName="floorType" aria-label="Select an option" class="flex flex-wrap items-center space-x-4">
+              <mat-radio-button value="1" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">ටයිල්</span>
+              </mat-radio-button>
+              <mat-radio-button value="2" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">සිමෙන්ති</span>
+              </mat-radio-button>
+              <mat-radio-button value="3" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">කොන්ක්‍රීට්</span>
+              </mat-radio-button>
+              <mat-radio-button value="4" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">මැටි</span>
+              </mat-radio-button>
+              <mat-radio-button value="5" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">ගොම</span>
+              </mat-radio-button>
+              <mat-radio-button value="6" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">වෙනත්</span>
+              </mat-radio-button>
+            </mat-radio-group>
+            <div class="flex flex-col sm:mt-0 mt-4">
+              <label for="description3" class="text-sm font-medium text-gray-700 mb-1">විස්තරය:</label>
+              <textarea formControlName="floorTypeDescription" id="description3" rows="3" placeholder="මෙතන විස්තරයක් ඇතුලත් කරන්න..."
+                        class="border border-gray-300 rounded-md p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-200"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-4 p-4 bg-white rounded-lg shadow-md">
+          <mat-label class="text-lg font-semibold mb-2">වහලයේ ස්වභාවය</mat-label>
+          <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-6">
+
+            <mat-radio-group formControlName="roofType" aria-label="Select an option" class="flex flex-wrap items-center space-x-4">
+              <mat-radio-button value="1" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">ඇස්බැස්ටෝස්</span>
+              </mat-radio-button>
+              <mat-radio-button value="2" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">උළු</span>
+              </mat-radio-button>
+              <mat-radio-button value="3" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">ටකරන්</span>
+              </mat-radio-button>
+              <mat-radio-button value="4" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">කොන්ක්‍රීට්</span>
+              </mat-radio-button>
+              <mat-radio-button value="5" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">පිදුරු/පොල් අතු</span>
+              </mat-radio-button>
+              <mat-radio-button value="6" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">වෙනත්</span>
+              </mat-radio-button>
+            </mat-radio-group>
+            <div class="flex flex-col sm:mt-0 mt-4">
+              <label for="description4" class="text-sm font-medium text-gray-700 mb-1">විස්තරය:</label>
+              <textarea formControlName="roofTypeDescription" id="description4" rows="3" placeholder="මෙතන විස්තරයක් ඇතුලත් කරන්න..."
+                        class="border border-gray-300 rounded-md p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-200"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-4 p-4 bg-white rounded-lg shadow-md">
+          <mat-label class="text-lg font-semibold mb-2">සනීපාරක්ෂක පහසුකම්</mat-label>
+          <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-6">
+
+            <mat-radio-group formControlName="sanitationType" aria-label="Select an option" class="flex flex-wrap items-center space-x-4">
+              <mat-radio-button value="1" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">කොමඩ්</span>
+              </mat-radio-button>
+              <mat-radio-button value="2" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">පොච්චි වැසිකිලි</span>
+              </mat-radio-button>
+              <mat-radio-button value="3" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">වල වැසිකිලි</span>
+              </mat-radio-button>
+              <mat-radio-button value="4" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">පොදු වැසිකිලි</span>
+              </mat-radio-button>
+              <mat-radio-button value="5" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">වෙනත්</span>
+              </mat-radio-button>
+              <mat-radio-button value="6" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">නැත</span>
+              </mat-radio-button>
+            </mat-radio-group>
+            <div class="flex flex-col sm:mt-0 mt-4">
+              <label for="description5" class="text-sm font-medium text-gray-700 mb-1">විස්තරය:</label>
+              <textarea formControlName="sanitationTypeDescription" id="description5" rows="3" placeholder="මෙතන විස්තරයක් ඇතුලත් කරන්න..."
+                        class="border border-gray-300 rounded-md p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-200"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-4 p-4 bg-white rounded-lg shadow-md">
+          <mat-label class="text-lg font-semibold mb-2">බීමට ජල පහසුකම්</mat-label>
+          <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-6">
+
+            <mat-radio-group formControlName="waterFacility" aria-label="Select an option" class="flex flex-wrap items-center space-x-4">
+              <mat-radio-button value="1" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">ජල සම්පාදන ම.</span>
+              </mat-radio-button>
+              <mat-radio-button value="2" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">ප්‍රජා ජල</span>
+              </mat-radio-button>
+              <mat-radio-button value="3" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">ආරක්ෂිත ළිඳ</span>
+              </mat-radio-button>
+              <mat-radio-button value="4" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">පොදු ලිඳ</span>
+              </mat-radio-button>
+              <mat-radio-button value="5" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">වෙනත්</span>
+              </mat-radio-button>
+              <mat-radio-button value="6" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">නැත</span>
+              </mat-radio-button>
+            </mat-radio-group>
+            <div class="flex flex-col sm:mt-0 mt-4">
+              <label for="description6" class="text-sm font-medium text-gray-700 mb-1">විස්තරය:</label>
+              <textarea formControlName="waterFacilityDescription" id="description6" rows="3" placeholder="මෙතන විස්තරයක් ඇතුලත් කරන්න..."
+                        class="border border-gray-300 rounded-md p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-200"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-4 p-4 bg-white rounded-lg shadow-md">
+          <mat-label class="text-lg font-semibold mb-2">බලශක්තිය</mat-label>
+          <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-6">
+
+            <mat-radio-group formControlName="powerSource" aria-label="Select an option" class="flex flex-wrap items-center space-x-4">
+              <mat-radio-button value="1" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">ල.න්.වි.ම විදුලිය  </span>
+              </mat-radio-button>
+              <mat-radio-button value="2" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">සූර්යය බලශක්තිය</span>
+              </mat-radio-button>
+              <mat-radio-button value="3" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">ගෑස් භාවිතා කරයි</span>
+              </mat-radio-button>
+              <mat-radio-button value="4" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">ජීව වායු</span>
+              </mat-radio-button>
+              <mat-radio-button value="5" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">වෙනත්</span>
+              </mat-radio-button>
+              <mat-radio-button value="6" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">නැත</span>
+              </mat-radio-button>
+            </mat-radio-group>
+            <div class="flex flex-col sm:mt-0 mt-4">
+              <label for="description7" class="text-sm font-medium text-gray-700 mb-1">විස්තරය:</label>
+              <textarea formControlName="powerSourceDescription" id="description7" rows="3" placeholder="මෙතන විස්තරයක් ඇතුලත් කරන්න..."
+                        class="border border-gray-300 rounded-md p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-200"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-4 p-4 bg-white rounded-lg shadow-md">
+          <mat-label class="text-lg font-semibold mb-2">ආපදා අවදානම් ස්වභාවය</mat-label>
+          <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-6">
+
+            <mat-radio-group formControlName="disasterRisk" aria-label="Select an option" class="flex flex-wrap items-center space-x-4">
+              <mat-radio-button value="1" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">නාය යෑම් අවදානම් </span>
+              </mat-radio-button>
+              <mat-radio-button value="2" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">ගංවතුර</span>
+              </mat-radio-button>
+              <mat-radio-button value="3" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">පස් කඳු කඩා වැටීම</span>
+              </mat-radio-button>
+              <mat-radio-button value="4" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">වන සත්ව හානි</span>
+              </mat-radio-button>
+              <mat-radio-button value="5" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">වෙනත්</span>
+              </mat-radio-button>
+              <mat-radio-button value="6" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">නැත</span>
+              </mat-radio-button>
+            </mat-radio-group>
+            <div class="flex flex-col sm:mt-0 mt-4">
+              <label for="description8" class="text-sm font-medium text-gray-700 mb-1">විස්තරය:</label>
+              <textarea formControlName="disasterRiskDescription" id="description8" rows="3" placeholder="මෙතන විස්තරයක් ඇතුලත් කරන්න..."
+                        class="border border-gray-300 rounded-md p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-200"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Second row with one field -->
+        <div class="space-y-6">
+
+        </div>
+
+        <!-- Fourth row with two fields -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+        </div>
+
+        <div class="flex justify-end space-x-4">
+          <button mat-button matStepperNext (click)="markStepComplete(step3)" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all">
+            Next
+          </button>
+
+          <button mat-raised-button color="primary" (click)="onManualSubmit()" type="button">
+            Submit
+          </button>
+        </div>
+      </form>
+    </mat-step>
+
+<!--     Step 4-->
+    <mat-step [stepControl]="form" #step4>
+      <form [formGroup]="form" class="space-y-4">
+        <ng-template matStepLabel class="text-lg font-semibold text-gray-700">දීමනා පිළිබඳ විස්තර</ng-template>
+
+
+        <!-- Institution Name Field -->
+        <div class="flex flex-col space-y-2">
+          <label for="name" class="text-sm font-semibold">අයතේ නම</label>
+          <select id="name" formControlName="name" class="border rounded-md p-2">
+            <option value="" disabled>Select an institution</option>
+            <option *ngFor="let person of peopleData" [value]="person.nic">{{ person.name }}</option>
+          </select>
+          <div *ngIf="form.get('name')?.invalid && form.get('name')?.touched" class="text-red-500 text-xs">
+            අයතේ නම අවශ්‍යයි.
+          </div>
+        </div>
+
+        <!-- Categories Section -->
+        <div class="space-y-4">
+          <label class="text-sm font-semibold">වටිනාකම්:</label>
+
+          <div class="flex flex-col space-y-2" formGroupName="categories">
+
+            <!-- Category: aswesome -->
+            <div class="flex items-center">
+              <input type="checkbox" formControlName="aswesome" id="aswesome" />
+              <label for="aswesome" class="ml-2">අස්වැසුම</label>
+              <input *ngIf="form.get('categories.aswesome')?.value" type="text" formControlName="aswesomeValue" class="border rounded-md p-2 ml-4" placeholder="Enter value for අස්වැසුම" />
+            </div>
+
+            <!-- Category: samrudhi -->
+            <div class="flex items-center">
+              <input type="checkbox" formControlName="samrudhi" id="samrudhi" />
+              <label for="samrudhi" class="ml-2">සමෘද්ධි</label>
+              <input *ngIf="form.get('categories.samrudhi')?.value" type="text" formControlName="samrudhiValue" class="border rounded-md p-2 ml-4" placeholder="Enter value for සමෘද්ī" />
+            </div>
+
+            <!-- Category: elderly -->
+            <div class="flex items-center">
+              <input type="checkbox" formControlName="elderly" id="elderly" />
+              <label for="elderly" class="ml-2">වැඩිහිටි ආධාර</label>
+              <input *ngIf="form.get('categories.elderly')?.value" type="text" formControlName="elderlyValue" class="border rounded-md p-2 ml-4" placeholder="Enter value for වැඩිහිටි" />
+            </div>
+
+            <!-- Category: blind -->
+            <div class="flex items-center">
+              <input type="checkbox" formControlName="blind" id="blind" />
+              <label for="blind" class="ml-2">පිළිකා ආධාර</label>
+              <input *ngIf="form.get('categories.blind')?.value" type="text" formControlName="blindValue" class="border rounded-md p-2 ml-4" placeholder="Enter value for පිළිකො ආධ්‍ොර" />
+            </div>
+
+            <!-- Category: ignorant -->
+            <div class="flex items-center">
+              <input type="checkbox" formControlName="ignorant" id="ignorant" />
+              <label for="ignorant" class="ml-2">අබොධිත</label>
+              <input *ngIf="form.get('categories.ignorant')?.value" type="text" formControlName="ignorantValue" class="border rounded-md p-2 ml-4" placeholder="Enter value for අබොධිත" />
+            </div>
+
+            <!-- Category: kidneyAssistance -->
+            <div class="flex items-center">
+              <input type="checkbox" formControlName="kidneyAssistance" id="kidneyAssistance" />
+              <label for="kidneyAssistance" class="ml-2">වකුගඩු ආධාර</label>
+              <input *ngIf="form.get('categories.kidneyAssistance')?.value" type="text" formControlName="kidneyAssistanceValue" class="border rounded-md p-2 ml-4" placeholder="Enter value for වකුගඩු ආධාර" />
+            </div>
+
+            <!-- Category: publicAssistance -->
+            <div class="flex items-center">
+              <input type="checkbox" formControlName="publicAssistance" id="publicAssistance" />
+              <label for="publicAssistance" class="ml-2">මහජනාධාර</label>
+              <input *ngIf="form.get('categories.publicAssistance')?.value" type="text" formControlName="publicAssistanceValue" class="border rounded-md p-2 ml-4" placeholder="Enter value for මහජනාධාර" />
+            </div>
+
+            <!-- Category: medicalAssistance -->
+            <div class="flex items-center">
+              <input type="checkbox" formControlName="medicalAssistance" id="medicalAssistance" />
+              <label for="medicalAssistance" class="ml-2">රෝගාධාර</label>
+              <input *ngIf="form.get('categories.medicalAssistance')?.value" type="text" formControlName="medicalAssistanceValue" class="border rounded-md p-2 ml-4" placeholder="Enter value for රෝගාධාර" />
+            </div>
+
+            <!-- Category: educationSupport -->
+            <div class="flex items-center">
+              <input type="checkbox" formControlName="educationSupport" id="educationSupport" />
+              <label for="educationSupport" class="ml-2">ආධ්‍යාපන ආධාර</label>
+              <input *ngIf="form.get('categories.educationSupport')?.value" type="text" formControlName="educationSupportValue" class="border rounded-md p-2 ml-4" placeholder="Enter value for ආධ්‍යාපන ආධාර" />
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="flex justify-end space-x-4">
+          <button
+            type="submit"
+            (click)="onSubmit1()"
+            [disabled]="form.invalid"
+            class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+
+      <!-- Submitted Data Table -->
+      <div *ngIf="submittedData.length > 0" class="mt-6">
+        <table class="table-auto w-full border-collapse">
+          <thead>
+          <tr>
+            <th class="border px-4 py-2">Institution Name</th>
+            <th class="border px-4 py-2">අස්වැසුම</th>
+            <th class="border px-4 py-2">සමෘද්ī</th>
+            <th class="border px-4 py-2">වැඩිහිටි</th>
+            <th class="border px-4 py-2">පිළිකො ආධ්‍ොර</th>
+            <th class="border px-4 py-2">අබොධිත</th>
+            <th class="border px-4 py-2">වකුගඩු ආධාර</th>
+            <th class="border px-4 py-2">මහජනාධාර</th>
+            <th class="border px-4 py-2">රෝගාධාර</th>
+            <th class="border px-4 py-2">ආධ්‍යාපන ආධාර</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let data of submittedData">
+            <td class="border px-4 py-2">{{ data.institution }}</td>
+            <td class="border px-4 py-2">{{ data.aswesomeValue || '-' }}</td>
+            <td class="border px-4 py-2">{{ data.samrudhiValue || '-' }}</td>
+            <td class="border px-4 py-2">{{ data.elderlyValue || '-' }}</td>
+            <td class="border px-4 py-2">{{ data.adultValue || '-' }}</td>
+            <td class="border px-4 py-2">{{ data.blindValue || '-' }}</td>
+            <td class="border px-4 py-2">{{ data.kidneyAssistanceValue || '-' }}</td>
+            <td class="border px-4 py-2">{{ data.publicAssistanceValue || '-' }}</td>
+            <td class="border px-4 py-2">{{ data.medicalAssistanceValue || '-' }}</td>
+            <td class="border px-4 py-2">{{ data.educationSupportValue || '-' }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="flex justify-end space-x-4">
+        <button mat-button matStepperNext (click)="markStepComplete(step4)" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all">
+          Next
+        </button>
+      </div>
+    </mat-step>
+
+<!--    step-5 -->
+    <mat-step [stepControl]="mainForm" #step5>
+      <form [formGroup]="mainForm" class="space-y-4" (ngSubmit)="onSubmit()">
+        <ng-template matStepLabel class="text-lg font-semibold text-gray-700">විදෙශ්ගත පුද්ගලයින් පිළිබද විස්තර</ng-template>
+
+        <!-- Institution Name Field -->
+        <div class="flex flex-col space-y-2">
+          <label for="nameMain" class="text-sm font-semibold">අයතේ නම</label>
+          <select id="nameMain" formControlName="name" class="border rounded-md p-2">
+            <option value="" disabled>Select an institution</option>
+            <option *ngFor="let person of peopleData" [value]="person.name">{{ person.name }}</option>
+          </select>
+          <div *ngIf="mainForm.get('name')?.invalid && mainForm.get('name')?.touched" class="text-red-500 text-xs">
+            අයතේ නම අවශ්‍යයි.
+          </div>
+        </div>
+
+        <!-- Country Field -->
+        <div class="flex flex-col space-y-2">
+          <label for="country" class="text-sm font-semibold">රට</label>
+          <input
+            id="country"
+            formControlName="country"
+            type="text"
+            class="border rounded-md p-2"
+            placeholder="රට ලියන්න"
+          />
+          <div *ngIf="mainForm.get('country')?.invalid && mainForm.get('country')?.touched" class="text-red-500 text-xs">
+            රට ලියන්න අවශ්‍යයි.
+          </div>
+        </div>
+
+        <!-- Year Field -->
+        <div class="flex flex-col space-y-2">
+          <label for="yearMigrated" class="text-sm font-semibold">විතද්ශගතවූ වර්ෂය</label>
+          <input
+            id="yearMigrated"
+            formControlName="yearMigrated"
+            type="text"
+            class="border rounded-md p-2"
+            placeholder="2000 වැනි ආකාරයෙන් වර්ෂය ඇතුලත් කරන්න"
+          />
+          <div *ngIf="mainForm.get('yearMigrated')?.invalid && mainForm.get('yearMigrated')?.touched" class="text-red-500 text-xs">
+            වලංගු වර්ෂයක් අවශ්‍යයි (උදා: 2000).
+          </div>
+        </div>
+
+        <!-- Reason Field -->
+        <div class="flex flex-col space-y-2">
+          <label for="reasonMigrated" class="text-sm font-semibold">විතද්ශගත වූතේ කුමක් සදහසටද?</label>
+          <textarea
+            id="reasonMigrated"
+            formControlName="reasonMigrated"
+            class="border rounded-md p-2"
+            placeholder="ඔබේ හේතුව ලියන්න"
+          ></textarea>
+          <div *ngIf="mainForm.get('reasonMigrated')?.invalid && mainForm.get('reasonMigrated')?.touched" class="text-red-500 text-xs">
+            හේතුව සඳහන් කරන්න.
+          </div>
+        </div>
+
+        <!-- Other Details Field -->
+        <div class="flex flex-col space-y-2">
+          <label for="otherDetails" class="text-sm font-semibold">වනත් කරුණු</label>
+          <textarea
+            id="otherDetails"
+            formControlName="otherDetails"
+            class="border rounded-md p-2"
+            placeholder="අතිරේක කරුණු (අත්‍යාවශ්‍ය නොවේ)"
+          ></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="flex justify-end space-x-4">
+          <button
+            (click)="onSubmitMain()"
+            type="submit"
+            [disabled]="mainForm.invalid"
+            class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+
+      <!-- Submitted Data Table -->
+      <div *ngIf="submittedData1.length > 0" class="mt-6">
+        <table class="table-auto w-full border-collapse">
+          <thead>
+          <tr>
+            <th class="border px-4 py-2">Institution Name</th>
+            <th class="border px-4 py-2">Country</th>
+            <th class="border px-4 py-2">Year</th>
+            <th class="border px-4 py-2">Reason</th>
+            <th class="border px-4 py-2">Other Details</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let data of submittedData1">
+            <td class="border px-4 py-2">{{ data.name }}</td>
+            <td class="border px-4 py-2">{{ data.country }}</td>
+            <td class="border px-4 py-2">{{ data.yearMigrated }}</td>
+            <td class="border px-4 py-2">{{ data.reasonMigrated }}</td>
+            <td class="border px-4 py-2">{{ data.otherDetails || '-' }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="flex justify-end space-x-4">
+        <button mat-button matStepperNext (click)="markStepComplete(step5)" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all">
+          Next
+        </button>
+      </div>
+    </mat-step>
+
+    <mat-step [stepControl]="landForm" #stepLand>
+      <form [formGroup]="landForm" class="space-y-4" (ngSubmit)="onSubmitLand()">
+        <ng-template matStepLabel class="text-lg font-semibold text-gray-700">ඉඩම් විස්තර</ng-template>
+
+        <!-- අයිතිය Field -->
+        <div class="flex flex-col space-y-2">
+          <label for="ownership" class="text-sm font-semibold">අයිතිය</label>
+          <select id="ownership" formControlName="ownership" class="border rounded-md p-2">
+            <option value="" disabled>අයිතියේ වර්ගය තෝරන්න</option>
+            <option value="government">රජයේ</option>
+            <option value="private">පුද්ගලික</option>
+            <option value="tax">බදු</option>
+            <option value="LR">එල්ආර්</option>
+            <option value="Estate">වතු</option>
+            <option value="Vihara Devalagam">විහාර දේවාලගම්</option>
+          </select>
+          <div *ngIf="landForm.get('ownership')?.invalid && landForm.get('ownership')?.touched" class="text-red-500 text-xs">
+            අයිතිය අත්‍යවශ්‍ය වේ.
+          </div>
+        </div>
+
+        <!-- ඉඩමේ ප්‍රමාණය Field -->
+        <div class="flex flex-col space-y-2">
+          <label for="landSize" class="text-sm font-semibold">ඉඩමේ ප්‍රමාණය (ඇකර් වලින්)</label>
+          <input
+            id="landSize"
+            formControlName="landSize"
+            type="text"
+            class="border rounded-md p-2"
+            placeholder="ඉඩමේ ප්‍රමාණය ඇතුල් කරන්න"
+          />
+          <div *ngIf="landForm.get('landSize')?.invalid && landForm.get('landSize')?.touched" class="text-red-500 text-xs">
+            වලංගු ප්‍රමාණයක් අත්‍යවශ්‍ය වේ.
+          </div>
+        </div>
+
+        <!-- හිමිකාරිත්වය දරන්නාගේ නම Field -->
+        <div class="flex flex-col space-y-2">
+          <label for="ownerName1" class="text-sm font-semibold">හිමිකාරිත්වය දරන්නාගේ නම</label>
+          <select id="ownerName1" formControlName="ownerName" class="border rounded-md p-2">
+            <option value="" disabled>හිමිකරු තෝරන්න</option>
+            <option *ngFor="let person of peopleData" [value]="person.name">{{ person.name }}</option>
+          </select>
+          <div *ngIf="landForm.get('ownerName')?.invalid && landForm.get('ownerName')?.touched" class="text-red-500 text-xs">
+            හිමිකරුගේ නම අත්‍යවශ්‍ය වේ.
+          </div>
+        </div>
+
+        <!-- ඉඩමේ නම / ලොට් අංකය / ඔප්පු අංකය Field -->
+        <div class="flex flex-col space-y-2">
+          <label for="landDetails" class="text-sm font-semibold">ඉඩමේ නම / ලොට් අංකය / ඔප්පු අංකය</label>
+          <input
+            id="landDetails"
+            formControlName="landDetails"
+            type="text"
+            class="border rounded-md p-2"
+            placeholder="ඉඩමේ නම, ලොට් අංකය, හෝ ඔප්පු අංකය ඇතුල් කරන්න"
+          />
+          <div *ngIf="landForm.get('landDetails')?.invalid && landForm.get('landDetails')?.touched" class="text-red-500 text-xs">
+            මෙම කේෂ්ත්‍රය අත්‍යවශ්‍ය වේ.
+          </div>
+        </div>
+
+        <!-- පිහිටි ග්‍රාම නිළධාරී වසම Field -->
+        <div class="flex flex-col space-y-2">
+          <label for="governorsArea" class="text-sm font-semibold">පිහිටි ග්‍රාම නිළධාරී වසම</label>
+          <input
+            id="governorsArea"
+            formControlName="governorsArea"
+            type="text"
+            class="border rounded-md p-2"
+            placeholder="ග්‍රාම නිළධාරී වසම ඇතුල් කරන්න"
+          />
+          <div *ngIf="landForm.get('governorsArea')?.invalid && landForm.get('governorsArea')?.touched" class="text-red-500 text-xs">
+            ග්‍රාම නිළධාරී වසම අත්‍යවශ්‍ය වේ.
+          </div>
+        </div>
+
+        <!-- වගා කර ඇති බෝගය Field -->
+        <div class="flex flex-col space-y-2">
+          <label for="cropGrown" class="text-sm font-semibold">වගා කර ඇති බෝගය</label>
+          <input
+            id="cropGrown"
+            formControlName="cropGrown"
+            type="text"
+            class="border rounded-md p-2"
+            placeholder="වගා කර ඇති බෝගය ඇතුල් කරන්න"
+          />
+          <div *ngIf="landForm.get('cropGrown')?.invalid && landForm.get('cropGrown')?.touched" class="text-red-500 text-xs">
+            වගා කර ඇති බෝගය අත්‍යවශ්‍ය වේ.
+          </div>
+        </div>
+
+        <!-- මාසිකව ලැබෙන අදායම Field -->
+        <div class="flex flex-col space-y-2">
+          <label for="monthlyIncome1" class="text-sm font-semibold">මාසිකව ලැබෙන අදායම</label>
+          <input
+            id="monthlyIncome1"
+            formControlName="monthlyIncome"
+            type="text"
+            class="border rounded-md p-2"
+            placeholder="මාසික අදායම ඇතුල් කරන්න"
+          />
+          <div *ngIf="landForm.get('monthlyIncome')?.invalid && landForm.get('monthlyIncome')?.touched" class="text-red-500 text-xs">
+            මාසික අදායම අත්‍යවශ්‍ය වේ.
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="flex justify-end space-x-4">
+          <button
+            (click)="onSubmitLand()"
+            type="submit"
+            [disabled]="landForm.invalid"
+            class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all"
+          >
+            ඉදිරිපත් කරන්න
+          </button>
+        </div>
+      </form>
+
+      <!-- Submitted Data Table -->
+      <div *ngIf="submittedLandData.length > 0" class="mt-6">
+        <table class="table-auto w-full border-collapse">
+          <thead>
+          <tr>
+            <th class="border px-4 py-2">අයිතිය</th>
+            <th class="border px-4 py-2">ඉඩමේ ප්‍රමාණය</th>
+            <th class="border px-4 py-2">හිමිකරුගේ නම</th>
+            <th class="border px-4 py-2">ඉඩමේ විස්තර</th>
+            <th class="border px-4 py-2">ග්‍රාම නිළධාරී වසම</th>
+            <th class="border px-4 py-2">වගා බෝග</th>
+            <th class="border px-4 py-2">අදායම</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let data of submittedLandData">
+            <td class="border px-4 py-2">{{ data.ownership }}</td>
+            <td class="border px-4 py-2">{{ data.landSize }}</td>
+            <td class="border px-4 py-2">{{ data.ownerName }}</td>
+            <td class="border px-4 py-2">{{ data.landDetails }}</td>
+            <td class="border px-4 py-2">{{ data.governorsArea }}</td>
+            <td class="border px-4 py-2">{{ data.cropGrown }}</td>
+            <td class="border px-4 py-2">{{ data.monthlyIncome }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Next Button -->
+      <div class="flex justify-end space-x-4">
+        <button mat-button matStepperNext (click)="markStepComplete(stepLand)" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all">
+          ඊළඟ
+        </button>
+      </div>
+    </mat-step>
+
+    <mat-step [stepControl]="vehicleForm" #stepVehicle>
+      <form [formGroup]="vehicleForm" class="space-y-4" (ngSubmit)="onSubmitVehicle()">
+        <ng-template matStepLabel class="text-lg font-semibold text-gray-700">වාහන විස්තර</ng-template>
+
+        <!-- වාහන වර්ගය Field -->
+        <div class="flex flex-col space-y-2">
+          <label for="vehicleType" class="text-sm font-semibold">වාහන වර්ගය</label>
+          <input
+            id="vehicleType"
+            formControlName="vehicleType"
+            type="text"
+            class="border rounded-md p-2"
+            placeholder="වාහන වර්ගය ඇතුල් කරන්න"
+          />
+          <div *ngIf="vehicleForm.get('vehicleType')?.invalid && vehicleForm.get('vehicleType')?.touched" class="text-red-500 text-xs">
+            වාහන වර්ගය අත්‍යවශ්‍ය වේ.
+          </div>
+        </div>
+
+        <!-- හිමිකරුගේ නම Field -->
+        <div class="flex flex-col space-y-2">
+          <label for="vehicleOwnerName" class="text-sm font-semibold">හිමිකරුගේ නම</label>
+          <select id="vehicleOwnerName" formControlName="vehicleOwnerName" class="border rounded-md p-2">
+            <option value="" disabled>හිමිකරු තෝරන්න</option>
+            <option *ngFor="let person of peopleData" [value]="person.name">{{ person.name }}</option>
+          </select>
+          <div *ngIf="vehicleForm.get('vehicleOwnerName')?.invalid && vehicleForm.get('vehicleOwnerName')?.touched" class="text-red-500 text-xs">
+            හිමිකරුගේ නම අත්‍යවශ්‍ය වේ.
+          </div>
+        </div>
+
+        <!-- වටිනාකම Field -->
+        <div class="flex flex-col space-y-2">
+          <label for="vehicleValue" class="text-sm font-semibold">වටිනාකම</label>
+          <input
+            id="vehicleValue"
+            formControlName="vehicleValue"
+            type="text"
+            class="border rounded-md p-2"
+            placeholder="වාහනයේ වටිනාකම ඇතුල් කරන්න"
+          />
+          <div *ngIf="vehicleForm.get('vehicleValue')?.invalid && vehicleForm.get('vehicleValue')?.touched" class="text-red-500 text-xs">
+            වලංගු වටිනාකමක් අත්‍යවශ්‍ය වේ.
+          </div>
+        </div>
+
+        <!-- මාසික ආදායම Field -->
+        <div class="flex flex-col space-y-2">
+          <label for="vehicleMonthlyIncome" class="text-sm font-semibold">මාසික ආදායම</label>
+          <input
+            id="vehicleMonthlyIncome"
+            formControlName="vehicleMonthlyIncome"
+            type="text"
+            class="border rounded-md p-2"
+            placeholder="මාසික ආදායම ඇතුල් කරන්න"
+          />
+          <div *ngIf="vehicleForm.get('vehicleMonthlyIncome')?.invalid && vehicleForm.get('vehicleMonthlyIncome')?.touched" class="text-red-500 text-xs">
+            වලංගු මාසික ආදායමක් අත්‍යවශ්‍ය වේ.
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="flex justify-end space-x-4">
+          <button
+            (click)="onSubmitVehicle()"
+            type="submit"
+            [disabled]="vehicleForm.invalid"
+            class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all"
+          >
+            ඉදිරිපත් කරන්න
+          </button>
+        </div>
+      </form>
+
+      <!-- Submitted Data Table -->
+      <div *ngIf="submittedVehicleData.length > 0" class="mt-6">
+        <table class="table-auto w-full border-collapse">
+          <thead>
+          <tr>
+            <th class="border px-4 py-2">වාහන වර්ගය</th>
+            <th class="border px-4 py-2">හිමිකරුගේ නම</th>
+            <th class="border px-4 py-2">වටිනාකම</th>
+            <th class="border px-4 py-2">මාසික ආදායම</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let data of submittedVehicleData">
+            <td class="border px-4 py-2">{{ data.vehicleType }}</td>
+            <td class="border px-4 py-2">{{ data.vehicleOwnerName }}</td>
+            <td class="border px-4 py-2">{{ data.vehicleValue }}</td>
+            <td class="border px-4 py-2">{{ data.vehicleMonthlyIncome }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Next Button -->
+      <div class="flex justify-end space-x-4">
+        <button mat-button matStepperNext (click)="markStepComplete(stepVehicle)" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all">
+          ඊළඟ
+        </button>
+      </div>
+    </mat-step>
+
+    <mat-step [stepControl]="assetForm" #stepAsset>
+      <form [formGroup]="assetForm" class="space-y-4" (ngSubmit)="onSubmitAsset()">
+        <ng-template matStepLabel class="text-lg font-semibold text-gray-700">අනෙකුත් ප්‍රාග්ධන වත්කම්</ng-template>
+
+        <!-- වත්කම් විස්තර Field -->
+        <div class="flex flex-col space-y-2">
+          <label for="assetDetails" class="text-sm font-semibold">වත්කම් විස්තර</label>
+          <input
+            id="assetDetails"
+            formControlName="assetDetails"
+            type="text"
+            class="border rounded-md p-2"
+            placeholder="වත්කම් විස්තර ඇතුල් කරන්න"
+          />
+          <div *ngIf="assetForm.get('assetDetails')?.invalid && assetForm.get('assetDetails')?.touched" class="text-red-500 text-xs">
+            වත්කම් විස්තර අත්‍යවශ්‍ය වේ.
+          </div>
+        </div>
+
+        <!-- හිමිකරුගේ නම Field -->
+        <div class="flex flex-col space-y-2">
+          <label for="assetOwnerName" class="text-sm font-semibold">හිමිකරුගේ නම</label>
+          <select id="assetOwnerName" formControlName="assetOwnerName" class="border rounded-md p-2">
+            <option value="" disabled>හිමිකරු තෝරන්න</option>
+            <option *ngFor="let person of peopleData" [value]="person.name">{{ person.name }}</option>
+          </select>
+          <div *ngIf="assetForm.get('assetOwnerName')?.invalid && assetForm.get('assetOwnerName')?.touched" class="text-red-500 text-xs">
+            හිමිකරුගේ නම අත්‍යවශ්‍ය වේ.
+          </div>
+        </div>
+
+        <!-- වටිනාකම Field -->
+        <div class="flex flex-col space-y-2">
+          <label for="assetValue" class="text-sm font-semibold">වටිනාකම</label>
+          <input
+            id="assetValue"
+            formControlName="assetValue"
+            type="text"
+            class="border rounded-md p-2"
+            placeholder="වටිනාකම ඇතුල් කරන්න"
+          />
+          <div *ngIf="assetForm.get('assetValue')?.invalid && assetForm.get('assetValue')?.touched" class="text-red-500 text-xs">
+            වලංගු වටිනාකමක් අත්‍යවශ්‍ය වේ.
+          </div>
+        </div>
+
+        <!-- මාසික ආදායම Field -->
+        <div class="flex flex-col space-y-2">
+          <label for="assetMonthlyIncome" class="text-sm font-semibold">මාසික ආදායම</label>
+          <input
+            id="assetMonthlyIncome"
+            formControlName="assetMonthlyIncome"
+            type="text"
+            class="border rounded-md p-2"
+            placeholder="මාසික ආදායම ඇතුල් කරන්න"
+          />
+          <div *ngIf="assetForm.get('assetMonthlyIncome')?.invalid && assetForm.get('assetMonthlyIncome')?.touched" class="text-red-500 text-xs">
+            වලංගු මාසික ආදායමක් අත්‍යවශ්‍ය වේ.
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="flex justify-end space-x-4">
+          <button
+            (click)="onSubmitAsset()"
+            type="submit"
+            [disabled]="assetForm.invalid"
+            class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all"
+          >
+            ඉදිරිපත් කරන්න
+          </button>
+        </div>
+      </form>
+
+      <!-- Submitted Data Table -->
+      <div *ngIf="submittedAssetData.length > 0" class="mt-6">
+        <table class="table-auto w-full border-collapse">
+          <thead>
+          <tr>
+            <th class="border px-4 py-2">වත්කම් විස්තර</th>
+            <th class="border px-4 py-2">හිමිකරුගේ නම</th>
+            <th class="border px-4 py-2">වටිනාකම</th>
+            <th class="border px-4 py-2">මාසික ආදායම</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let data of submittedAssetData">
+            <td class="border px-4 py-2">{{ data.assetDetails }}</td>
+            <td class="border px-4 py-2">{{ data.assetOwnerName }}</td>
+            <td class="border px-4 py-2">{{ data.assetValue }}</td>
+            <td class="border px-4 py-2">{{ data.assetMonthlyIncome }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Next Button -->
+      <div class="flex justify-end space-x-4">
+        <button mat-button matStepperNext (click)="markStepComplete(stepAsset)" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all">
+          ඊළඟ
+        </button>
+      </div>
+    </mat-step>
+
+    <mat-step [stepControl]="businessForm" #stepBusiness>
+      <form [formGroup]="businessForm" class="space-y-4" (ngSubmit)="onSubmitBusiness()">
+        <ng-template matStepLabel class="text-lg font-semibold text-gray-700">ව්‍යාපාර හා ස්වයං රැකියා </ng-template>
+
+        <!-- ස්වභාවය Field -->
+        <div class="flex flex-col space-y-2">
+          <label for="businessNature" class="text-sm font-semibold">ස්වභාවය</label>
+          <select id="businessNature" formControlName="businessNature" class="border rounded-md p-2">
+            <option value="" disabled>ස්වභාවය තෝරන්න</option>
+            <option value="large">මහා පරිමාණ</option>
+            <option value="medium">මධ්‍ය පරිමාණ</option>
+            <option value="small">කුඩා කර්මාන්ත</option>
+            <option value="selfEmployment">ස්වයං රැකියා</option>
+            <option value="livestock">පශු සම්පත්</option>
+            <option value="commercialAgriculture">වාණිජ කෘෂිකර්මාන්තය</option>
+            <option value="other">වෙනත්</option>
+          </select>
+          <div *ngIf="businessForm.get('businessNature')?.invalid && businessForm.get('businessNature')?.touched" class="text-red-500 text-xs">
+            ස්වභාවය අත්‍යවශ්‍ය වේ.
+          </div>
+        </div>
+
+        <!-- ව්‍යාපාරයේ නම/අංශය Field -->
+        <div class="flex flex-col space-y-2">
+          <label for="businessName" class="text-sm font-semibold">ව්‍යාපාරයේ නම/අංශය</label>
+          <input
+            id="businessName"
+            formControlName="businessName"
+            type="text"
+            class="border rounded-md p-2"
+            placeholder="ව්‍යාපාරයේ නම හෝ අංශය ඇතුල් කරන්න"
+          />
+          <div *ngIf="businessForm.get('businessName')?.invalid && businessForm.get('businessName')?.touched" class="text-red-500 text-xs">
+            ව්‍යාපාරයේ නම/අංශය අත්‍යවශ්‍ය වේ.
+          </div>
+        </div>
+
+        <!-- සේවක සංඛ්‍යාව Field -->
+        <div class="flex flex-col space-y-2">
+          <label for="employeeCount" class="text-sm font-semibold">සේවක සංඛ්‍යාව</label>
+          <input
+            id="employeeCount"
+            formControlName="employeeCount"
+            type="text"
+            class="border rounded-md p-2"
+            placeholder="සේවක සංඛ්‍යාව ඇතුල් කරන්න"
+          />
+          <div *ngIf="businessForm.get('employeeCount')?.invalid && businessForm.get('employeeCount')?.touched" class="text-red-500 text-xs">
+            වලංගු සේවක සංඛ්‍යාවක් අත්‍යවශ්‍ය වේ.
+          </div>
+        </div>
+
+        <!-- පිහිටි ලිපිනය Field -->
+        <div class="flex flex-col space-y-2">
+          <label for="businessAddress" class="text-sm font-semibold">පිහිටි ලිපිනය</label>
+          <input
+            id="businessAddress"
+            formControlName="businessAddress"
+            type="text"
+            class="border rounded-md p-2"
+            placeholder="පිහිටි ලිපිනය ඇතුල් කරන්න"
+          />
+          <div *ngIf="businessForm.get('businessAddress')?.invalid && businessForm.get('businessAddress')?.touched" class="text-red-500 text-xs">
+            පිහිටි ලිපිනය අත්‍යවශ්‍ය වේ.
+          </div>
+        </div>
+
+        <!-- මාසික ආදායම Field -->
+        <div class="flex flex-col space-y-2">
+          <label for="monthlyIncome2" class="text-sm font-semibold">මාසික ආදායම</label>
+          <input
+            id="monthlyIncome2"
+            formControlName="monthlyIncome"
+            type="text"
+            class="border rounded-md p-2"
+            placeholder="මාසික ආදායම ඇතුල් කරන්න"
+          />
+          <div *ngIf="businessForm.get('monthlyIncome')?.invalid && businessForm.get('monthlyIncome')?.touched" class="text-red-500 text-xs">
+            වලංගු මාසික ආදායමක් අත්‍යවශ්‍ය වේ.
+          </div>
+        </div>
+
+        <!-- වෙනත් Field -->
+        <div class="flex flex-col space-y-2">
+          <label for="businessOtherDetails" class="text-sm font-semibold">වෙනත්</label>
+          <input
+            id="businessOtherDetails"
+            formControlName="businessOtherDetails"
+            type="text"
+            class="border rounded-md p-2"
+            placeholder="වෙනත් විස්තර ඇතුල් කරන්න"
+          />
+        </div>
+
+        <!-- Submit Button -->
+        <div class="flex justify-end space-x-4">
+          <button
+            (click)="onSubmitBusiness()"
+            type="submit"
+            [disabled]="businessForm.invalid"
+            class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all"
+          >
+            ඉදිරිපත් කරන්න
+          </button>
+        </div>
+      </form>
+
+      <!-- Submitted Data Table -->
+      <div *ngIf="submittedBusinessData.length > 0" class="mt-6">
+        <table class="table-auto w-full border-collapse">
+          <thead>
+          <tr>
+            <th class="border px-4 py-2">ස්වභාවය</th>
+            <th class="border px-4 py-2">ව්‍යාපාරයේ නම/අංශය</th>
+            <th class="border px-4 py-2">සේවක සංඛ්‍යාව</th>
+            <th class="border px-4 py-2">පිහිටි ලිපිනය</th>
+            <th class="border px-4 py-2">මාසික ආදායම</th>
+            <th class="border px-4 py-2">වෙනත්</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let data of submittedBusinessData">
+            <td class="border px-4 py-2">{{ data.businessNature }}</td>
+            <td class="border px-4 py-2">{{ data.businessName }}</td>
+            <td class="border px-4 py-2">{{ data.employeeCount }}</td>
+            <td class="border px-4 py-2">{{ data.businessAddress }}</td>
+            <td class="border px-4 py-2">{{ data.monthlyIncome }}</td>
+            <td class="border px-4 py-2">{{ data.businessOtherDetails }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Next Button -->
+      <div class="flex justify-end space-x-4">
+        <button mat-button matStepperNext (click)="markStepComplete(stepBusiness)" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all">
+          ඊළඟ
+        </button>
+      </div>
+    </mat-step>
+
+    <mat-step [stepControl]="otherActivitiesForm" #stepOtherActivities>
+      <form [formGroup]="otherActivitiesForm" class="space-y-4" (ngSubmit)="onSubmitOtherActivities()">
+
+        <!-- හිමිකරුගේ නම -->
+        <div class="flex flex-col space-y-2">
+          <label for="ownerName" class="text-sm font-semibold">හිමිකරුගේ නම</label>
+          <select id="ownerName" formControlName="ownerName" class="border rounded-md p-2">
+            <option value="" disabled>හිමිකරුගේ නම තෝරන්න</option>
+            <option *ngFor="let person of peopleData" [value]="person.name">{{ person.name }}</option>
+          </select>
+          <div *ngIf="otherActivitiesForm.get('ownerName')?.invalid && otherActivitiesForm.get('ownerName')?.touched" class="text-red-500 text-xs">
+            හිමිකරුගේ නම අත්‍යවශ්‍ය වේ.
+          </div>
+        </div>
+
+        <!-- ස්ථානයේ ලිපිනය -->
+        <div class="flex flex-col space-y-2">
+          <label for="activityAddress" class="text-sm font-semibold">ස්ථානයේ ලිපිනය</label>
+          <input
+            id="activityAddress"
+            formControlName="activityAddress"
+            type="text"
+            class="border rounded-md p-2"
+            placeholder="ස්ථානයේ ලිපිනය ඇතුල් කරන්න"
+          />
+          <div *ngIf="otherActivitiesForm.get('activityAddress')?.invalid && otherActivitiesForm.get('activityAddress')?.touched" class="text-red-500 text-xs">
+            ස්ථානයේ ලිපිනය අත්‍යවශ්‍ය වේ.
+          </div>
+        </div>
+
+        <!-- මාසික ආදායම -->
+        <div class="flex flex-col space-y-2">
+          <label for="monthlyIncome" class="text-sm font-semibold">මාසික ආදායම</label>
+          <input
+            id="monthlyIncome"
+            formControlName="monthlyIncome"
+            type="text"
+            class="border rounded-md p-2"
+            placeholder="මාසික ආදායම ඇතුල් කරන්න"
+          />
+          <div *ngIf="otherActivitiesForm.get('monthlyIncome')?.invalid && otherActivitiesForm.get('monthlyIncome')?.touched" class="text-red-500 text-xs">
+            වලංගු මාසික ආදායමක් අත්‍යවශ්‍ය වේ.
+          </div>
+        </div>
+
+        <!-- වෙනත් විස්තර -->
+        <div class="flex flex-col space-y-2">
+          <label for="additionalDetails" class="text-sm font-semibold">වෙනත් විස්තර</label>
+          <input
+            id="additionalDetails"
+            formControlName="additionalDetails"
+            type="text"
+            class="border rounded-md p-2"
+            placeholder="වෙනත් විස්තර ඇතුල් කරන්න"
+          />
+        </div>
+
+        <!-- Submit Button -->
+        <div class="flex justify-end space-x-4">
+          <button
+            (click)="onSubmitOtherActivities()"
+            type="submit"
+            [disabled]="otherActivitiesForm.invalid"
+            class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all"
+          >
+            ඉදිරිපත් කරන්න
+          </button>
+        </div>
+      </form>
+
+      <!-- Submitted Data Table -->
+      <div *ngIf="submittedOtherActivitiesData.length > 0" class="mt-6">
+        <table class="table-auto w-full border-collapse">
+          <thead>
+          <tr>
+            <th class="border px-4 py-2">හිමිකරුගේ නම</th>
+            <th class="border px-4 py-2">ස්ථානයේ ලිපිනය</th>
+            <th class="border px-4 py-2">මාසික ආදායම</th>
+            <th class="border px-4 py-2">වෙනත් විස්තර</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let data of submittedOtherActivitiesData">
+            <td class="border px-4 py-2">{{ data.ownerName }}</td>
+            <td class="border px-4 py-2">{{ data.activityAddress }}</td>
+            <td class="border px-4 py-2">{{ data.monthlyIncome }}</td>
+            <td class="border px-4 py-2">{{ data.additionalDetails }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Next Button -->
+      <div class="flex justify-end space-x-4">
+        <button mat-button matStepperNext (click)="markStepComplete(stepOtherActivities)" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all">
+          ඊළඟ
+        </button>
+      </div>
+    </mat-step>
+    <!-- Done Step -->
+    <mat-step>
+      <ng-template matStepLabel class="text-lg font-semibold text-gray-700">Done</ng-template>
+      <p class="text-gray-600 text-center">You are now done!</p>
+
+      <!-- Special Notes Text Area -->
+      <form [formGroup]="specialNotesForm" class="space-y-4" (ngSubmit)="onSubmitSpecialNotes()">
+        <div class="flex flex-col space-y-2">
+          <label for="specialNotes" class="text-sm font-semibold">විශේෂ කරුණු</label>
+          <textarea
+            id="specialNotes"
+            formControlName="specialNotes"
+            rows="4"
+            class="border rounded-md p-2 w-full"
+            placeholder="විශේෂ කරුණු ඇතුල් කරන්න"
+          ></textarea>
+          <div *ngIf="specialNotesForm.get('specialNotes')?.invalid && specialNotesForm.get('specialNotes')?.touched" class="text-red-500 text-xs">
+            විශේෂ කරුණු අත්‍යවශ්‍ය වේ.
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="flex justify-center space-x-4">
+          <button
+            mat-button
+            type="submit"
+            [disabled]="specialNotesForm.invalid"
+            class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all"
+          >
+            ඉදිරිපත් කරන්න
+          </button>
+        </div>
+      </form>
+
+      <!-- Navigation Buttons -->
+      <div class="flex justify-center space-x-4 mt-4">
+        <button mat-button matStepperPrevious class="bg-gray-400 text-white px-6 py-2 rounded-md hover:bg-gray-500 transition-all">
+          Back
+        </button>
+      </div>
+    </mat-step>
+
+  </mat-horizontal-stepper>
+</div>
