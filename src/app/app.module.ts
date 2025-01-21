@@ -9,7 +9,7 @@ import {firebaseConfig} from "../environments/environment";
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { StepperFormComponent } from './components/stepper-form/stepper-form.component';
+// import { StepperFormComponent } from './components/stepper-form/stepper-form.component';
 
 
 @NgModule({
