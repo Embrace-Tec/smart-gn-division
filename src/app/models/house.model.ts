@@ -16,7 +16,7 @@ export interface House {
 export interface HouseDTO {
   houseNo: string;
   address: string;
-  wallType: string;
+  wallType: string|undefined;
   floorType: string;
   roofType: string;
   power: string;

@@ -1,17 +1,19 @@
-import { Component, inject } from '@angular/core';
-import { FormBuilder, Validators, FormsModule, ReactiveFormsModule,FormGroup } from '@angular/forms';
-import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatStepperModule, MatStep } from '@angular/material/stepper';
-import { CommonModule } from '@angular/common';
-import { MatSelectModule } from '@angular/material/select';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatTableModule } from '@angular/material/table';
+import {Component, inject} from '@angular/core';
+import {FormBuilder, Validators, FormsModule, ReactiveFormsModule, FormGroup} from '@angular/forms';
+import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+import {MatButtonModule} from '@angular/material/button';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatStepperModule, MatStep} from '@angular/material/stepper';
+import {CommonModule} from '@angular/common';
+import {MatSelectModule} from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatTableModule} from '@angular/material/table';
 import {MatRadioModule} from '@angular/material/radio';
 import {CombinedFormDto} from "../../dto/type";
+import {HouseDTO} from "@app/models/house.model";
+import {HouseService} from "@app/services/house.service";
 
 @Component({
   selector: 'app-stepper-form',
@@ -21,7 +23,7 @@ import {CombinedFormDto} from "../../dto/type";
   providers: [
     {
       provide: STEPPER_GLOBAL_OPTIONS,
-      useValue: { showError: true },
+      useValue: {showError: true},
     },
   ],
   imports: [
@@ -58,7 +60,7 @@ export class StepperFormComponent {
   landForm: FormGroup;
 
 
-  constructor() {
+  constructor(private houseService:HouseService) {
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required],
       secondCtrl: ['', Validators.required],
@@ -210,6 +212,7 @@ export class StepperFormComponent {
       }
     ];
   }
+
   peopleData: any[] = [];
 
   displayedColumns: string[] = [
@@ -240,6 +243,7 @@ export class StepperFormComponent {
       this.markAllFieldsAsTouched();
     }
   }
+
   onSubmitAsset(): void {
     if (this.assetForm.valid) {
       this.submittedAssetData.push(this.assetForm.value);
@@ -248,11 +252,12 @@ export class StepperFormComponent {
       this.markAllFieldsAsTouched();
     }
   }
+
   markAllFieldsAsTouched(): void {
     Object.keys(this.landForm.controls).forEach(field => {
       const control = this.landForm.get(field);
       if (control) {
-        control.markAsTouched({ onlySelf: true });
+        control.markAsTouched({onlySelf: true});
       }
     });
   }
@@ -265,6 +270,7 @@ export class StepperFormComponent {
       this.markAllFieldsAsTouched();
     }
   }
+
   markStepComplete(step: MatStep) {
     step.completed = true;
   }
@@ -304,23 +310,42 @@ export class StepperFormComponent {
 
   onSubmitSpecialNotes(): void {
 
-      const combinedFormDto: CombinedFormDto = {
-        householdInfo: this.firstFormGroup.value,
-        people: this.peopleData,
-        housingInfo: this.thirdFormGroup.value,
-        assistanceDetails: this.submittedData,
-        migrantDetails: this.submittedData1,
-        landDetails: this.submittedLandData,
-        vehicleDetails: this.submittedVehicleData,
-        assetDetails: this.submittedAssetData,
-        businessDetails: this.submittedBusinessData,
-        otherActivities: this.submittedOtherActivitiesData,
-        specialNotes: this.specialNotesForm.value.specialNotes
-      };
+    const combinedFormDto: CombinedFormDto = {
+      householdInfo: this.firstFormGroup.value,
+      people: this.peopleData,
+      housingInfo: this.thirdFormGroup.value,
+      assistanceDetails: this.submittedData,
+      migrantDetails: this.submittedData1,
+      landDetails: this.submittedLandData,
+      vehicleDetails: this.submittedVehicleData,
+      assetDetails: this.submittedAssetData,
+      businessDetails: this.submittedBusinessData,
+      otherActivities: this.submittedOtherActivitiesData,
+      specialNotes: this.specialNotesForm.value.specialNotes
+    };
 
-      console.log('Combined Form Data:', combinedFormDto);
+    //save house
 
-      this.resetForms();
+    const houseDTO: HouseDTO = {
+      houseNo: combinedFormDto.householdInfo.firstCtrl,
+      address: combinedFormDto.householdInfo.fourthCtrl,
+      wallType: `${combinedFormDto.housingInfo?.wallTypeDescription ?? ''} ${combinedFormDto.housingInfo?.wallType ?? ''}`.trim(),
+      floorType: `${combinedFormDto.housingInfo?.floorTypeDescription ?? ''} ${combinedFormDto.housingInfo?.floorType ?? ''}`.trim(),
+      roofType: `${combinedFormDto.housingInfo?.roofTypeDescription ?? ''} ${combinedFormDto.housingInfo?.roofType ?? ''}`.trim(),
+      power: `${combinedFormDto.housingInfo?.powerSourceDescription ?? ''} ${combinedFormDto.housingInfo?.powerSource ?? ''}`.trim(),
+      drinkingWater: `${combinedFormDto.housingInfo?.waterFacilityDescription ?? ''} ${combinedFormDto.housingInfo?.waterFacility ?? ''}`.trim(),
+      naturalHazard: `${combinedFormDto.housingInfo?.disasterRiskDescription ?? ''} ${combinedFormDto.housingInfo?.disasterRisk ?? ''}`.trim(),
+      sanitaryFacilities: `${combinedFormDto.housingInfo?.sanitationTypeDescription ?? ''} ${combinedFormDto.housingInfo?.sanitationType ?? ''}`.trim(),
+      whatsapp: combinedFormDto.householdInfo.sixthCtrl,
+      landLine: combinedFormDto.householdInfo.fifthCtrl
+    }
+
+    //save house
+    this.houseService.addHouse(houseDTO);
+
+    console.log('Combined Form Data:', combinedFormDto);
+
+    this.resetForms();
   }
 
 // Optional method to reset all forms after submission
