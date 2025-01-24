@@ -106,6 +106,7 @@ interface BusinessDTO {
 }
 
 interface OtherActivitiesDTO {
+  activityName: string; // Name of the activity
   ownerName: string; // Owner's name
   activityAddress: string; // Address of the activity
   monthlyIncome: string; // Monthly income from the activity

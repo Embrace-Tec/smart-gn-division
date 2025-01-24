@@ -170,6 +170,7 @@ export class StepperFormComponent {
     });
 
     this.otherActivitiesForm = this._formBuilder.group({
+      activityName: ['', Validators.required],
       ownerName: ['', Validators.required],
       activityAddress: ['', Validators.required],
       monthlyIncome: ['', [Validators.required, Validators.pattern('^\\d+(\\.\\d+)?$')]],

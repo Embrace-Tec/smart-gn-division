@@ -1302,6 +1302,21 @@
     <mat-step [stepControl]="otherActivitiesForm" #stepOtherActivities>
       <form [formGroup]="otherActivitiesForm" class="space-y-4" (ngSubmit)="onSubmitOtherActivities()">
 
+        <div class="flex flex-col space-y-2">
+          <label for="activityName" class="text-sm font-semibold">වෙනත් විශෙෂ හැකියා/වෘත්තීන්/ක්‍රියාකාරකම් විස්තර</label>
+          <input
+            id="activityName"
+            formControlName="activiyName"
+            type="text"
+            class="border rounded-md p-2"
+            placeholder="වෙනත් විශෙෂ
+            හැකියා/වෘත්තීන්/ක්‍රියාකාරකම් විස්තර ඇතුල් කරන්න"
+          />
+          <div *ngIf="otherActivitiesForm.get('activityName')?.invalid && otherActivitiesForm.get('activityName')?.touched" class="text-red-500 text-xs">
+            වෙනත් විශෙෂ
+            හැකියා/වෘත්තීන්/ක්‍රියාකාරකම් විස්තර අත්‍යවශ්‍ය වේ.
+          </div>
+        </div>
         <!-- හිමිකරුගේ නම -->
         <div class="flex flex-col space-y-2">
           <label for="ownerName" class="text-sm font-semibold">හිමිකරුගේ නම</label>
@@ -1313,6 +1328,9 @@
             හිමිකරුගේ නම අත්‍යවශ්‍ය වේ.
           </div>
         </div>
+
+
+
 
         <!-- ස්ථානයේ ලිපිනය -->
         <div class="flex flex-col space-y-2">
@@ -1374,6 +1392,7 @@
         <table class="table-auto w-full border-collapse">
           <thead>
           <tr>
+            <th class="border px-4 py-2">වෙනත් විශෙෂ හැකියා/වෘත්තීන්/ක්‍රියාකාරකම් විස්තර</th>
             <th class="border px-4 py-2">හිමිකරුගේ නම</th>
             <th class="border px-4 py-2">ස්ථානයේ ලිපිනය</th>
             <th class="border px-4 py-2">මාසික ආදායම</th>
@@ -1382,6 +1401,7 @@
           </thead>
           <tbody>
           <tr *ngFor="let data of submittedOtherActivitiesData">
+            <td class="border px-4 py-2">{{ data.activityName }}</td>
             <td class="border px-4 py-2">{{ data.ownerName }}</td>
             <td class="border px-4 py-2">{{ data.activityAddress }}</td>
             <td class="border px-4 py-2">{{ data.monthlyIncome }}</td>
