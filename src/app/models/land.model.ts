@@ -14,5 +14,5 @@ export interface LandDTO {
   landDetails: string; // Details of the land (name, lot number, or deed number)
   governorsArea: string; // Grama Niladhari division
   cropGrown: string; // Crops grown on the land
-  monthlyIncome: string; // Monthly income from the land
+  monthlyIncome: number; // Monthly income from the land
 }

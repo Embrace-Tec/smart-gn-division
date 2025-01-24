@@ -13,9 +13,12 @@ export class HouseService {
 
   // Add a new house
   addHouse(houseDTO: HouseDTO): Promise<void> {
+    // Ensure there are no undefined values in the object
+    const cleanedData = this.cleanUndefinedFields(houseDTO);
+
     return this.firestore
       .collection(this.houseCollection)
-      .add(houseDTO)
+      .add(cleanedData)
       .then(() => console.log('House added successfully'))
       .catch((error) => console.error('Error adding house:', error));
   }
@@ -53,5 +56,12 @@ export class HouseService {
       .delete()
       .then(() => console.log('House deleted successfully'))
       .catch((error) => console.error('Error deleting house:', error));
+  }
+
+  // Helper function to clean undefined fields
+  private cleanUndefinedFields(obj: any) {
+    return Object.fromEntries(
+      Object.entries(obj).filter(([_, value]) => value !== undefined)
+    );
   }
 }

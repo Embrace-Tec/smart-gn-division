@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
 import {Observable} from 'rxjs';
-import {Business, BusinessDTO} from '../models/business.model';
+import {Business, BusinessModelDTO} from '../models/business.model';
 import {map} from 'rxjs/operators';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class BusinessService {
   }
 
   // Add a new business
-  addBusiness(businessDTO: BusinessDTO) {
+  addBusiness(businessDTO: BusinessModelDTO) {
     // const id = this.firestore.createId(); // Generate unique ID
     // const business: Business = { id, ...businessDTO }; // Create Business object with ID
     // return this.firestore.collection<Business>(this.businessCollection).doc(id).set(business);

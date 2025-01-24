@@ -88,7 +88,7 @@ export class StepperFormComponent {
               private donationReceivedService: DonationReceivedService, private migratedPersonService: MigratedPersonService,
               private landService: LandService, private vehicleService: VehicleService,
               private assetService: AssetService, private businessService: BusinessService,
-              private talentService:TalentService) {
+              private talentService: TalentService) {
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required],
       secondCtrl: ['', Validators.required],
@@ -366,7 +366,7 @@ export class StepperFormComponent {
       sanitaryFacilities: `${combinedFormDto.housingInfo?.sanitationTypeDescription ?? ''} ${combinedFormDto.housingInfo?.sanitationType ?? ''}`.trim(),
       whatsapp: combinedFormDto.householdInfo.sixthCtrl,
       landLine: combinedFormDto.householdInfo.fifthCtrl,
-      specialNotes:combinedFormDto.specialNotes?.specialNotes
+      specialNotes: combinedFormDto.specialNotes?.specialNotes || ""
     }
 
     //save house
@@ -378,15 +378,16 @@ export class StepperFormComponent {
       const personDTO: PersonDTO = {
         nic: person.nic,
         houseNo: houseDTO.houseNo,
+        name:person.name,
         dob: person.dob,
         phoneNo: houseDTO.whatsapp,
         religion: person.religion,
         race: person.ethnicity,
-        educationLevel: person.education,
-        occupation: person.occupation,
-        income: person.income,
-        illnesses: person.healthIssues,
-        disabilities: person.remarks,
+        educationLevel: person.education || "",
+        occupation: person.occupation || "No Job",
+        income: person.income || 0,
+        illnesses: person.healthIssues || "N/A",
+        disabilities: person.remarks || "N/A",
         relationshipToHouseOwner: person.relation
       }
       this.personService.addPerson(personDTO); //save this person
@@ -398,15 +399,15 @@ export class StepperFormComponent {
       for (let assistanceDetail of assistanceDetails) {
         const donationReceived: DonationReceived = {
           nic: this.getIdFromName(people, assistanceDetail.institution),
-          aswesumaValue: assistanceDetail.aswesomeValue,
-          samurdhiValue: assistanceDetail.samrudhiValue,
-          elderlyValue: assistanceDetail.elderlyValue,
-          cancerValue: assistanceDetail.adultValue,
-          disabledValue: assistanceDetail.ignorantValue,
-          kidneyAssistanceValue: assistanceDetail.kidneyAssistanceValue,
-          publicAssistanceValue: assistanceDetail.publicAssistanceValue,
-          medicalAssistanceValue: assistanceDetail.medicalAssistanceValue,
-          educationSupportValue: assistanceDetail.educationSupportValue
+          aswesumaValue: assistanceDetail.aswesomeValue || 0,
+          samurdhiValue: assistanceDetail.samrudhiValue || 0,
+          elderlyValue: assistanceDetail.elderlyValue || 0,
+          cancerValue: assistanceDetail.adultValue || 0,
+          disabledValue: assistanceDetail.ignorantValue || 0,
+          kidneyAssistanceValue: assistanceDetail.kidneyAssistanceValue || 0,
+          publicAssistanceValue: assistanceDetail.publicAssistanceValue || 0,
+          medicalAssistanceValue: assistanceDetail.medicalAssistanceValue || 0,
+          educationSupportValue: assistanceDetail.educationSupportValue || 0
         }
         this.donationReceivedService.addDonationReceived(donationReceived); //save donation
       }
@@ -418,10 +419,10 @@ export class StepperFormComponent {
       for (let migrantDetail of migrantDetails) {
         const migrant: MigratedPersonDTO = {
           nic: this.getIdFromName(people, migrantDetail.name),
-          country: migrantDetail.country,
-          reason: migrantDetail.reasonMigrated,
-          year: migrantDetail.yearMigrated,
-          remark: migrantDetail.otherDetails!
+          country: migrantDetail.country || "",
+          reason: migrantDetail.reasonMigrated || "",
+          year: migrantDetail.yearMigrated || 0,
+          remark: migrantDetail.otherDetails || "",
         }
         this.migratedPersonService.addMigratedPerson(migrant); //save migrant
       }
@@ -431,13 +432,13 @@ export class StepperFormComponent {
     if (landDetails !== undefined) {
       for (let landDetail of landDetails) {
         const land: LandDTO = {
-          ownership: landDetail.ownership,
-          landSize: landDetail.landSize,
+          ownership: landDetail.ownership || "",
+          landSize: landDetail.landSize || "",
           ownerNic: this.getIdFromName(people, landDetail.ownerName),
-          landDetails: landDetail.landDetails,
-          governorsArea: landDetail.governorsArea,
-          cropGrown: landDetail.cropGrown,
-          monthlyIncome: landDetail.monthlyIncome
+          landDetails: landDetail.landDetails || "",
+          governorsArea: landDetail.governorsArea || "",
+          cropGrown: landDetail.cropGrown || "",
+          monthlyIncome: landDetail.monthlyIncome || 0
         }
         this.landService.addLand(land); // save land to db
       }
@@ -447,10 +448,10 @@ export class StepperFormComponent {
     if (vehicleDetails !== undefined) {
       for (let vehicleDetail of vehicleDetails) {
         const vehicle: VehicleDTO = {
-          vehicleType: vehicleDetail.vehicleType,
+          vehicleType: vehicleDetail.vehicleType || "",
           vehicleOwnerNic: this.getIdFromName(people, vehicleDetail.vehicleOwnerName),
-          vehicleValue: vehicleDetail.vehicleValue,
-          vehicleMonthlyIncome: vehicleDetail.vehicleMonthlyIncome
+          vehicleValue: vehicleDetail.vehicleValue || 0,
+          vehicleMonthlyIncome: vehicleDetail.vehicleMonthlyIncome || 0
         }
         this.vehicleService.addVehicle(vehicle); //save vehicle to db
       }
@@ -462,8 +463,8 @@ export class StepperFormComponent {
         const asset: AssetDTO = {
           assetDetails: assetDetail.assetDetails,
           assetOwnerNic: this.getIdFromName(people, assetDetail.assetOwnerName),
-          assetValue: assetDetail.assetValue,
-          assetMonthlyIncome: assetDetail.assetMonthlyIncome
+          assetValue: assetDetail.assetValue || 0,
+          assetMonthlyIncome: assetDetail.assetMonthlyIncome || 0
         }
         this.assetService.addAsset(asset); //save
       }
@@ -474,12 +475,12 @@ export class StepperFormComponent {
       for (let businessDetail of businessDetails) {
         const business: BusinessModelDTO = {
           ownerNic: this.getIdFromName(people, businessDetail.businessOwner),
-          businessNature: businessDetail.businessNature,
-          businessName: businessDetail.businessName,
-          employeeCount: businessDetail.employeeCount,
-          businessAddress: businessDetail.businessAddress,
-          monthlyIncome: businessDetail.monthlyIncome,
-          businessOtherDetails: businessDetail.businessOtherDetails
+          businessNature: businessDetail.businessNature || "",
+          businessName: businessDetail.businessName || "",
+          employeeCount: businessDetail.employeeCount || 0,
+          businessAddress: businessDetail.businessAddress || "",
+          monthlyIncome: businessDetail.monthlyIncome || 0,
+          businessOtherDetails: businessDetail.businessOtherDetails || "",
         }
         this.businessService.addBusiness(business); //save
       }
@@ -489,11 +490,11 @@ export class StepperFormComponent {
     if (otherActivities !== undefined) {
       for (let otherActivity of otherActivities) {
         const talent: TalentDTO = {
-          nic: this.getIdFromName(people,otherActivity.ownerName),
-          name: otherActivity.activityName,
-          address: otherActivity.activityAddress,
-          description: otherActivity.additionalDetails,
-          income: otherActivity.monthlyIncome
+          nic: this.getIdFromName(people, otherActivity.ownerName),
+          name: otherActivity.activityName || "",
+          address: otherActivity.activityAddress || "",
+          description: otherActivity.additionalDetails || "",
+          income: otherActivity.monthlyIncome || 0
         }
         this.talentService.addTalent(talent); //save
       }

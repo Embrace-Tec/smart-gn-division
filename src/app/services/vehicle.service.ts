@@ -56,13 +56,13 @@ export class VehicleService {
   }
 
   // Convert Vehicle to VehicleDTO
-  convertToDTO(vehicle: Vehicle): VehicleDTO {
-    return {
-      nic: vehicle.nic,
-      registrationNumber: vehicle.registrationNumber,
-      model: vehicle.model,
-      value: vehicle.value,
-      monthlyRevenue: vehicle.monthlyRevenue,
-    };
-  }
+  // convertToDTO(vehicle: Vehicle): VehicleDTO {
+  //   return {
+  //     nic: vehicle.nic,
+  //     registrationNumber: vehicle.registrationNumber,
+  //     model: vehicle.model,
+  //     value: vehicle.value,
+  //     monthlyRevenue: vehicle.monthlyRevenue,
+  //   };
+  // }
 }
