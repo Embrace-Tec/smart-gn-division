@@ -11,6 +11,7 @@ export interface House {
   sanitaryFacilities: string;
   whatsapp: string;
   landLine: string;
+  specialNotes?:string;
 }
 
 export interface HouseDTO {
@@ -25,4 +26,5 @@ export interface HouseDTO {
   sanitaryFacilities: string;
   whatsapp: string;
   landLine: string;
+  specialNotes?:string;
 }

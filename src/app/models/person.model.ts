@@ -2,7 +2,7 @@ export interface Person {
   id: string;
   nic:string;
   houseNo: string;
-  dob: string;
+  dob: Date;
   phoneNo: string;
   religion: string;
   race: string;
@@ -17,7 +17,7 @@ export interface Person {
 export interface PersonDTO {
   nic:string;
   houseNo: string;
-  dob: string;
+  dob: Date;
   phoneNo: string;
   religion: string;
   race: string;
