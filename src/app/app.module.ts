@@ -10,11 +10,29 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { StepperFormComponent } from './components/stepper-form/stepper-form.component';
+import { TouchServicesComponent } from './components/touch-services/touch-services.component';
+import { FirstComponent } from './components/first/first.component';
+import { LastComponent } from './components/last/last.component';
+import { SecondComponent } from './components/second/second.component';
+import { ThirdComponent } from './components/third/third.component';
+import { FourthComponent } from './components/fourth/fourth.component';
+import { FifthComponent } from './components/fifth/fifth.component';
+import { SixthComponent } from './components/sixth/sixth.component';
+import { SeventhComponent } from './components/seventh/seventh.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TouchServicesComponent,
+    FirstComponent,
+    LastComponent,
+    SecondComponent,
+    ThirdComponent,
+    FourthComponent,
+    FifthComponent,
+    SixthComponent,
+    SeventhComponent,
   ],
   imports: [
     BrowserModule,
