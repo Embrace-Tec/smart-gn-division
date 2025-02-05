@@ -15,3 +15,9 @@ export const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
+export const emailJSConfig={
+  serviceId:"service_vl0vrgi",
+  templateId:"template_ssx0fqk",
+  publicKey:"asMNMa8Vghoc4C0B9"
+}
