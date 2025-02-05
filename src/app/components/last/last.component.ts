@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-last',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './last.component.css'
 })
 export class LastComponent {
-
+  constructor(private router: Router) {
+  }
+  backHomeWindow() {
+    this.router.navigate(['/']);
+  }
 }
