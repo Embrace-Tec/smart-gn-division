@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import emailjs from "@emailjs/browser";
 import {emailJSConfig} from "../../../environments/environment";
+import {PersonService} from "@app/services/person.service";
 
 @Component({
   selector: 'app-third',
@@ -9,17 +10,36 @@ import {emailJSConfig} from "../../../environments/environment";
   styleUrl: './third.component.css'
 })
 export class ThirdComponent {
-  constructor(private router: Router) {
+  constructor(private router: Router, private personService: PersonService) {
   }
 
   openNewWindow() {
-    this.sendEmail();
-    this.router.navigate(['/last']);
+    if (this.checkNicExist()) {
+      this.sendEmail();
+      this.router.navigate(['/last']);
+    } else {
+      alert("NIC not found");
+    }
 
   }
 
   backHomeWindow() {
     this.router.navigate(['/']);
+  }
+
+  checkNicExist() {
+    let nic = (document.getElementById("nicText") as HTMLInputElement).value;
+    let exist = false;
+    this.personService.getPersonByNic(nic.toUpperCase()).subscribe(person => {
+      if (person) {
+        console.log("Person found:", person);
+        exist = true;
+      } else {
+        console.log("No person found.");
+        alert("NIC not found!!");
+      }
+    });
+    return exist;
   }
 
   sendEmail() {

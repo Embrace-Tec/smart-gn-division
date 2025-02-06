@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
-import { Person, PersonDTO } from '../models/person.model'; // Adjust the path as needed
+import { Person, PersonDTO } from '../models/person.model';
+import {map} from "rxjs/operators"; // Adjust the path as needed
 
 @Injectable({
   providedIn: 'root',
@@ -33,6 +34,18 @@ export class PersonService {
       .collection<Person>(this.personCollection)
       .doc<Person>(id)
       .valueChanges();
+  }
+
+  // Get a person by NIC
+  getPersonByNic(nic: string): Observable<Person | undefined> {
+    return this.firestore
+      .collection<Person>(this.personCollection, (ref) =>
+        ref.where('nic', '==', nic).limit(1) // Query by NIC field
+      )
+      .valueChanges()
+      .pipe(
+        map((persons) => (persons.length > 0 ? persons[0] : undefined)) // Return first match
+      );
   }
 
   // Update an existing person

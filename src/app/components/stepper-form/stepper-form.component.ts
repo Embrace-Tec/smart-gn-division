@@ -376,7 +376,7 @@ export class StepperFormComponent {
     const people: PersonDto[] = combinedFormDto.people;
     for (let person of people) {
       const personDTO: PersonDTO = {
-        nic: person.nic,
+        nic: person.nic.toUpperCase(),
         houseNo: houseDTO.houseNo,
         name:person.name,
         dob: person.dob,
