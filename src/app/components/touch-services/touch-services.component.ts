@@ -1,18 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
+import { MatSidenav } from '@angular/material/sidenav';
+import {LoginModalComponent} from "@app/components/login-modal/login-modal.component";
+import { MatDialog } from '@angular/material/dialog';
+
 @Component({
   selector: 'app-touch-services',
   templateUrl: './touch-services.component.html',
   styleUrls: ['./touch-services.component.css']
 })
 export class TouchServicesComponent implements OnInit {
+  @ViewChild('sidenav') sidenav!: MatSidenav;
+
+
   currentYear: string = '';
   currentDate: string = '';
   currentDay: string = '';
   showHeader: boolean = true;  // Controls visibility of the header
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,private dialog: MatDialog) { }
 
+  toggleMenu() {
+    this.sidenav.toggle();
+  }
   ngOnInit() {
     this.setSinhalaDate();
     setTimeout(() => {
@@ -53,6 +63,13 @@ export class TouchServicesComponent implements OnInit {
   seventhNewWindow() {
     // Open the new component route in a new window
     this.router.navigate(['/seventh']);
+  }
+
+  openLoginModal() {
+
+    this.dialog.open(LoginModalComponent, {
+      width: '400px'
+    });
   }
 
   setSinhalaDate() {
