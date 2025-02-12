@@ -10,9 +10,13 @@ import {FourthComponent} from "@app/components/fourth/fourth.component";
 import {FifthComponent} from "@app/components/fifth/fifth.component";
 import {SixthComponent} from "@app/components/sixth/sixth.component";
 import {SeventhComponent} from "@app/components/seventh/seventh.component";
+import {AdminDashboardComponent} from "@app/components/admin-dashboard/admin-dashboard.component";
+import {AddServicesComponent} from "@app/components/add-services/add-services.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'touch-services', pathMatch: 'full' },
+  {path: 'add-services', component: AddServicesComponent},
+  {path: 'admin-dashboard', component: AdminDashboardComponent},
   { path: 'touch-services', component: TouchServicesComponent },
   { path: 'stepper-form', component: StepperFormComponent },
   {path: 'first', component: FirstComponent},

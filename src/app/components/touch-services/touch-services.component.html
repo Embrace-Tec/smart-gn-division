@@ -1,6 +1,39 @@
-<div class="flex flex-col items-center p-6 max-w-7xl mx-auto">
+<div>
+  <mat-toolbar color="primary" class="p-4 flex justify-between items-center bg-blue-600 text-white shadow-lg">
+    <div class="flex items-center space-x-4">
+      <img src="./assets/gov-logo.png" alt="Government Logo" class="w-10 h-12">
+      <span class="text-2xl font-bold">Smart Haputale</span>
+    </div>
+
+    <!-- Login Button (Opens Modal) -->
+    <button mat-raised-button class="bg-white text-blue-600 hover:bg-gray-100 hidden md:block" (click)="openLoginModal()">
+      Login
+    </button>
+
+    <!-- Menu Button (Always Visible) -->
+    <button mat-icon-button (click)="toggleMenu()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <!-- Mobile Navigation Drawer -->
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav mode="over" class="w-64 p-4 bg-blue-600 text-white">
+      <button mat-icon-button (click)="sidenav.close()" class="float-right">
+        <mat-icon class="text-white">close</mat-icon>
+      </button>
+      <div class="mt-12 flex flex-col space-y-4">
+        <button mat-raised-button class="bg-white text-blue-600 hover:bg-gray-100" (click)="openLoginModal()">
+          Login
+        </button>
+      </div>
+    </mat-sidenav>
+  </mat-sidenav-container>
+
+
+<div class="flex flex-col items-center p-6 h-full mx-auto">
   <!-- Header Section (Visible for first 5 seconds) -->
-  <div *ngIf="showHeader" class="bg-gradient-to-r from-blue-500 to-teal-500 text-white text-center p-12 rounded-3xl w-full shadow-xl transform transition-all duration-300 hover:scale-105">
+  <div *ngIf="showHeader" class="bg-gradient-to-r from-blue-500 to-teal-500 text-white text-center p-12 rounded-3xl w-full shadow-xl transform transition-all duration-300 hover:scale-105 h-full">
     <p class="text-8xl font-extrabold animated-text">
       <span>ආ</span><span>යු</span><span>බෝ</span><span>ව</span><span>න්</span>
     </p>
@@ -29,41 +62,73 @@
     </div>
   </div>
 
-  <!-- Main Section (Visible after 5 seconds) -->
-  <div *ngIf="!showHeader" class="mt-10 w-full">
-    <div class="bg-gradient-to-r from-green-400 to-teal-500 text-white text-center py-4 px-6 font-semibold rounded-xl text-3xl shadow-lg">
-      කරුණාකර ඔබට අවශ්‍ය සේවාව තෝරන්න
-    </div>
-
-    <!-- Service List -->
-    <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div class="bg-blue-600 text-white py-6 px-8 rounded-lg shadow-xl flex items-center text-4xl cursor-pointer transform transition-all duration-300 hover:scale-105 hover:bg-blue-700" (click)="firstNewWindow()">
-        ➤ පදිංචි සහතිකයක් ලබාගන්න
+  <div class="container mx-auto px-6 py-12">
+    <!-- Main Section (Visible after 5 seconds) -->
+    <div *ngIf="!showHeader" class="mt-10 w-full">
+      <!-- Title Section -->
+      <div class="bg-gradient-to-r from-green-400 to-teal-500 text-white text-center py-8 px-6 font-bold rounded-xl text-6xl shadow-lg">
+        කරුණාකර ඔබට අවශ්‍ය සේවාව තෝරන්න
       </div>
 
-      <div (click)="secondNewWindow()" class="bg-blue-600 text-white py-6 px-8 rounded-lg shadow-xl flex items-center text-4xl cursor-pointer transform transition-all duration-300 hover:scale-105 hover:bg-blue-700">
-        ➤ පදිංචිය හැරයාමේ සහතිකයක් ලබා ගන්න
-      </div>
+      <!-- Service List -->
+      <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Service 1 -->
+        <div
+          (click)="firstNewWindow()"
+          class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-8 px-10 rounded-xl shadow-2xl flex items-center text-5xl font-bold cursor-pointer transform transition-all duration-300 hover:scale-105 hover:bg-gradient-to-r hover:from-blue-700 hover:to-indigo-700"
+        >
+          ➤ පදිංචි සහතිකයක් ලබාගන්න
+        </div>
 
-      <div (click)="thirdNewWindow()" class="bg-blue-600 text-white py-6 px-8 rounded-lg shadow-xl flex items-center text-4xl cursor-pointer transform transition-all duration-300 hover:scale-105 hover:bg-blue-700">
-        ➤ වැලි ගොඩ දැමීම සඳහා අවසරයක් ලබා ගන්න
-      </div>
+        <!-- Service 2 -->
+        <div
+          (click)="secondNewWindow()"
+          class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-8 px-10 rounded-xl shadow-2xl flex items-center text-5xl font-bold cursor-pointer transform transition-all duration-300 hover:scale-105 hover:bg-gradient-to-r hover:from-blue-700 hover:to-indigo-700"
+        >
+          ➤ පදිංචිය හැරයාමේ සහතිකයක් ලබාගන්න
+        </div>
 
-      <div (click)="fourthNewWindow()" class="bg-blue-600 text-white py-6 px-8 rounded-lg shadow-xl flex items-center text-4xl cursor-pointer transform transition-all duration-300 hover:scale-105 hover:bg-blue-700">
-        ➤ ගසක් කැපීම සඳහා බලපත්‍රයක් ලබා ගන්න
-      </div>
+        <!-- Service 3 -->
+        <div
+          (click)="thirdNewWindow()"
+          class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-8 px-10 rounded-xl shadow-2xl flex items-center text-5xl font-bold cursor-pointer transform transition-all duration-300 hover:scale-105 hover:bg-gradient-to-r hover:from-blue-700 hover:to-indigo-700"
+        >
+          ➤ වැලි ගොඩ දැමීම සඳහා අවසරයක් ලබාගන්න
+        </div>
 
-      <div (click)="fifthNewWindow()" class="bg-blue-600 text-white py-6 px-8 rounded-lg shadow-xl flex items-center text-4xl cursor-pointer transform transition-all duration-300 hover:scale-105 hover:bg-blue-700">
-        ➤ හදසි ආපදාවක් පිළිබද දැනුම්දීම
-      </div>
+        <!-- Service 4 -->
+        <div
+          (click)="fourthNewWindow()"
+          class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-8 px-10 rounded-xl shadow-2xl flex items-center text-5xl font-bold cursor-pointer transform transition-all duration-300 hover:scale-105 hover:bg-gradient-to-r hover:from-blue-700 hover:to-indigo-700"
+        >
+          ➤ ගසක් කැපීම සඳහා බලපත්‍රයක් ලබාගන්න
+        </div>
 
-      <div (click)="sixthNewWindow()" class="bg-blue-600 text-white py-6 px-8 rounded-lg shadow-xl flex items-center text-4xl cursor-pointer transform transition-all duration-300 hover:scale-105 hover:bg-blue-700">
-        ➤ හදසි මරණෙක් පිළි ද දැනුම්දීම
-      </div>
+        <!-- Service 5 -->
+        <div
+          (click)="fifthNewWindow()"
+          class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-8 px-10 rounded-xl shadow-2xl flex items-center text-5xl font-bold cursor-pointer transform transition-all duration-300 hover:scale-105 hover:bg-gradient-to-r hover:from-blue-700 hover:to-indigo-700"
+        >
+          ➤ හදිසි ආපදාවක් පිළිබඳ දැනුම්දීම
+        </div>
 
-      <div (click)="seventhNewWindow()" class="bg-blue-600 text-white py-6 px-8 rounded-lg shadow-xl flex items-center text-4xl cursor-pointer transform transition-all duration-300 hover:scale-105 hover:bg-blue-700 md:col-span-2">
-        ➤ වෙනත් හදසි පණිවිඩෙක් දැනුම්දීම
+        <!-- Service 6 -->
+        <div
+          (click)="sixthNewWindow()"
+          class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-8 px-10 rounded-xl shadow-2xl flex items-center text-5xl font-bold cursor-pointer transform transition-all duration-300 hover:scale-105 hover:bg-gradient-to-r hover:from-blue-700 hover:to-indigo-700"
+        >
+          ➤ හදිසි මරණයක් පිළිබඳ දැනුම්දීම
+        </div>
+
+        <!-- Service 7 -->
+        <div
+          (click)="seventhNewWindow()"
+          class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-8 px-10 rounded-xl shadow-2xl flex items-center text-5xl font-bold cursor-pointer transform transition-all duration-300 hover:scale-105 hover:bg-gradient-to-r hover:from-blue-700 hover:to-indigo-700 md:col-span-2"
+        >
+          ➤ වෙනත් හදිසි පණිවිඩයක් දැනුම්දීම
+        </div>
       </div>
     </div>
   </div>
+</div>
 </div>
