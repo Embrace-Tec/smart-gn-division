@@ -1,0 +1,43 @@
+.key {
+  background-color: #4CAF50;
+  height: 100px;
+  color: white;
+  font-size: 4rem;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.key:hover {
+  background-color: #45a049;
+}
+
+.hidden {
+  display: none;
+}
+.fixed {
+  position: fixed;
+}
+
+.bottom-0 {
+  bottom: 0;
+}
+
+.left-0 {
+  left: 0;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.rounded-t-xl {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.shadow-lg {
+  box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.2);
+}

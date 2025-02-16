@@ -1,0 +1,59 @@
+<div class="container mx-auto p-8 max-w-2xl bg-gray-100 shadow-xl rounded-xl">
+  <h1 class="text-4xl font-bold text-gray-900 mb-8 text-center">Manage Services</h1>
+
+  <!-- Add Service Form -->
+  <div class="flex items-center bg-white shadow-md rounded-lg overflow-hidden mb-8 p-4">
+    <input
+      [(ngModel)]="newServiceName"
+      placeholder="Enter service name"
+      class="flex-grow p-4 text-lg border-none focus:ring-2 focus:ring-blue-500 outline-none rounded-l-lg"
+    />
+    <button
+      (click)="addService()"
+      class="bg-blue-600 text-white px-6 py-4 text-lg hover:bg-blue-700 transition rounded-r-lg"
+    >
+      Add
+    </button>
+  </div>
+
+  <!-- Services List -->
+  <div class="bg-white shadow-lg rounded-xl divide-y">
+    <div *ngFor="let service of services" class="p-6 flex justify-between items-center">
+      <div *ngIf="editServiceId !== service.id; else editMode" class="flex items-center w-full">
+        <span class="text-xl font-semibold text-gray-800 flex-grow">{{ service.name }}</span>
+        <button
+          (click)="editService(service)"
+          class="text-blue-500 hover:text-blue-700 transition text-xl px-3"
+        >
+          ✏️
+        </button>
+        <button
+          (click)="deleteService(service.id)"
+          class="text-red-500 hover:text-red-700 transition text-xl px-3"
+        >
+          🗑️
+        </button>
+      </div>
+      <ng-template #editMode>
+        <div class="flex items-center w-full">
+          <input
+            [(ngModel)]="editedServiceName"
+            class="flex-grow p-3 text-lg border rounded focus:ring-2 focus:ring-blue-500 outline-none"
+          />
+          <button
+            (click)="saveEditedService()"
+            class="text-green-500 hover:text-green-700 transition text-xl px-3"
+          >
+            ✅
+          </button>
+          <button
+            (click)="cancelEdit()"
+            class="text-gray-500 hover:text-gray-700 transition text-xl px-3"
+          >
+            ❌
+          </button>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

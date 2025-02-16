@@ -13,6 +13,38 @@ export class ThirdComponent {
   constructor(private router: Router, private personService: PersonService) {
   }
 
+  activeInput: HTMLInputElement | null = null;
+
+  showKeyboard(inputId: string): void {
+    this.activeInput = document.getElementById(inputId) as HTMLInputElement | null;
+    const keyboard = document.getElementById("keyboard");
+    if (keyboard) {
+      keyboard.classList.remove("hidden");
+      keyboard.style.display = "block";
+    }
+  }
+
+  hideKeyboard(): void {
+    const keyboard = document.getElementById("keyboard");
+    if (keyboard) {
+      keyboard.classList.add("hidden");
+      keyboard.style.display = "none";
+    }
+  }
+
+  addToInput(value: string): void {
+    if (this.activeInput) {
+      this.activeInput.value += value;
+    }
+  }
+
+  deleteLast(): void {
+    if (this.activeInput) {
+      this.activeInput.value = this.activeInput.value.slice(0, -1);
+    }
+  }
+
+
   openNewWindow() {
     if (this.checkNicExist()) {
       this.sendEmail();
