@@ -1,0 +1,290 @@
+<div class="m-20">
+  <form [formGroup]="thirdFormGroup" class="space-y-6">
+    <ng-template matStepLabel class="text-lg font-semibold text-gray-700">නිවාස තොරතුරු</ng-template>
+
+    <!-- First row with two fields -->
+    <div class="grid grid-cols-1 gap-4 p-4 bg-white rounded-lg shadow-md">
+      <mat-label class="text-xl font-bold text-gray-800 mb-3">නිවාස වර්ගය</mat-label>
+      <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-6">
+        <!-- Radio Group -->
+        <mat-radio-group
+          formControlName="housingType"
+          aria-label="Select an option" class="flex flex-wrap items-center space-x-6">
+          <mat-radio-button value="1" class="flex items-center p-3 border border-gray-300 rounded-md hover:bg-blue-100 transition duration-200">
+            <span class="ml-2 text-gray-700">ස්ථිර</span>
+          </mat-radio-button>
+          <mat-radio-button value="2" class="flex items-center p-3 border border-gray-300 rounded-md hover:bg-blue-100 transition duration-200">
+            <span class="ml-2 text-gray-700">අර්ධ ස්ථිර</span>
+          </mat-radio-button>
+          <mat-radio-button value="3" class="flex items-center p-3 border border-gray-300 rounded-md hover:bg-blue-100 transition duration-200">
+            <span class="ml-2 text-gray-700">තාවකාලික</span>
+          </mat-radio-button>
+          <mat-radio-button value="4" class="flex items-center p-3 border border-gray-300 rounded-md hover:bg-blue-100 transition duration-200">
+            <span class="ml-2 text-gray-700">පැල්පත්</span>
+          </mat-radio-button>
+          <mat-radio-button value="5" class="flex items-center p-3 border border-gray-300 rounded-md hover:bg-blue-100 transition duration-200">
+            <span class="ml-2 text-gray-700">ලයිම් කාමර</span>
+          </mat-radio-button>
+          <mat-radio-button value="6" class="flex items-center p-3 border border-gray-300 rounded-md hover:bg-blue-100 transition duration-200">
+            <span class="ml-2 text-gray-700">නැත</span>
+          </mat-radio-button>
+        </mat-radio-group>
+
+        <div class="flex flex-col sm:mt-0 mt-4">
+          <label for="description1" class="text-sm font-medium text-gray-700 mb-1">විස්තරය:</label>
+          <textarea
+            formControlName="housingTypeDescription"
+            id="description1" rows="3" placeholder="මෙතන විස්තරයක් ඇතුලත් කරන්න..."
+            class="border border-gray-300 rounded-md p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-200"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 gap-4 p-4 bg-white rounded-lg shadow-md">
+      <mat-label class="text-lg font-semibold mb-2">බිත්ති වල ස්වභාවය</mat-label>
+      <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-6">
+
+        <mat-radio-group
+          formControlName="wallType"
+          aria-label="Select an option" class="flex flex-wrap items-center space-x-4">
+          <mat-radio-button value="1" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">බ්ලොක් ගල්</span>
+          </mat-radio-button>
+          <mat-radio-button value="2" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">මැටි ගඩොල්</span>
+          </mat-radio-button>
+          <mat-radio-button value="3" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">වරිච්චි</span>
+          </mat-radio-button>
+          <mat-radio-button value="4" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">ලෑළි</span>
+          </mat-radio-button>
+          <mat-radio-button value="5" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">ටකරන්</span>
+          </mat-radio-button>
+          <mat-radio-button value="6" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">වෙනත්</span>
+          </mat-radio-button>
+        </mat-radio-group>
+        <div class="flex flex-col sm:mt-0 mt-4">
+          <label for="description2" class="text-sm font-medium text-gray-700 mb-1">විස්තරය:</label>
+          <textarea id="description2"
+                    formControlName="wallTypeDescription"
+                    rows="3" placeholder="මෙතන විස්තරයක් ඇතුලත් කරන්න..."
+                    class="border border-gray-300 rounded-md p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-200"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 gap-4 p-4 bg-white rounded-lg shadow-md">
+      <mat-label class="text-lg font-semibold mb-2">ගෙබිම ස්වභාවය</mat-label>
+      <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-6">
+
+        <mat-radio-group formControlName="floorType" aria-label="Select an option" class="flex flex-wrap items-center space-x-4">
+          <mat-radio-button value="1" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">ටයිල්</span>
+          </mat-radio-button>
+          <mat-radio-button value="2" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">සිමෙන්ති</span>
+          </mat-radio-button>
+          <mat-radio-button value="3" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">කොන්ක්‍රීට්</span>
+          </mat-radio-button>
+          <mat-radio-button value="4" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">මැටි</span>
+          </mat-radio-button>
+          <mat-radio-button value="5" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">ගොම</span>
+          </mat-radio-button>
+          <mat-radio-button value="6" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">වෙනත්</span>
+          </mat-radio-button>
+        </mat-radio-group>
+        <div class="flex flex-col sm:mt-0 mt-4">
+          <label for="description3" class="text-sm font-medium text-gray-700 mb-1">විස්තරය:</label>
+          <textarea formControlName="floorTypeDescription" id="description3" rows="3" placeholder="මෙතන විස්තරයක් ඇතුලත් කරන්න..."
+                    class="border border-gray-300 rounded-md p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-200"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 gap-4 p-4 bg-white rounded-lg shadow-md">
+      <mat-label class="text-lg font-semibold mb-2">වහලයේ ස්වභාවය</mat-label>
+      <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-6">
+
+        <mat-radio-group formControlName="roofType" aria-label="Select an option" class="flex flex-wrap items-center space-x-4">
+          <mat-radio-button value="1" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">ඇස්බැස්ටෝස්</span>
+          </mat-radio-button>
+          <mat-radio-button value="2" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">උළු</span>
+          </mat-radio-button>
+          <mat-radio-button value="3" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">ටකරන්</span>
+          </mat-radio-button>
+          <mat-radio-button value="4" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">කොන්ක්‍රීට්</span>
+          </mat-radio-button>
+          <mat-radio-button value="5" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">පිදුරු/පොල් අතු</span>
+          </mat-radio-button>
+          <mat-radio-button value="6" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">වෙනත්</span>
+          </mat-radio-button>
+        </mat-radio-group>
+        <div class="flex flex-col sm:mt-0 mt-4">
+          <label for="description4" class="text-sm font-medium text-gray-700 mb-1">විස්තරය:</label>
+          <textarea formControlName="roofTypeDescription" id="description4" rows="3" placeholder="මෙතන විස්තරයක් ඇතුලත් කරන්න..."
+                    class="border border-gray-300 rounded-md p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-200"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 gap-4 p-4 bg-white rounded-lg shadow-md">
+      <mat-label class="text-lg font-semibold mb-2">සනීපාරක්ෂක පහසුකම්</mat-label>
+      <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-6">
+
+        <mat-radio-group formControlName="sanitationType" aria-label="Select an option" class="flex flex-wrap items-center space-x-4">
+          <mat-radio-button value="1" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">කොමඩ්</span>
+          </mat-radio-button>
+          <mat-radio-button value="2" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">පොච්චි වැසිකිලි</span>
+          </mat-radio-button>
+          <mat-radio-button value="3" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">වල වැසිකිලි</span>
+          </mat-radio-button>
+          <mat-radio-button value="4" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">පොදු වැසිකිලි</span>
+          </mat-radio-button>
+          <mat-radio-button value="5" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">වෙනත්</span>
+          </mat-radio-button>
+          <mat-radio-button value="6" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">නැත</span>
+          </mat-radio-button>
+        </mat-radio-group>
+        <div class="flex flex-col sm:mt-0 mt-4">
+          <label for="description5" class="text-sm font-medium text-gray-700 mb-1">විස්තරය:</label>
+          <textarea formControlName="sanitationTypeDescription" id="description5" rows="3" placeholder="මෙතන විස්තරයක් ඇතුලත් කරන්න..."
+                    class="border border-gray-300 rounded-md p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-200"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 gap-4 p-4 bg-white rounded-lg shadow-md">
+      <mat-label class="text-lg font-semibold mb-2">බීමට ජල පහසුකම්</mat-label>
+      <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-6">
+
+        <mat-radio-group formControlName="waterFacility" aria-label="Select an option" class="flex flex-wrap items-center space-x-4">
+          <mat-radio-button value="1" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">ජල සම්පාදන ම.</span>
+          </mat-radio-button>
+          <mat-radio-button value="2" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">ප්‍රජා ජල</span>
+          </mat-radio-button>
+          <mat-radio-button value="3" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">ආරක්ෂිත ළිඳ</span>
+          </mat-radio-button>
+          <mat-radio-button value="4" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">පොදු ලිඳ</span>
+          </mat-radio-button>
+          <mat-radio-button value="5" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">වෙනත්</span>
+          </mat-radio-button>
+          <mat-radio-button value="6" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">නැත</span>
+          </mat-radio-button>
+        </mat-radio-group>
+        <div class="flex flex-col sm:mt-0 mt-4">
+          <label for="description6" class="text-sm font-medium text-gray-700 mb-1">විස්තරය:</label>
+          <textarea formControlName="waterFacilityDescription" id="description6" rows="3" placeholder="මෙතන විස්තරයක් ඇතුලත් කරන්න..."
+                    class="border border-gray-300 rounded-md p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-200"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 gap-4 p-4 bg-white rounded-lg shadow-md">
+      <mat-label class="text-lg font-semibold mb-2">බලශක්තිය</mat-label>
+      <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-6">
+
+        <mat-radio-group formControlName="powerSource" aria-label="Select an option" class="flex flex-wrap items-center space-x-4">
+          <mat-radio-button value="1" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">ල.න්.වි.ම විදුලිය  </span>
+          </mat-radio-button>
+          <mat-radio-button value="2" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">සූර්යය බලශක්තිය</span>
+          </mat-radio-button>
+          <mat-radio-button value="3" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">ගෑස් භාවිතා කරයි</span>
+          </mat-radio-button>
+          <mat-radio-button value="4" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">ජීව වායු</span>
+          </mat-radio-button>
+          <mat-radio-button value="5" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">වෙනත්</span>
+          </mat-radio-button>
+          <mat-radio-button value="6" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">නැත</span>
+          </mat-radio-button>
+        </mat-radio-group>
+        <div class="flex flex-col sm:mt-0 mt-4">
+          <label for="description7" class="text-sm font-medium text-gray-700 mb-1">විස්තරය:</label>
+          <textarea formControlName="powerSourceDescription" id="description7" rows="3" placeholder="මෙතන විස්තරයක් ඇතුලත් කරන්න..."
+                    class="border border-gray-300 rounded-md p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-200"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 gap-4 p-4 bg-white rounded-lg shadow-md">
+      <mat-label class="text-lg font-semibold mb-2">ආපදා අවදානම් ස්වභාවය</mat-label>
+      <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-6">
+
+        <mat-radio-group formControlName="disasterRisk" aria-label="Select an option" class="flex flex-wrap items-center space-x-4">
+          <mat-radio-button value="1" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">නාය යෑම් අවදානම් </span>
+          </mat-radio-button>
+          <mat-radio-button value="2" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">ගංවතුර</span>
+          </mat-radio-button>
+          <mat-radio-button value="3" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">පස් කඳු කඩා වැටීම</span>
+          </mat-radio-button>
+          <mat-radio-button value="4" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">වන සත්ව හානි</span>
+          </mat-radio-button>
+          <mat-radio-button value="5" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">වෙනත්</span>
+          </mat-radio-button>
+          <mat-radio-button value="6" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+            <span class="ml-2">නැත</span>
+          </mat-radio-button>
+        </mat-radio-group>
+        <div class="flex flex-col sm:mt-0 mt-4">
+          <label for="description8" class="text-sm font-medium text-gray-700 mb-1">විස්තරය:</label>
+          <textarea formControlName="disasterRiskDescription" id="description8" rows="3" placeholder="මෙතන විස්තරයක් ඇතුලත් කරන්න..."
+                    class="border border-gray-300 rounded-md p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-200"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Second row with one field -->
+    <div class="space-y-6">
+
+    </div>
+
+    <!-- Fourth row with two fields -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+    </div>
+
+    <div class="flex justify-end space-x-4">
+
+      <button mat-raised-button color="primary" (click)="onManualSubmit()" type="button">
+        Submit
+      </button>
+    </div>
+  </form>
+</div>
+
+

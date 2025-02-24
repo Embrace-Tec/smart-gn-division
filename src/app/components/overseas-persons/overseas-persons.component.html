@@ -1,0 +1,108 @@
+<div class="m-20">
+  <form [formGroup]="mainForm" class="space-y-4" (ngSubmit)="onSubmit()">
+    <ng-template matStepLabel class="text-lg font-semibold text-gray-700">විදෙශ්ගත පුද්ගලයින් පිළිබද විස්තර</ng-template>
+
+    <!-- Institution Name Field -->
+    <div class="flex flex-col space-y-2">
+      <label for="nameMain" class="text-sm font-semibold">අයතේ නම</label>
+      <select id="nameMain" formControlName="name" class="border rounded-md p-2">
+        <option value="" disabled>Select an institution</option>
+        <option *ngFor="let person of peopleData" [value]="person.name">{{ person.name }}</option>
+      </select>
+      <div *ngIf="mainForm.get('name')?.invalid && mainForm.get('name')?.touched" class="text-red-500 text-xs">
+        අයතේ නම අවශ්‍යයි.
+      </div>
+    </div>
+
+    <!-- Country Field -->
+    <div class="flex flex-col space-y-2">
+      <label for="country" class="text-sm font-semibold">රට</label>
+      <input
+        id="country"
+        formControlName="country"
+        type="text"
+        class="border rounded-md p-2"
+        placeholder="රට ලියන්න"
+      />
+      <div *ngIf="mainForm.get('country')?.invalid && mainForm.get('country')?.touched" class="text-red-500 text-xs">
+        රට ලියන්න අවශ්‍යයි.
+      </div>
+    </div>
+
+    <!-- Year Field -->
+    <div class="flex flex-col space-y-2">
+      <label for="yearMigrated" class="text-sm font-semibold">විතද්ශගතවූ වර්ෂය</label>
+      <input
+        id="yearMigrated"
+        formControlName="yearMigrated"
+        type="text"
+        class="border rounded-md p-2"
+        placeholder="2000 වැනි ආකාරයෙන් වර්ෂය ඇතුලත් කරන්න"
+      />
+      <div *ngIf="mainForm.get('yearMigrated')?.invalid && mainForm.get('yearMigrated')?.touched" class="text-red-500 text-xs">
+        වලංගු වර්ෂයක් අවශ්‍යයි (උදා: 2000).
+      </div>
+    </div>
+
+    <!-- Reason Field -->
+    <div class="flex flex-col space-y-2">
+      <label for="reasonMigrated" class="text-sm font-semibold">විතද්ශගත වූතේ කුමක් සදහසටද?</label>
+      <textarea
+        id="reasonMigrated"
+        formControlName="reasonMigrated"
+        class="border rounded-md p-2"
+        placeholder="ඔබේ හේතුව ලියන්න"
+      ></textarea>
+      <div *ngIf="mainForm.get('reasonMigrated')?.invalid && mainForm.get('reasonMigrated')?.touched" class="text-red-500 text-xs">
+        හේතුව සඳහන් කරන්න.
+      </div>
+    </div>
+
+    <!-- Other Details Field -->
+    <div class="flex flex-col space-y-2">
+      <label for="otherDetails" class="text-sm font-semibold">වනත් කරුණු</label>
+      <textarea
+        id="otherDetails"
+        formControlName="otherDetails"
+        class="border rounded-md p-2"
+        placeholder="අතිරේක කරුණු (අත්‍යාවශ්‍ය නොවේ)"
+      ></textarea>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="flex justify-end space-x-4">
+      <button
+        (click)="onSubmitMain()"
+        type="submit"
+        [disabled]="mainForm.invalid"
+        class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+
+  <!-- Submitted Data Table -->
+  <div *ngIf="submittedData1.length > 0" class="mt-6">
+    <table class="table-auto w-full border-collapse">
+      <thead>
+      <tr>
+        <th class="border px-4 py-2">Institution Name</th>
+        <th class="border px-4 py-2">Country</th>
+        <th class="border px-4 py-2">Year</th>
+        <th class="border px-4 py-2">Reason</th>
+        <th class="border px-4 py-2">Other Details</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of submittedData1">
+        <td class="border px-4 py-2">{{ data.name }}</td>
+        <td class="border px-4 py-2">{{ data.country }}</td>
+        <td class="border px-4 py-2">{{ data.yearMigrated }}</td>
+        <td class="border px-4 py-2">{{ data.reasonMigrated }}</td>
+        <td class="border px-4 py-2">{{ data.otherDetails || '-' }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

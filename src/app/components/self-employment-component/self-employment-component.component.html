@@ -1,0 +1,133 @@
+<div class="m-20">
+  <form [formGroup]="businessForm" class="space-y-4" (ngSubmit)="onSubmitBusiness()">
+    <ng-template matStepLabel class="text-lg font-semibold text-gray-700">ව්‍යාපාර හා ස්වයං රැකියා </ng-template>
+
+    <!-- ස්වභාවය Field -->
+    <div class="flex flex-col space-y-2">
+      <label for="businessNature" class="text-sm font-semibold">ස්වභාවය</label>
+      <select id="businessNature" formControlName="businessNature" class="border rounded-md p-2">
+        <option value="" disabled>ස්වභාවය තෝරන්න</option>
+        <option value="large">මහා පරිමාණ</option>
+        <option value="medium">මධ්‍ය පරිමාණ</option>
+        <option value="small">කුඩා කර්මාන්ත</option>
+        <option value="selfEmployment">ස්වයං රැකියා</option>
+        <option value="livestock">පශු සම්පත්</option>
+        <option value="commercialAgriculture">වාණිජ කෘෂිකර්මාන්තය</option>
+        <option value="other">වෙනත්</option>
+      </select>
+      <div *ngIf="businessForm.get('businessNature')?.invalid && businessForm.get('businessNature')?.touched" class="text-red-500 text-xs">
+        ස්වභාවය අත්‍යවශ්‍ය වේ.
+      </div>
+    </div>
+
+    <!-- ව්‍යාපාරයේ නම/අංශය Field -->
+    <div class="flex flex-col space-y-2">
+      <label for="businessName" class="text-sm font-semibold">ව්‍යාපාරයේ නම/අංශය</label>
+      <input
+        id="businessName"
+        formControlName="businessName"
+        type="text"
+        class="border rounded-md p-2"
+        placeholder="ව්‍යාපාරයේ නම හෝ අංශය ඇතුල් කරන්න"
+      />
+      <div *ngIf="businessForm.get('businessName')?.invalid && businessForm.get('businessName')?.touched" class="text-red-500 text-xs">
+        ව්‍යාපාරයේ නම/අංශය අත්‍යවශ්‍ය වේ.
+      </div>
+    </div>
+
+    <!-- සේවක සංඛ්‍යාව Field -->
+    <div class="flex flex-col space-y-2">
+      <label for="employeeCount" class="text-sm font-semibold">සේවක සංඛ්‍යාව</label>
+      <input
+        id="employeeCount"
+        formControlName="employeeCount"
+        type="text"
+        class="border rounded-md p-2"
+        placeholder="සේවක සංඛ්‍යාව ඇතුල් කරන්න"
+      />
+      <div *ngIf="businessForm.get('employeeCount')?.invalid && businessForm.get('employeeCount')?.touched" class="text-red-500 text-xs">
+        වලංගු සේවක සංඛ්‍යාවක් අත්‍යවශ්‍ය වේ.
+      </div>
+    </div>
+
+    <!-- පිහිටි ලිපිනය Field -->
+    <div class="flex flex-col space-y-2">
+      <label for="businessAddress" class="text-sm font-semibold">පිහිටි ලිපිනය</label>
+      <input
+        id="businessAddress"
+        formControlName="businessAddress"
+        type="text"
+        class="border rounded-md p-2"
+        placeholder="පිහිටි ලිපිනය ඇතුල් කරන්න"
+      />
+      <div *ngIf="businessForm.get('businessAddress')?.invalid && businessForm.get('businessAddress')?.touched" class="text-red-500 text-xs">
+        පිහිටි ලිපිනය අත්‍යවශ්‍ය වේ.
+      </div>
+    </div>
+
+    <!-- මාසික ආදායම Field -->
+    <div class="flex flex-col space-y-2">
+      <label for="monthlyIncome2" class="text-sm font-semibold">මාසික ආදායම</label>
+      <input
+        id="monthlyIncome2"
+        formControlName="monthlyIncome"
+        type="text"
+        class="border rounded-md p-2"
+        placeholder="මාසික ආදායම ඇතුල් කරන්න"
+      />
+      <div *ngIf="businessForm.get('monthlyIncome')?.invalid && businessForm.get('monthlyIncome')?.touched" class="text-red-500 text-xs">
+        වලංගු මාසික ආදායමක් අත්‍යවශ්‍ය වේ.
+      </div>
+    </div>
+
+    <!-- වෙනත් Field -->
+    <div class="flex flex-col space-y-2">
+      <label for="businessOtherDetails" class="text-sm font-semibold">වෙනත්</label>
+      <input
+        id="businessOtherDetails"
+        formControlName="businessOtherDetails"
+        type="text"
+        class="border rounded-md p-2"
+        placeholder="වෙනත් විස්තර ඇතුල් කරන්න"
+      />
+    </div>
+
+    <!-- Submit Button -->
+    <div class="flex justify-end space-x-4">
+      <button
+        (click)="onSubmitBusiness()"
+        type="submit"
+        [disabled]="businessForm.invalid"
+        class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all"
+      >
+        ඉදිරිපත් කරන්න
+      </button>
+    </div>
+  </form>
+
+  <!-- Submitted Data Table -->
+  <div *ngIf="submittedBusinessData.length > 0" class="mt-6">
+    <table class="table-auto w-full border-collapse">
+      <thead>
+      <tr>
+        <th class="border px-4 py-2">ස්වභාවය</th>
+        <th class="border px-4 py-2">ව්‍යාපාරයේ නම/අංශය</th>
+        <th class="border px-4 py-2">සේවක සංඛ්‍යාව</th>
+        <th class="border px-4 py-2">පිහිටි ලිපිනය</th>
+        <th class="border px-4 py-2">මාසික ආදායම</th>
+        <th class="border px-4 py-2">වෙනත්</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of submittedBusinessData">
+        <td class="border px-4 py-2">{{ data.businessNature }}</td>
+        <td class="border px-4 py-2">{{ data.businessName }}</td>
+        <td class="border px-4 py-2">{{ data.employeeCount }}</td>
+        <td class="border px-4 py-2">{{ data.businessAddress }}</td>
+        <td class="border px-4 py-2">{{ data.monthlyIncome }}</td>
+        <td class="border px-4 py-2">{{ data.businessOtherDetails }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

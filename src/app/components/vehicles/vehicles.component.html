@@ -1,0 +1,96 @@
+<div class="m-20">
+  <form [formGroup]="vehicleForm" class="space-y-4" (ngSubmit)="onSubmitVehicle()">
+    <ng-template matStepLabel class="text-lg font-semibold text-gray-700">වාහන විස්තර</ng-template>
+
+    <!-- වාහන වර්ගය Field -->
+    <div class="flex flex-col space-y-2">
+      <label for="vehicleType" class="text-sm font-semibold">වාහන වර්ගය</label>
+      <input
+        id="vehicleType"
+        formControlName="vehicleType"
+        type="text"
+        class="border rounded-md p-2"
+        placeholder="වාහන වර්ගය ඇතුල් කරන්න"
+      />
+      <div *ngIf="vehicleForm.get('vehicleType')?.invalid && vehicleForm.get('vehicleType')?.touched" class="text-red-500 text-xs">
+        වාහන වර්ගය අත්‍යවශ්‍ය වේ.
+      </div>
+    </div>
+
+    <!-- හිමිකරුගේ නම Field -->
+    <div class="flex flex-col space-y-2">
+      <label for="vehicleOwnerName" class="text-sm font-semibold">හිමිකරුගේ නම</label>
+      <select id="vehicleOwnerName" formControlName="vehicleOwnerName" class="border rounded-md p-2">
+        <option value="" disabled>හිමිකරු තෝරන්න</option>
+        <option *ngFor="let person of peopleData" [value]="person.name">{{ person.name }}</option>
+      </select>
+      <div *ngIf="vehicleForm.get('vehicleOwnerName')?.invalid && vehicleForm.get('vehicleOwnerName')?.touched" class="text-red-500 text-xs">
+        හිමිකරුගේ නම අත්‍යවශ්‍ය වේ.
+      </div>
+    </div>
+
+    <!-- වටිනාකම Field -->
+    <div class="flex flex-col space-y-2">
+      <label for="vehicleValue" class="text-sm font-semibold">වටිනාකම</label>
+      <input
+        id="vehicleValue"
+        formControlName="vehicleValue"
+        type="text"
+        class="border rounded-md p-2"
+        placeholder="වාහනයේ වටිනාකම ඇතුල් කරන්න"
+      />
+      <div *ngIf="vehicleForm.get('vehicleValue')?.invalid && vehicleForm.get('vehicleValue')?.touched" class="text-red-500 text-xs">
+        වලංගු වටිනාකමක් අත්‍යවශ්‍ය වේ.
+      </div>
+    </div>
+
+    <!-- මාසික ආදායම Field -->
+    <div class="flex flex-col space-y-2">
+      <label for="vehicleMonthlyIncome" class="text-sm font-semibold">මාසික ආදායම</label>
+      <input
+        id="vehicleMonthlyIncome"
+        formControlName="vehicleMonthlyIncome"
+        type="text"
+        class="border rounded-md p-2"
+        placeholder="මාසික ආදායම ඇතුල් කරන්න"
+      />
+      <div *ngIf="vehicleForm.get('vehicleMonthlyIncome')?.invalid && vehicleForm.get('vehicleMonthlyIncome')?.touched" class="text-red-500 text-xs">
+        වලංගු මාසික ආදායමක් අත්‍යවශ්‍ය වේ.
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="flex justify-end space-x-4">
+      <button
+        (click)="onSubmitVehicle()"
+        type="submit"
+        [disabled]="vehicleForm.invalid"
+        class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all"
+      >
+        ඉදිරිපත් කරන්න
+      </button>
+    </div>
+  </form>
+
+  <!-- Submitted Data Table -->
+  <div *ngIf="submittedVehicleData.length > 0" class="mt-6">
+    <table class="table-auto w-full border-collapse">
+      <thead>
+      <tr>
+        <th class="border px-4 py-2">වාහන වර්ගය</th>
+        <th class="border px-4 py-2">හිමිකරුගේ නම</th>
+        <th class="border px-4 py-2">වටිනාකම</th>
+        <th class="border px-4 py-2">මාසික ආදායම</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of submittedVehicleData">
+        <td class="border px-4 py-2">{{ data.vehicleType }}</td>
+        <td class="border px-4 py-2">{{ data.vehicleOwnerName }}</td>
+        <td class="border px-4 py-2">{{ data.vehicleValue }}</td>
+        <td class="border px-4 py-2">{{ data.vehicleMonthlyIncome }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

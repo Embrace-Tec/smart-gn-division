@@ -1,0 +1,71 @@
+<div class="flex justify-center items-center min-h-screen bg-gradient-to-r from-blue-100 to-blue-400">
+  <div class="bg-white bg-opacity-80 backdrop-blur-xl shadow-2xl rounded-3xl p-10 w-full max-w-3xl">
+    <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">ගෘහ මූලිකයාගේ විස්තර</h2>
+
+    <form [formGroup]="firstFormGroup" class="space-y-8">
+      <ng-template matStepLabel class="text-lg font-semibold text-gray-700">මූලික තොරතුරු</ng-template>
+
+      <!-- First row -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <mat-form-field class="w-full">
+          <mat-label>ගෘහ මූලික අංකය</mat-label>
+          <input matInput placeholder="65" formControlName="firstCtrl" required class="input-text focus:ring-2 focus:ring-blue-500" />
+          <mat-error *ngIf="firstFormGroup.get('firstCtrl')?.hasError('required')">
+            අංකය අවශ්‍යයි.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-full">
+          <mat-label>ගම</mat-label>
+          <input matInput placeholder="හපුරුදෙණිය" formControlName="secondCtrl" required class="input-text focus:ring-2 focus:ring-blue-500" />
+          <mat-error *ngIf="firstFormGroup.get('secondCtrl')?.hasError('required')">
+            ගම අවශ්‍යයි.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Second row -->
+      <mat-form-field class="w-full">
+        <mat-label>ගෘහ මූලිකයාගේ නම</mat-label>
+        <input matInput placeholder="මුල් නම , අවසාන නම" formControlName="thirdCtrl" required class="input-text focus:ring-2 focus:ring-blue-500" />
+        <mat-error *ngIf="firstFormGroup.get('thirdCtrl')?.hasError('required')">
+          නම අවශ්‍යයි.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field  class="w-full">
+        <mat-label>ලිපිනය</mat-label>
+        <input matInput placeholder="නම , හපුරුදෙණිය" formControlName="fourthCtrl" required class="input-text focus:ring-2 focus:ring-blue-500" />
+        <mat-error *ngIf="firstFormGroup.get('fourthCtrl')?.hasError('required')">
+          ලිපිනය අවශ්‍යයි.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Fourth row -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <mat-form-field class="w-full">
+          <mat-label>දුරකථන අංකය</mat-label>
+          <input matInput placeholder="07XXXXXXXX" formControlName="fifthCtrl" required class="input-text focus:ring-2 focus:ring-blue-500" />
+          <mat-error *ngIf="firstFormGroup.get('fifthCtrl')?.hasError('required')">
+            දුරකථන අංකය අවශ්‍යයි.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-full">
+          <mat-label>වට්ස්ඇප් අංකය</mat-label>
+          <input matInput placeholder="07XXXXXXXX" formControlName="sixthCtrl" required class="input-text focus:ring-2 focus:ring-blue-500" />
+          <mat-error *ngIf="firstFormGroup.get('sixthCtrl')?.hasError('required')">
+            වට්ස්ඇප් අංකය අවශ්‍යයි.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="flex justify-center">
+        <button type="submit" mat-button class="bg-gradient-to-r from-blue-500 to-blue-700 text-white px-6 py-3 rounded-lg text-lg font-semibold shadow-md hover:shadow-xl hover:from-blue-600 hover:to-blue-800 transition-all">
+          තහවුරු කරන්න
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

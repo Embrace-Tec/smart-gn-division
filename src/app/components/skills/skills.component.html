@@ -1,0 +1,92 @@
+<div class="m-20">
+  <form [formGroup]="otherActivitiesForm" class="space-y-4" (ngSubmit)="onSubmitOtherActivities()">
+
+    <!-- හිමිකරුගේ නම -->
+    <div class="flex flex-col space-y-2">
+      <label for="ownerName" class="text-sm font-semibold">හිමිකරුගේ නම</label>
+      <select id="ownerName" formControlName="ownerName" class="border rounded-md p-2">
+        <option value="" disabled>හිමිකරුගේ නම තෝරන්න</option>
+        <option *ngFor="let person of peopleData" [value]="person.name">{{ person.name }}</option>
+      </select>
+      <div *ngIf="otherActivitiesForm.get('ownerName')?.invalid && otherActivitiesForm.get('ownerName')?.touched" class="text-red-500 text-xs">
+        හිමිකරුගේ නම අත්‍යවශ්‍ය වේ.
+      </div>
+    </div>
+
+    <!-- ස්ථානයේ ලිපිනය -->
+    <div class="flex flex-col space-y-2">
+      <label for="activityAddress" class="text-sm font-semibold">ස්ථානයේ ලිපිනය</label>
+      <input
+        id="activityAddress"
+        formControlName="activityAddress"
+        type="text"
+        class="border rounded-md p-2"
+        placeholder="ස්ථානයේ ලිපිනය ඇතුල් කරන්න"
+      />
+      <div *ngIf="otherActivitiesForm.get('activityAddress')?.invalid && otherActivitiesForm.get('activityAddress')?.touched" class="text-red-500 text-xs">
+        ස්ථානයේ ලිපිනය අත්‍යවශ්‍ය වේ.
+      </div>
+    </div>
+
+    <!-- මාසික ආදායම -->
+    <div class="flex flex-col space-y-2">
+      <label for="monthlyIncome" class="text-sm font-semibold">මාසික ආදායම</label>
+      <input
+        id="monthlyIncome"
+        formControlName="monthlyIncome"
+        type="text"
+        class="border rounded-md p-2"
+        placeholder="මාසික ආදායම ඇතුල් කරන්න"
+      />
+      <div *ngIf="otherActivitiesForm.get('monthlyIncome')?.invalid && otherActivitiesForm.get('monthlyIncome')?.touched" class="text-red-500 text-xs">
+        වලංගු මාසික ආදායමක් අත්‍යවශ්‍ය වේ.
+      </div>
+    </div>
+
+    <!-- වෙනත් විස්තර -->
+    <div class="flex flex-col space-y-2">
+      <label for="additionalDetails" class="text-sm font-semibold">වෙනත් විස්තර</label>
+      <input
+        id="additionalDetails"
+        formControlName="additionalDetails"
+        type="text"
+        class="border rounded-md p-2"
+        placeholder="වෙනත් විස්තර ඇතුල් කරන්න"
+      />
+    </div>
+
+    <!-- Submit Button -->
+    <div class="flex justify-end space-x-4">
+      <button
+        (click)="onSubmitOtherActivities()"
+        type="submit"
+        [disabled]="otherActivitiesForm.invalid"
+        class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all"
+      >
+        ඉදිරිපත් කරන්න
+      </button>
+    </div>
+  </form>
+
+  <!-- Submitted Data Table -->
+  <div *ngIf="submittedOtherActivitiesData.length > 0" class="mt-6">
+    <table class="table-auto w-full border-collapse">
+      <thead>
+      <tr>
+        <th class="border px-4 py-2">හිමිකරුගේ නම</th>
+        <th class="border px-4 py-2">ස්ථානයේ ලිපිනය</th>
+        <th class="border px-4 py-2">මාසික ආදායම</th>
+        <th class="border px-4 py-2">වෙනත් විස්තර</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of submittedOtherActivitiesData">
+        <td class="border px-4 py-2">{{ data.ownerName }}</td>
+        <td class="border px-4 py-2">{{ data.activityAddress }}</td>
+        <td class="border px-4 py-2">{{ data.monthlyIncome }}</td>
+        <td class="border px-4 py-2">{{ data.additionalDetails }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
