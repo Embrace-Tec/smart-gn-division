@@ -1,0 +1,139 @@
+
+<div class="m-20">
+  <form [formGroup]="form" class="space-y-4">
+    <ng-template matStepLabel class="text-lg font-semibold text-gray-700">දීමනා පිළිබඳ විස්තර</ng-template>
+
+
+    <!-- Institution Name Field -->
+    <div class="flex flex-col space-y-2">
+      <label for="name" class="text-sm font-semibold">අයතේ නම</label>
+      <select id="name" formControlName="name" class="border rounded-md p-2">
+        <option value="" disabled>Select an institution</option>
+        <option *ngFor="let person of peopleData" [value]="person.nic">{{ person.name }}</option>
+      </select>
+      <div *ngIf="form.get('name')?.invalid && form.get('name')?.touched" class="text-red-500 text-xs">
+        අයතේ නම අවශ්‍යයි.
+      </div>
+    </div>
+
+    <!-- Categories Section -->
+    <div class="space-y-4">
+      <label class="text-sm font-semibold">වටිනාකම්:</label>
+
+      <div class="flex flex-col space-y-2" formGroupName="categories">
+
+        <!-- Category: aswesome -->
+        <div class="flex items-center">
+          <input type="checkbox" formControlName="aswesome" id="aswesome" />
+          <label for="aswesome" class="ml-2">අස්වැසුම</label>
+          <input *ngIf="form.get('categories.aswesome')?.value" type="text" formControlName="aswesomeValue" class="border rounded-md p-2 ml-4" placeholder="Enter value for අස්වැසුම" />
+        </div>
+
+        <!-- Category: samrudhi -->
+        <div class="flex items-center">
+          <input type="checkbox" formControlName="samrudhi" id="samrudhi" />
+          <label for="samrudhi" class="ml-2">සමෘද්ධි</label>
+          <input *ngIf="form.get('categories.samrudhi')?.value" type="text" formControlName="samrudhiValue" class="border rounded-md p-2 ml-4" placeholder="Enter value for සමෘද්ī" />
+        </div>
+
+        <!-- Category: elderly -->
+        <div class="flex items-center">
+          <input type="checkbox" formControlName="elderly" id="elderly" />
+          <label for="elderly" class="ml-2">වැඩිහිටි ආධාර</label>
+          <input *ngIf="form.get('categories.elderly')?.value" type="text" formControlName="elderlyValue" class="border rounded-md p-2 ml-4" placeholder="Enter value for වැඩිහිටි" />
+        </div>
+
+        <!-- Category: blind -->
+        <div class="flex items-center">
+          <input type="checkbox" formControlName="blind" id="blind" />
+          <label for="blind" class="ml-2">පිළිකා ආධාර</label>
+          <input *ngIf="form.get('categories.blind')?.value" type="text" formControlName="blindValue" class="border rounded-md p-2 ml-4" placeholder="Enter value for පිළිකො ආධ්‍ොර" />
+        </div>
+
+        <!-- Category: ignorant -->
+        <div class="flex items-center">
+          <input type="checkbox" formControlName="ignorant" id="ignorant" />
+          <label for="ignorant" class="ml-2">අබොධිත</label>
+          <input *ngIf="form.get('categories.ignorant')?.value" type="text" formControlName="ignorantValue" class="border rounded-md p-2 ml-4" placeholder="Enter value for අබොධිත" />
+        </div>
+
+        <!-- Category: kidneyAssistance -->
+        <div class="flex items-center">
+          <input type="checkbox" formControlName="kidneyAssistance" id="kidneyAssistance" />
+          <label for="kidneyAssistance" class="ml-2">වකුගඩු ආධාර</label>
+          <input *ngIf="form.get('categories.kidneyAssistance')?.value" type="text" formControlName="kidneyAssistanceValue" class="border rounded-md p-2 ml-4" placeholder="Enter value for වකුගඩු ආධාර" />
+        </div>
+
+        <!-- Category: publicAssistance -->
+        <div class="flex items-center">
+          <input type="checkbox" formControlName="publicAssistance" id="publicAssistance" />
+          <label for="publicAssistance" class="ml-2">මහජනාධාර</label>
+          <input *ngIf="form.get('categories.publicAssistance')?.value" type="text" formControlName="publicAssistanceValue" class="border rounded-md p-2 ml-4" placeholder="Enter value for මහජනාධාර" />
+        </div>
+
+        <!-- Category: medicalAssistance -->
+        <div class="flex items-center">
+          <input type="checkbox" formControlName="medicalAssistance" id="medicalAssistance" />
+          <label for="medicalAssistance" class="ml-2">රෝගාධාර</label>
+          <input *ngIf="form.get('categories.medicalAssistance')?.value" type="text" formControlName="medicalAssistanceValue" class="border rounded-md p-2 ml-4" placeholder="Enter value for රෝගාධාර" />
+        </div>
+
+        <!-- Category: educationSupport -->
+        <div class="flex items-center">
+          <input type="checkbox" formControlName="educationSupport" id="educationSupport" />
+          <label for="educationSupport" class="ml-2">ආධ්‍යාපන ආධාර</label>
+          <input *ngIf="form.get('categories.educationSupport')?.value" type="text" formControlName="educationSupportValue" class="border rounded-md p-2 ml-4" placeholder="Enter value for ආධ්‍යාපන ආධාර" />
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="flex justify-end space-x-4">
+      <button
+        type="submit"
+        (click)="onSubmit1()"
+        [disabled]="form.invalid"
+        class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+
+  <div *ngIf="submittedData.length > 0" class="mt-6">
+    <table class="table-auto w-full border-collapse">
+      <thead>
+      <tr>
+        <th class="border px-4 py-2">Institution Name</th>
+        <th class="border px-4 py-2">අස්වැසුම</th>
+        <th class="border px-4 py-2">සමෘද්ī</th>
+        <th class="border px-4 py-2">වැඩිහිටි</th>
+        <th class="border px-4 py-2">පිළිකො ආධ්‍ොර</th>
+        <th class="border px-4 py-2">අබොධිත</th>
+        <th class="border px-4 py-2">වකුගඩු ආධාර</th>
+        <th class="border px-4 py-2">මහජනාධාර</th>
+        <th class="border px-4 py-2">රෝගාධාර</th>
+        <th class="border px-4 py-2">ආධ්‍යාපන ආධාර</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of submittedData">
+        <td class="border px-4 py-2">{{ data.institution }}</td>
+        <td class="border px-4 py-2">{{ data.aswesomeValue || '-' }}</td>
+        <td class="border px-4 py-2">{{ data.samrudhiValue || '-' }}</td>
+        <td class="border px-4 py-2">{{ data.elderlyValue || '-' }}</td>
+        <td class="border px-4 py-2">{{ data.adultValue || '-' }}</td>
+        <td class="border px-4 py-2">{{ data.blindValue || '-' }}</td>
+        <td class="border px-4 py-2">{{ data.kidneyAssistanceValue || '-' }}</td>
+        <td class="border px-4 py-2">{{ data.publicAssistanceValue || '-' }}</td>
+        <td class="border px-4 py-2">{{ data.medicalAssistanceValue || '-' }}</td>
+        <td class="border px-4 py-2">{{ data.educationSupportValue || '-' }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+

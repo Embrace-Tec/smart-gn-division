@@ -1,0 +1,96 @@
+<div class="m-20">
+  <form [formGroup]="assetForm" class="space-y-4" (ngSubmit)="onSubmitAsset()">
+    <ng-template matStepLabel class="text-lg font-semibold text-gray-700">අනෙකුත් ප්‍රාග්ධන වත්කම්</ng-template>
+
+    <!-- වත්කම් විස්තර Field -->
+    <div class="flex flex-col space-y-2">
+      <label for="assetDetails" class="text-sm font-semibold">වත්කම් විස්තර</label>
+      <input
+        id="assetDetails"
+        formControlName="assetDetails"
+        type="text"
+        class="border rounded-md p-2"
+        placeholder="වත්කම් විස්තර ඇතුල් කරන්න"
+      />
+      <div *ngIf="assetForm.get('assetDetails')?.invalid && assetForm.get('assetDetails')?.touched" class="text-red-500 text-xs">
+        වත්කම් විස්තර අත්‍යවශ්‍ය වේ.
+      </div>
+    </div>
+
+    <!-- හිමිකරුගේ නම Field -->
+    <div class="flex flex-col space-y-2">
+      <label for="assetOwnerName" class="text-sm font-semibold">හිමිකරුගේ නම</label>
+      <select id="assetOwnerName" formControlName="assetOwnerName" class="border rounded-md p-2">
+        <option value="" disabled>හිමිකරු තෝරන්න</option>
+        <option *ngFor="let person of peopleData" [value]="person.name">{{ person.name }}</option>
+      </select>
+      <div *ngIf="assetForm.get('assetOwnerName')?.invalid && assetForm.get('assetOwnerName')?.touched" class="text-red-500 text-xs">
+        හිමිකරුගේ නම අත්‍යවශ්‍ය වේ.
+      </div>
+    </div>
+
+    <!-- වටිනාකම Field -->
+    <div class="flex flex-col space-y-2">
+      <label for="assetValue" class="text-sm font-semibold">වටිනාකම</label>
+      <input
+        id="assetValue"
+        formControlName="assetValue"
+        type="text"
+        class="border rounded-md p-2"
+        placeholder="වටිනාකම ඇතුල් කරන්න"
+      />
+      <div *ngIf="assetForm.get('assetValue')?.invalid && assetForm.get('assetValue')?.touched" class="text-red-500 text-xs">
+        වලංගු වටිනාකමක් අත්‍යවශ්‍ය වේ.
+      </div>
+    </div>
+
+    <!-- මාසික ආදායම Field -->
+    <div class="flex flex-col space-y-2">
+      <label for="assetMonthlyIncome" class="text-sm font-semibold">මාසික ආදායම</label>
+      <input
+        id="assetMonthlyIncome"
+        formControlName="assetMonthlyIncome"
+        type="text"
+        class="border rounded-md p-2"
+        placeholder="මාසික ආදායම ඇතුල් කරන්න"
+      />
+      <div *ngIf="assetForm.get('assetMonthlyIncome')?.invalid && assetForm.get('assetMonthlyIncome')?.touched" class="text-red-500 text-xs">
+        වලංගු මාසික ආදායමක් අත්‍යවශ්‍ය වේ.
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="flex justify-end space-x-4">
+      <button
+        (click)="onSubmitAsset()"
+        type="submit"
+        [disabled]="assetForm.invalid"
+        class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all"
+      >
+        ඉදිරිපත් කරන්න
+      </button>
+    </div>
+  </form>
+
+  <!-- Submitted Data Table -->
+  <div *ngIf="submittedAssetData.length > 0" class="mt-6">
+    <table class="table-auto w-full border-collapse">
+      <thead>
+      <tr>
+        <th class="border px-4 py-2">වත්කම් විස්තර</th>
+        <th class="border px-4 py-2">හිමිකරුගේ නම</th>
+        <th class="border px-4 py-2">වටිනාකම</th>
+        <th class="border px-4 py-2">මාසික ආදායම</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of submittedAssetData">
+        <td class="border px-4 py-2">{{ data.assetDetails }}</td>
+        <td class="border px-4 py-2">{{ data.assetOwnerName }}</td>
+        <td class="border px-4 py-2">{{ data.assetValue }}</td>
+        <td class="border px-4 py-2">{{ data.assetMonthlyIncome }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,153 @@
+<form [formGroup]="secondFormGroup" class="space-y-8 p-6 bg-gray-50 rounded-lg shadow-md">
+  <ng-template matStepLabel class="text-2xl font-bold text-gray-800">පුද්ගල තොරතුරු</ng-template>
+
+  <!-- First row with two fields -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label class="text-sm">නම</mat-label>
+      <input matInput placeholder="මුල් නම , අවසාන නම" formControlName="firstCtrl" required class="input-text" />
+      <mat-error *ngIf="secondFormGroup.get('firstCtrl')?.hasError('required')" class="text-red-500 text-sm">
+        නම අවශ්‍යයි.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label class="text-sm">ගෘහ මූලිකයොට ඇති නෑකම</mat-label>
+      <mat-select formControlName="relationCtrl" required class="input-text">
+        <mat-option value="" disabled>නෑකම තෝරන්න</mat-option>
+        <mat-option value="ගෘහ මූලික">ගෘහ මූලික</mat-option>
+        <mat-option value="තාත්තා">තාත්තා</mat-option>
+        <mat-option value="මව">මව</mat-option>
+        <mat-option value="සැමියා/බිරිඳ">සැමියා/බිරිඳ</mat-option>
+        <mat-option value="දරුවා">දරුවා</mat-option>
+        <mat-option value="සොයුරා/සොයුරිය">සොයුරා/සොයුරිය</mat-option>
+        <mat-option value="ඥාතී">ඥාතී</mat-option>
+        <mat-option value="වෙනත්">වෙනත්</mat-option>
+      </mat-select>
+      <mat-error *ngIf="secondFormGroup.get('relationCtrl')?.hasError('required')" class="text-red-500 text-sm">
+        නෑ කම තෙරිය යුතුයි.
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <!-- Second row with two fields -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label class="text-sm">උපන් දිනය</mat-label>
+      <input matInput [matDatepicker]="picker" placeholder="07/11/2002" formControlName="thirdCtrl" required class="input-text" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="secondFormGroup.get('thirdCtrl')?.hasError('required')" class="text-red-500 text-sm">
+        උපන් දිනය අවශ්‍යයි.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label class="text-sm">ජා.හැ. අංකය</mat-label>
+      <input matInput placeholder="200219300925" formControlName="fourthCtrl" required class="input-text" />
+      <mat-error *ngIf="secondFormGroup.get('fourthCtrl')?.hasError('required')" class="text-red-500 text-sm">
+        ජා.හැ. අංකය අවශ්‍යයි.
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <!-- Third row with two fields -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label class="text-sm">ජාතිය</mat-label>
+      <mat-select formControlName="fifthCtrl" required class="input-text">
+        <mat-option value="සිංහල">සිංහල</mat-option>
+        <mat-option value="දෙමළ">දෙමළ</mat-option>
+        <mat-option value="මුස්ලිම්">මුස්ලිම්</mat-option>
+        <mat-option value="බර්ගර්">බර්ගර්</mat-option>
+        <mat-option value="වෙනත්">වෙනත්</mat-option>
+      </mat-select>
+      <mat-error *ngIf="secondFormGroup.get('fifthCtrl')?.hasError('required')" class="text-red-500 text-sm">
+        ජාතිය අවශ්‍යයි.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label class="text-sm">ආගම</mat-label>
+      <mat-select formControlName="sixthCtrl" required class="input-text">
+        <mat-option value="බෞද්ධ">බෞද්ධ</mat-option>
+        <mat-option value="හින්දු">හින්දු</mat-option>
+        <mat-option value="ඉස්ලාම්">ඉස්ලාම්</mat-option>
+        <mat-option value="ක්‍රිස්තු">ක්‍රිස්තු</mat-option>
+        <mat-option value="වෙනත්">වෙනත්</mat-option>
+      </mat-select>
+      <mat-error *ngIf="secondFormGroup.get('sixthCtrl')?.hasError('required')" class="text-red-500 text-sm">
+        ආගම අවශ්‍යයි.
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <!-- Fourth row with two fields -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label class="text-sm">අධ්‍යාපන මට්ටම/දැනට අධ්‍යාපනය ලබන ශ්‍රෙනිය</mat-label>
+      <input matInput placeholder="උසස් පෙළ සමත්" formControlName="seventhCtrl" class="input-text" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label class="text-sm">රැකියාව/තනතුර</mat-label>
+      <input matInput placeholder="පොලිස්" formControlName="eighthCtrl" class="input-text" />
+    </mat-form-field>
+  </div>
+
+  <!-- Fifth row with two fields -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label class="text-sm">මාසික වැටුප/ආදායම</mat-label>
+      <input matInput placeholder="Rs:50,000" formControlName="ninthCtrl" class="input-text" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label class="text-sm">රෝගාබාධ</mat-label>
+      <input matInput placeholder="රෝගාබාධ නැත" formControlName="tenthCtrl" class="input-text" />
+    </mat-form-field>
+  </div>
+
+  <!-- Sixth row with one field -->
+  <div class="grid grid-cols-1 gap-6">
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label class="text-sm">ආබාධිත විස්තර</mat-label>
+      <input matInput placeholder="ආබාධිත නැත" formControlName="eleventhCtrl" class="input-text" />
+    </mat-form-field>
+  </div>
+
+  <!-- Action buttons -->
+  <div class="flex justify-end gap-4">
+    <button mat-raised-button color="primary" (click)="addToTable()" type="button" class="px-6 py-2 shadow hover:shadow-lg transition">
+      Add to Table
+    </button>
+  </div>
+
+  <!-- Data Table -->
+  <div class="mt-8">
+    <table class="min-w-full bg-white border-collapse shadow rounded-lg overflow-hidden">
+      <thead class="bg-green-700 text-white">
+      <tr>
+        <th class="px-6 py-3 text-left text-sm font-semibold">නම</th>
+        <th class="px-6 py-3 text-left text-sm font-semibold">ගෘහ මූලිකයොට ඇති නෑකම</th>
+        <th class="px-6 py-3 text-left text-sm font-semibold">උපන් දිනය</th>
+        <th class="px-6 py-3 text-left text-sm font-semibold">ජා.හැ. අංකය</th>
+        <th class="px-6 py-3 text-left text-sm font-semibold">ජාතිය</th>
+        <th class="px-6 py-3 text-left text-sm font-semibold">ආගම</th>
+        <th class="px-6 py-3 text-left text-sm font-semibold">ආබාධිත විස්තර</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let person of peopleData; let i = index" class="hover:bg-gray-50 border-t">
+        <td class="px-6 py-4 text-sm text-gray-700">{{ person.name }}</td>
+        <td class="px-6 py-4 text-sm text-gray-700">{{ person.relation }}</td>
+        <td class="px-6 py-4 text-sm text-gray-700">{{ person.dob | date }}</td>
+        <td class="px-6 py-4 text-sm text-gray-700">{{ person.nic }}</td>
+        <td class="px-6 py-4 text-sm text-gray-700">{{ person.ethnicity }}</td>
+        <td class="px-6 py-4 text-sm text-gray-700">{{ person.religion }}</td>
+        <td class="px-6 py-4 text-sm text-gray-700">{{ person.remarks }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</form>

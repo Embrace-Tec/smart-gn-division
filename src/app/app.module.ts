@@ -28,9 +28,24 @@ import { LoginModalComponent } from './components/login-modal/login-modal.compon
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { AddServicesComponent } from './components/add-services/add-services.component';
+import { EditDetailsComponent } from './components/edit-details/edit-details.component';
+import { BasicInfoComponent } from './components/basic-info/basic-info.component';
+import { PersonalInfoComponent } from './components/personal-info/personal-info.component';
+import { GovermentBenefitsComponent } from './components/goverment-benefits/goverment-benefits.component';
+import { OverseasPersonsComponent } from './components/overseas-persons/overseas-persons.component';
+import { LandInfoComponent } from './components/land-info/land-info.component';
+import { VehiclesComponent } from './components/vehicles/vehicles.component';
+import { PracticalAssetsComponent } from './components/practical-assets/practical-assets.component';
+import { SelfEmploymentComponentComponent } from './components/self-employment-component/self-employment-component.component';
+import { SkillsComponent } from './components/skills/skills.component';
+import { SpecialNotesComponent } from './components/special-notes/special-notes.component';
+import {MatStepLabel, MatStepperNext, MatStepperPrevious} from "@angular/material/stepper";
+import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
+import {MatOption} from "@angular/material/core";
+import {MatSelect} from "@angular/material/select";
 
 
 
@@ -50,6 +65,17 @@ import { AddServicesComponent } from './components/add-services/add-services.com
     LoginModalComponent,
     AdminDashboardComponent,
     AddServicesComponent,
+    EditDetailsComponent,
+    BasicInfoComponent,
+    PersonalInfoComponent,
+    GovermentBenefitsComponent,
+    OverseasPersonsComponent,
+    LandInfoComponent,
+    VehiclesComponent,
+    PracticalAssetsComponent,
+    SelfEmploymentComponentComponent,
+    SkillsComponent,
+    SpecialNotesComponent,
 
   ],
   imports: [
@@ -67,7 +93,16 @@ import { AddServicesComponent } from './components/add-services/add-services.com
     MatFormFieldModule,
     MatInputModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    MatStepLabel,
+    MatStepperNext,
+    ReactiveFormsModule,
+    MatDatepicker,
+    MatDatepickerInput,
+    MatDatepickerToggle,
+    MatOption,
+    MatSelect,
+    MatStepperPrevious
 
   ],
   providers: [

@@ -1,0 +1,149 @@
+<div class="m-20">
+  <form [formGroup]="landForm" class="space-y-4" (ngSubmit)="onSubmitLand()">
+    <ng-template matStepLabel class="text-lg font-semibold text-gray-700">ඉඩම් විස්තර</ng-template>
+
+    <!-- අයිතිය Field -->
+    <div class="flex flex-col space-y-2">
+      <label for="ownership" class="text-sm font-semibold">අයිතිය</label>
+      <select id="ownership" formControlName="ownership" class="border rounded-md p-2">
+        <option value="" disabled>අයිතියේ වර්ගය තෝරන්න</option>
+        <option value="government">රජයේ</option>
+        <option value="private">පුද්ගලික</option>
+        <option value="tax">බදු</option>
+        <option value="LR">එල්ආර්</option>
+        <option value="Estate">වතු</option>
+        <option value="Vihara Devalagam">විහාර දේවාලගම්</option>
+      </select>
+      <div *ngIf="landForm.get('ownership')?.invalid && landForm.get('ownership')?.touched" class="text-red-500 text-xs">
+        අයිතිය අත්‍යවශ්‍ය වේ.
+      </div>
+    </div>
+
+    <!-- ඉඩමේ ප්‍රමාණය Field -->
+    <div class="flex flex-col space-y-2">
+      <label for="landSize" class="text-sm font-semibold">ඉඩමේ ප්‍රමාණය (ඇකර් වලින්)</label>
+      <input
+        id="landSize"
+        formControlName="landSize"
+        type="text"
+        class="border rounded-md p-2"
+        placeholder="ඉඩමේ ප්‍රමාණය ඇතුල් කරන්න"
+      />
+      <div *ngIf="landForm.get('landSize')?.invalid && landForm.get('landSize')?.touched" class="text-red-500 text-xs">
+        වලංගු ප්‍රමාණයක් අත්‍යවශ්‍ය වේ.
+      </div>
+    </div>
+
+    <!-- හිමිකාරිත්වය දරන්නාගේ නම Field -->
+    <div class="flex flex-col space-y-2">
+      <label for="ownerName1" class="text-sm font-semibold">හිමිකාරිත්වය දරන්නාගේ නම</label>
+      <select id="ownerName1" formControlName="ownerName" class="border rounded-md p-2">
+        <option value="" disabled>හිමිකරු තෝරන්න</option>
+        <option *ngFor="let person of peopleData" [value]="person.name">{{ person.name }}</option>
+      </select>
+      <div *ngIf="landForm.get('ownerName')?.invalid && landForm.get('ownerName')?.touched" class="text-red-500 text-xs">
+        හිමිකරුගේ නම අත්‍යවශ්‍ය වේ.
+      </div>
+    </div>
+
+    <!-- ඉඩමේ නම / ලොට් අංකය / ඔප්පු අංකය Field -->
+    <div class="flex flex-col space-y-2">
+      <label for="landDetails" class="text-sm font-semibold">ඉඩමේ නම / ලොට් අංකය / ඔප්පු අංකය</label>
+      <input
+        id="landDetails"
+        formControlName="landDetails"
+        type="text"
+        class="border rounded-md p-2"
+        placeholder="ඉඩමේ නම, ලොට් අංකය, හෝ ඔප්පු අංකය ඇතුල් කරන්න"
+      />
+      <div *ngIf="landForm.get('landDetails')?.invalid && landForm.get('landDetails')?.touched" class="text-red-500 text-xs">
+        මෙම කේෂ්ත්‍රය අත්‍යවශ්‍ය වේ.
+      </div>
+    </div>
+
+    <!-- පිහිටි ග්‍රාම නිළධාරී වසම Field -->
+    <div class="flex flex-col space-y-2">
+      <label for="governorsArea" class="text-sm font-semibold">පිහිටි ග්‍රාම නිළධාරී වසම</label>
+      <input
+        id="governorsArea"
+        formControlName="governorsArea"
+        type="text"
+        class="border rounded-md p-2"
+        placeholder="ග්‍රාම නිළධාරී වසම ඇතුල් කරන්න"
+      />
+      <div *ngIf="landForm.get('governorsArea')?.invalid && landForm.get('governorsArea')?.touched" class="text-red-500 text-xs">
+        ග්‍රාම නිළධාරී වසම අත්‍යවශ්‍ය වේ.
+      </div>
+    </div>
+
+    <!-- වගා කර ඇති බෝගය Field -->
+    <div class="flex flex-col space-y-2">
+      <label for="cropGrown" class="text-sm font-semibold">වගා කර ඇති බෝගය</label>
+      <input
+        id="cropGrown"
+        formControlName="cropGrown"
+        type="text"
+        class="border rounded-md p-2"
+        placeholder="වගා කර ඇති බෝගය ඇතුල් කරන්න"
+      />
+      <div *ngIf="landForm.get('cropGrown')?.invalid && landForm.get('cropGrown')?.touched" class="text-red-500 text-xs">
+        වගා කර ඇති බෝගය අත්‍යවශ්‍ය වේ.
+      </div>
+    </div>
+
+    <!-- මාසිකව ලැබෙන අදායම Field -->
+    <div class="flex flex-col space-y-2">
+      <label for="monthlyIncome1" class="text-sm font-semibold">මාසිකව ලැබෙන අදායම</label>
+      <input
+        id="monthlyIncome1"
+        formControlName="monthlyIncome"
+        type="text"
+        class="border rounded-md p-2"
+        placeholder="මාසික අදායම ඇතුල් කරන්න"
+      />
+      <div *ngIf="landForm.get('monthlyIncome')?.invalid && landForm.get('monthlyIncome')?.touched" class="text-red-500 text-xs">
+        මාසික අදායම අත්‍යවශ්‍ය වේ.
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="flex justify-end space-x-4">
+      <button
+        (click)="onSubmitLand()"
+        type="submit"
+        [disabled]="landForm.invalid"
+        class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all"
+      >
+        ඉදිරිපත් කරන්න
+      </button>
+    </div>
+  </form>
+
+  <!-- Submitted Data Table -->
+  <div *ngIf="submittedLandData.length > 0" class="mt-6">
+    <table class="table-auto w-full border-collapse">
+      <thead>
+      <tr>
+        <th class="border px-4 py-2">අයිතිය</th>
+        <th class="border px-4 py-2">ඉඩමේ ප්‍රමාණය</th>
+        <th class="border px-4 py-2">හිමිකරුගේ නම</th>
+        <th class="border px-4 py-2">ඉඩමේ විස්තර</th>
+        <th class="border px-4 py-2">ග්‍රාම නිළධාරී වසම</th>
+        <th class="border px-4 py-2">වගා බෝග</th>
+        <th class="border px-4 py-2">අදායම</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of submittedLandData">
+        <td class="border px-4 py-2">{{ data.ownership }}</td>
+        <td class="border px-4 py-2">{{ data.landSize }}</td>
+        <td class="border px-4 py-2">{{ data.ownerName }}</td>
+        <td class="border px-4 py-2">{{ data.landDetails }}</td>
+        <td class="border px-4 py-2">{{ data.governorsArea }}</td>
+        <td class="border px-4 py-2">{{ data.cropGrown }}</td>
+        <td class="border px-4 py-2">{{ data.monthlyIncome }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

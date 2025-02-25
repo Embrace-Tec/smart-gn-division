@@ -1,0 +1,29 @@
+<div class="bg-gray-100 flex justify-center items-center h-screen">
+<div class="bg-white p-10 rounded-lg shadow-lg w-full max-w-4xl">
+  <h2 class="text-3xl font-bold mb-6">ගෘහ මූලිකයාගේ විස්තර</h2>
+  <label for="nic" class="block text-gray-700 text-lg">ජාතික හැඳුනුම්පත් අංකය ඇතුළත් කරන්න:</label>
+  <input type="text" id="nic" name="nic" placeholder="ජා.හැ.අංකය"
+         class="w-full p-4 border rounded-md mb-6 text-lg">
+
+  <label for="details" class="block text-gray-700 text-lg">තොරතුරු වර්ගය තෝරන්න:</label>
+  <select id="details" name="details" class="w-full p-4 border rounded-md mb-6 text-lg">
+    <option value="1">මූලික තොරතුරු</option>
+    <option value="2">පුද්ගලික තොරතුරු</option>
+    <option value="3">නිවසේ තොරතුරු</option>
+    <option value="4">රජයේ දීමනා පිළිබඳ විස්තර</option>
+    <option value="5">විදේශගත පුද්ගලයින් පිළිබඳ විස්තර</option>
+    <option value="6">ඉඩම් විස්තර</option>
+    <option value="7">වාහන</option>
+    <option value="8">අතනකුත් ප්‍රායෝගික වත්කම් (ලී මෝල/වඩු මඩු/වී මෝල්/කම්මල/මහන මැදින්/තණතකොළ කපන මැදින්/වැනි)</option>
+    <option value="9">වයස අවුරුදු 40ට වැඩි හෝ ස්වයං රැකියා</option>
+    <option value="10">වෙනත් විශේෂ හැකියාවන්/වෘත්තීයයන්/ක්‍රියාකාරකම් විස්තර (සම්ප්‍රදායික කර්මාන්ත/දේශීය වවදය/නර්තන/සංගීත/තට්ටු වादन/යාන්ත්‍ර මන්ත්‍ර/අත්කම්/වැනි)</option>
+    <option value="11">විශේෂ සටහන්</option>
+  </select>
+
+  <button type="button" class="w-full bg-blue-500 text-white py-4 rounded-md text-lg"
+          (click)="navigateToDetails()">
+    තෝරන්න
+  </button>
+
+</div>
+</div>
