@@ -33,4 +33,11 @@ export class DonationReceivedService {
       .doc<DonationReceived>(donation_id)
       .valueChanges();
   }
+
+  // Fetch government donations by NIC
+  getGovernmentDonationsByNic(nic: string): Observable<DonationReceived[]> {
+    return this.firestore
+      .collection<DonationReceived>(this.receivedCollection, ref => ref.where('nic', '==', nic))
+      .valueChanges();
+  }
 }

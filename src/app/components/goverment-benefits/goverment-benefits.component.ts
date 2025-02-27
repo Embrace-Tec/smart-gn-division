@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {GovernmentDonationsService} from "@app/services/government-donations.service";
+import {Donation} from "@app/models/donation.model";
+import {DonationReceivedService} from "@app/services/donations-received.service";
+import {DonationReceived} from "@app/models/donation.received.model";
 
 @Component({
   selector: 'app-goverment-benefits',
@@ -8,13 +12,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class GovermentBenefitsComponent implements OnInit {
   form: FormGroup;
-  submittedData: any[] = [];
+  submittedData: any[] = [
+    {nic: '2002000000', name: 'Example Institution 1'},
+  ];
   peopleData: any[] = [
-    { nic: '123456789V', name: 'Example Institution 1' },
-    { nic: '987654321V', name: 'Example Institution 2' }
+    {nic: '123456789V', name: 'Example Institution 1'},
+    {nic: '987654321V', name: 'Example Institution 2'}
   ];
 
-  constructor(private fb: FormBuilder) {
+
+  constructor(private fb: FormBuilder, private donationService: DonationReceivedService) {
     this.form = this.fb.group({
       name: ['', Validators.required],
       categories: this.fb.group({
@@ -38,10 +45,26 @@ export class GovermentBenefitsComponent implements OnInit {
         educationSupportValue: ['']
       })
     });
+
+
   }
 
   ngOnInit(): void {
     // Any additional initialization logic can be placed here.
+    this.loadDonationDetails();
+  }
+
+  loadDonationDetails() {
+    this.donationService.getGovernmentDonationsByNic(this.submittedData[0].nic).subscribe(data => {
+      let donations: DonationReceived[] = data;
+      console.log('Government Donations found:', donations);
+      const formValues = this.form.value;
+      let donationReceived: DonationReceived = donations[0];
+      formValues.categories.aswesomeValue=donationReceived.aswesumaValue;
+      // if (donationReceived.aswesumaValue! > 0) {
+      //
+      // }
+    });
   }
 
   onSubmit1(): void {
