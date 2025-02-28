@@ -1,0 +1,31 @@
+<div class="min-h-screen bg-gradient-to-r from-blue-500 via-teal-400 to-indigo-500 text-gray-800 flex items-center justify-center">
+  <div class="w-full p-8 max-w-7xl space-y-6">
+
+    <!-- Heading -->
+    <p class="text-5xl font-extrabold text-center mb-6 text-white">පුද්ගල විස්තර</p>
+
+    <!-- Table for Showing Foreign Individuals -->
+    <div class="overflow-x-auto bg-white rounded-lg shadow-xl p-6 mt-6 bg-opacity-80">
+      <table class="min-w-full table-auto text-center">
+        <thead class="bg-gradient-to-r from-green-400 to-teal-500 text-white">
+        <tr>
+          <th class="py-3 px-6 text-lg font-semibold">2. පුද්ගල නම</th>
+          <th class="py-3 px-6 text-lg font-semibold">3. උපන් දිනය</th>
+          <th class="py-3 px-6 text-lg font-semibold">4. ජා.හැ. අංකය</th>
+          <th class="py-3 px-6 text-lg font-semibold">5. ජාතිය</th>
+          <th class="py-3 px-6 text-lg font-semibold">6. ආගම</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let row of Data" class="hover:bg-gray-50">
+          <td class="py-3 px-6 border-b">{{ row.name }}</td>
+          <td class="py-3 px-6 border-b">{{ row.dob }}</td>
+          <td class="py-3 px-6 border-b">{{ row.id }}</td>
+          <td class="py-3 px-6 border-b">{{ row.ethnicity }}</td>
+          <td class="py-3 px-6 border-b">{{ row.religion }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

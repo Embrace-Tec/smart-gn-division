@@ -26,6 +26,11 @@ import {
 } from "@app/components/self-employment-component/self-employment-component.component";
 import {SkillsComponent} from "@app/components/skills/skills.component";
 import {SpecialNotesComponent} from "@app/components/special-notes/special-notes.component";
+import {FilterDataComponent} from "@app/components/filter-data/filter-data.component";
+import {DeemanaDetailsComponent} from "@app/components/deemana-details/deemana-details.component";
+import {ForeignersDetailsComponent} from "@app/components/foreigners-details/foreigners-details.component";
+import {HomeDetailsComponent} from "@app/components/home-details/home-details.component";
+import {PersonDetailsComponent} from "@app/components/person-details/person-details.component";
 
 
 const routes: Routes = [
@@ -54,6 +59,11 @@ const routes: Routes = [
   { path: 'self-employment', component: SelfEmploymentComponentComponent },
   { path: 'skills', component: SkillsComponent },
   { path: 'special-notes', component: SpecialNotesComponent },
+  { path: 'filter-data',component:FilterDataComponent},
+  { path: 'deemana-details', component: DeemanaDetailsComponent },
+  { path: 'foreigners-details', component: ForeignersDetailsComponent },
+  { path: 'home-details', component: HomeDetailsComponent },
+  { path: 'person-details', component: PersonDetailsComponent },
 
 ];
 
