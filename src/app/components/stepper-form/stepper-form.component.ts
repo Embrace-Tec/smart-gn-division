@@ -11,6 +11,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatTableModule} from '@angular/material/table';
 import {MatRadioModule} from '@angular/material/radio';
+import Swal from 'sweetalert2';
 import {
   CombinedFormDto,
   PersonDto,
@@ -90,21 +91,21 @@ export class StepperFormComponent {
               private assetService: AssetService, private businessService: BusinessService,
               private talentService: TalentService) {
     this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required],
-      secondCtrl: ['', Validators.required],
-      thirdCtrl: ['', Validators.required],
-      fourthCtrl: ['', Validators.required],
-      fifthCtrl: ['', Validators.required],
-      sixthCtrl: ['', Validators.required],
+      firstCtrl: [''],
+      secondCtrl: [''],
+      thirdCtrl: [''],
+      fourthCtrl: [''],
+      fifthCtrl: [''],
+      sixthCtrl: [''],
     });
 
     this.secondFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required],
-      relationCtrl: ['', Validators.required],
-      thirdCtrl: ['', Validators.required],
-      fourthCtrl: ['', Validators.required],
-      fifthCtrl: ['', Validators.required],
-      sixthCtrl: ['', Validators.required],
+      firstCtrl: [''],
+      relationCtrl: [''],
+      thirdCtrl: [''],
+      fourthCtrl: [''],
+      fifthCtrl: [''],
+      sixthCtrl: [''],
       seventhCtrl: [''],
       eighthCtrl: [''],
       ninthCtrl: [''],
@@ -112,26 +113,26 @@ export class StepperFormComponent {
       eleventhCtrl: [''],
     });
     this.thirdFormGroup = this._formBuilder.group({
-      housingType: ['', Validators.required],
+      housingType: [''],
       housingTypeDescription: [''],
-      wallType: ['', Validators.required],
+      wallType: [''],
       wallTypeDescription: [''],
-      floorType: ['', Validators.required],
+      floorType: [''],
       floorTypeDescription: [''],
-      roofType: ['', Validators.required],
+      roofType: [''],
       roofTypeDescription: [''],
-      sanitationType: ['', Validators.required],
+      sanitationType: [''],
       sanitationTypeDescription: [''],
-      waterFacility: ['', Validators.required],
+      waterFacility: [''],
       waterFacilityDescription: [''],
-      powerSource: ['', Validators.required],
+      powerSource: [''],
       powerSourceDescription: [''],
-      disasterRisk: ['', Validators.required],
+      disasterRisk: [''],
       disasterRiskDescription: ['']
     });
 
     this.form = this._formBuilder.group({
-      name: ['', Validators.required],
+      name: [''],
       categories: this._formBuilder.group({
         aswesome: [false], // "අස්වැසුම"
         samrudhi: [false], // "සමෘද්ී"
@@ -158,87 +159,59 @@ export class StepperFormComponent {
 
 
     this.landForm = this._formBuilder.group({
-      ownership: ['', Validators.required],
-      landSize: ['', [Validators.required, Validators.pattern('^\\d+(\\.\\d+)?$')]],
-      ownerName: ['', Validators.required],
-      landDetails: ['', Validators.required],
-      governorsArea: ['', Validators.required],
-      cropGrown: ['', Validators.required],
-      monthlyIncome: ['', [Validators.required, Validators.pattern('^\\d+(\\.\\d+)?$')]]
+      ownership: [''],
+      landSize: ['', [Validators.pattern('^\\d+(\\.\\d+)?$')]],
+      ownerName: [''],
+      landDetails: [''],
+      governorsArea: [''],
+      cropGrown: [''],
+      monthlyIncome: ['', [Validators.pattern('^\\d+(\\.\\d+)?$')]]
     });
 
 
     this.mainForm = this._formBuilder.group({
-      name: ['', Validators.required],
-      country: ['', Validators.required], // Country field
-      yearMigrated: ['', [Validators.required, Validators.pattern('^[0-9]{4}$')]], // Year field
-      reasonMigrated: ['', Validators.required], // Reason field
+      name: [''],
+      country: [''], // Country field
+      yearMigrated: ['', [Validators.pattern('^[0-9]{4}$')]], // Year field
+      reasonMigrated: [''], // Reason field
       otherDetails: [''], // Other details
     });
 
     this.vehicleForm = this._formBuilder.group({
-      vehicleType: ['', Validators.required],
-      vehicleOwnerName: ['', Validators.required],
-      vehicleValue: ['', [Validators.required, Validators.pattern('^\\d+(\\.\\d+)?$')]],
-      vehicleMonthlyIncome: ['', [Validators.required, Validators.pattern('^\\d+(\\.\\d+)?$')]]
+      vehicleType: [''],
+      vehicleOwnerName: [''],
+      vehicleValue: ['', [Validators.pattern('^\\d+(\\.\\d+)?$')]],
+      vehicleMonthlyIncome: ['', [Validators.pattern('^\\d+(\\.\\d+)?$')]]
     });
 
     this.assetForm = this._formBuilder.group({
-      assetDetails: ['', Validators.required],
-      assetOwnerName: ['', Validators.required],
-      assetValue: ['', [Validators.required, Validators.pattern('^\\d+(\\.\\d+)?$')]],
-      assetMonthlyIncome: ['', [Validators.required, Validators.pattern('^\\d+(\\.\\d+)?$')]]
+      assetDetails: [''],
+      assetOwnerName: [''],
+      assetValue: ['', [ Validators.pattern('^\\d+(\\.\\d+)?$')]],
+      assetMonthlyIncome: ['', [Validators.pattern('^\\d+(\\.\\d+)?$')]]
     });
 
     this.businessForm = this._formBuilder.group({
-      businessNature: ['', Validators.required],
-      businessName: ['', Validators.required],
-      employeeCount: ['', [Validators.required, Validators.pattern('^\\d+$')]],
-      businessAddress: ['', Validators.required],
-      monthlyIncome: ['', [Validators.required, Validators.pattern('^\\d+(\\.\\d+)?$')]],
+      businessNature: [''],
+      businessName: [''],
+      employeeCount: ['', [Validators.pattern('^\\d+$')]],
+      businessAddress: [''],
+      monthlyIncome: ['', [Validators.pattern('^\\d+(\\.\\d+)?$')]],
       businessOtherDetails: ['']
     });
 
     this.otherActivitiesForm = this._formBuilder.group({
-      ownerName: ['', Validators.required],
-      activityAddress: ['', Validators.required],
-      monthlyIncome: ['', [Validators.required, Validators.pattern('^\\d+(\\.\\d+)?$')]],
+      ownerName: [''],
+      activityAddress: [''],
+      monthlyIncome: ['', [Validators.pattern('^\\d+(\\.\\d+)?$')]],
       additionalDetails: ['']
     });
     this.specialNotesForm = this._formBuilder.group({
-      specialNotes: ['', Validators.required]
+      specialNotes: ['']
     });
 
 
-    this.peopleData = [
-      {
-        name: 'John Doe',
-        relation: 'Brother',
-        dob: '1990-01-01',
-        nic: '123456789V',
-        ethnicity: 'Sinhalese',
-        religion: 'Buddhism',
-        remarks: 'No disability',
-      },
-      {
-        name: 'Jane Smith',
-        relation: 'Sister',
-        dob: '1992-02-15',
-        nic: '987654321V',
-        ethnicity: 'Tamil',
-        religion: 'Hinduism',
-        remarks: 'Visually impaired',
-      },
-      {
-        name: 'Ali Khan',
-        relation: 'Father',
-        dob: '1965-03-30',
-        nic: '456789123V',
-        ethnicity: 'Muslim',
-        religion: 'Islam',
-        remarks: 'No disability',
-      }
-    ];
+    this.peopleData = [];
   }
 
   peopleData: any[] = [];
@@ -352,157 +325,192 @@ export class StepperFormComponent {
       specialNotes: this.specialNotesForm.value.specialNotes
     };
 
-    //save house
-
-    const houseDTO: HouseDTO = {
-      houseNo: combinedFormDto.householdInfo.firstCtrl,
-      address: combinedFormDto.householdInfo.fourthCtrl,
-      wallType: `${combinedFormDto.housingInfo?.wallTypeDescription ?? ''} ${combinedFormDto.housingInfo?.wallType ?? ''}`.trim(),
-      floorType: `${combinedFormDto.housingInfo?.floorTypeDescription ?? ''} ${combinedFormDto.housingInfo?.floorType ?? ''}`.trim(),
-      roofType: `${combinedFormDto.housingInfo?.roofTypeDescription ?? ''} ${combinedFormDto.housingInfo?.roofType ?? ''}`.trim(),
-      power: `${combinedFormDto.housingInfo?.powerSourceDescription ?? ''} ${combinedFormDto.housingInfo?.powerSource ?? ''}`.trim(),
-      drinkingWater: `${combinedFormDto.housingInfo?.waterFacilityDescription ?? ''} ${combinedFormDto.housingInfo?.waterFacility ?? ''}`.trim(),
-      naturalHazard: `${combinedFormDto.housingInfo?.disasterRiskDescription ?? ''} ${combinedFormDto.housingInfo?.disasterRisk ?? ''}`.trim(),
-      sanitaryFacilities: `${combinedFormDto.housingInfo?.sanitationTypeDescription ?? ''} ${combinedFormDto.housingInfo?.sanitationType ?? ''}`.trim(),
-      whatsapp: combinedFormDto.householdInfo.sixthCtrl,
-      landLine: combinedFormDto.householdInfo.fifthCtrl,
-      specialNotes: combinedFormDto.specialNotes?.specialNotes || ""
-    }
-
-    //save house
-    this.houseService.addHouse(houseDTO);
-
-    //to save people
-    const people: PersonDto[] = combinedFormDto.people;
-    for (let person of people) {
-      const personDTO: PersonDTO = {
-        nic: person.nic.toUpperCase(),
-        houseNo: houseDTO.houseNo,
-        name:person.name,
-        dob: person.dob,
-        phoneNo: houseDTO.whatsapp,
-        religion: person.religion,
-        race: person.ethnicity,
-        educationLevel: person.education || "",
-        occupation: person.occupation || "No Job",
-        income: person.income || 0,
-        illnesses: person.healthIssues || "N/A",
-        disabilities: person.remarks || "N/A",
-        relationshipToHouseOwner: person.relation
+    if (
+      combinedFormDto.householdInfo.firstCtrl &&
+      combinedFormDto.householdInfo.secondCtrl &&
+      combinedFormDto.householdInfo.thirdCtrl
+    ) {
+      const houseDTO: HouseDTO = {
+        houseNo: combinedFormDto.householdInfo.firstCtrl,
+        address: combinedFormDto.householdInfo.fourthCtrl,
+        wallType: `${combinedFormDto.housingInfo?.wallTypeDescription ?? ''} ${combinedFormDto.housingInfo?.wallType ?? ''}`.trim(),
+        floorType: `${combinedFormDto.housingInfo?.floorTypeDescription ?? ''} ${combinedFormDto.housingInfo?.floorType ?? ''}`.trim(),
+        roofType: `${combinedFormDto.housingInfo?.roofTypeDescription ?? ''} ${combinedFormDto.housingInfo?.roofType ?? ''}`.trim(),
+        power: `${combinedFormDto.housingInfo?.powerSourceDescription ?? ''} ${combinedFormDto.housingInfo?.powerSource ?? ''}`.trim(),
+        drinkingWater: `${combinedFormDto.housingInfo?.waterFacilityDescription ?? ''} ${combinedFormDto.housingInfo?.waterFacility ?? ''}`.trim(),
+        naturalHazard: `${combinedFormDto.housingInfo?.disasterRiskDescription ?? ''} ${combinedFormDto.housingInfo?.disasterRisk ?? ''}`.trim(),
+        sanitaryFacilities: `${combinedFormDto.housingInfo?.sanitationTypeDescription ?? ''} ${combinedFormDto.housingInfo?.sanitationType ?? ''}`.trim(),
+        whatsapp: combinedFormDto.householdInfo.sixthCtrl,
+        landLine: combinedFormDto.householdInfo.fifthCtrl,
+        specialNotes: combinedFormDto.specialNotes?.specialNotes || ""
       }
-      this.personService.addPerson(personDTO); //save this person
-    }
 
-    //donations
-    const assistanceDetails: AssistanceDetails[] | undefined = combinedFormDto.assistanceDetails;
-    if (assistanceDetails !== undefined) {
-      for (let assistanceDetail of assistanceDetails) {
-        const donationReceived: DonationReceived = {
-          nic: this.getIdFromName(people, assistanceDetail.institution),
-          aswesumaValue: assistanceDetail.aswesomeValue || 0,
-          samurdhiValue: assistanceDetail.samrudhiValue || 0,
-          elderlyValue: assistanceDetail.elderlyValue || 0,
-          cancerValue: assistanceDetail.adultValue || 0,
-          disabledValue: assistanceDetail.ignorantValue || 0,
-          kidneyAssistanceValue: assistanceDetail.kidneyAssistanceValue || 0,
-          publicAssistanceValue: assistanceDetail.publicAssistanceValue || 0,
-          medicalAssistanceValue: assistanceDetail.medicalAssistanceValue || 0,
-          educationSupportValue: assistanceDetail.educationSupportValue || 0
+      //save house
+      this.houseService.addHouse(houseDTO);
+
+      //to save people
+      const people: PersonDto[] = combinedFormDto.people;
+      for (let person of people) {
+        const personDTO: PersonDTO = {
+          nic: person.nic.toUpperCase(),
+          houseNo: houseDTO.houseNo,
+          name:person.name,
+          dob: person.dob,
+          phoneNo: houseDTO.whatsapp,
+          religion: person.religion,
+          race: person.ethnicity,
+          educationLevel: person.education || "",
+          occupation: person.occupation || "No Job",
+          income: person.income || 0,
+          illnesses: person.healthIssues || "N/A",
+          disabilities: person.remarks || "N/A",
+          relationshipToHouseOwner: person.relation
         }
-        this.donationReceivedService.addDonationReceived(donationReceived); //save donation
+        this.personService.addPerson(personDTO); //save this person
       }
-    }
 
-    //migrants
-    let migrantDetails: MigrantDetailsDTO[] | undefined = combinedFormDto.migrantDetails;
-    if (migrantDetails !== undefined) {
-      for (let migrantDetail of migrantDetails) {
-        const migrant: MigratedPersonDTO = {
-          nic: this.getIdFromName(people, migrantDetail.name),
-          country: migrantDetail.country || "",
-          reason: migrantDetail.reasonMigrated || "",
-          year: migrantDetail.yearMigrated || 0,
-          remark: migrantDetail.otherDetails || "",
+      //donations
+      const assistanceDetails: AssistanceDetails[] | undefined = combinedFormDto.assistanceDetails;
+      if (assistanceDetails !== undefined) {
+        for (let assistanceDetail of assistanceDetails) {
+          const donationReceived: DonationReceived = {
+            nic: this.getIdFromName(people, assistanceDetail.institution),
+            aswesumaValue: assistanceDetail.aswesomeValue || 0,
+            samurdhiValue: assistanceDetail.samrudhiValue || 0,
+            elderlyValue: assistanceDetail.elderlyValue || 0,
+            cancerValue: assistanceDetail.adultValue || 0,
+            disabledValue: assistanceDetail.ignorantValue || 0,
+            kidneyAssistanceValue: assistanceDetail.kidneyAssistanceValue || 0,
+            publicAssistanceValue: assistanceDetail.publicAssistanceValue || 0,
+            medicalAssistanceValue: assistanceDetail.medicalAssistanceValue || 0,
+            educationSupportValue: assistanceDetail.educationSupportValue || 0
+          }
+          this.donationReceivedService.addDonationReceived(donationReceived); //save donation
         }
-        this.migratedPersonService.addMigratedPerson(migrant); //save migrant
       }
-    }
 
-    let landDetails: LandDetailsDTO[] | undefined = combinedFormDto.landDetails;
-    if (landDetails !== undefined) {
-      for (let landDetail of landDetails) {
-        const land: LandDTO = {
-          ownership: landDetail.ownership || "",
-          landSize: landDetail.landSize || "",
-          ownerNic: this.getIdFromName(people, landDetail.ownerName),
-          landDetails: landDetail.landDetails || "",
-          governorsArea: landDetail.governorsArea || "",
-          cropGrown: landDetail.cropGrown || "",
-          monthlyIncome: landDetail.monthlyIncome || 0
+      //migrants
+      let migrantDetails: MigrantDetailsDTO[] | undefined = combinedFormDto.migrantDetails;
+      if (migrantDetails !== undefined) {
+        for (let migrantDetail of migrantDetails) {
+          const migrant: MigratedPersonDTO = {
+            nic: this.getIdFromName(people, migrantDetail.name),
+            country: migrantDetail.country || "",
+            reason: migrantDetail.reasonMigrated || "",
+            year: migrantDetail.yearMigrated || 0,
+            remark: migrantDetail.otherDetails || "",
+          }
+          this.migratedPersonService.addMigratedPerson(migrant); //save migrant
         }
-        this.landService.addLand(land); // save land to db
       }
-    }
 
-    let vehicleDetails: VehicleDetailsDTO[] | undefined = combinedFormDto.vehicleDetails;
-    if (vehicleDetails !== undefined) {
-      for (let vehicleDetail of vehicleDetails) {
-        const vehicle: VehicleDTO = {
-          vehicleType: vehicleDetail.vehicleType || "",
-          vehicleOwnerNic: this.getIdFromName(people, vehicleDetail.vehicleOwnerName),
-          vehicleValue: vehicleDetail.vehicleValue || 0,
-          vehicleMonthlyIncome: vehicleDetail.vehicleMonthlyIncome || 0
+      let landDetails: LandDetailsDTO[] | undefined = combinedFormDto.landDetails;
+      if (landDetails !== undefined) {
+        for (let landDetail of landDetails) {
+          const land: LandDTO = {
+            ownership: landDetail.ownership || "",
+            landSize: landDetail.landSize || "",
+            ownerNic: this.getIdFromName(people, landDetail.ownerName),
+            landDetails: landDetail.landDetails || "",
+            governorsArea: landDetail.governorsArea || "",
+            cropGrown: landDetail.cropGrown || "",
+            monthlyIncome: landDetail.monthlyIncome || 0
+          }
+          this.landService.addLand(land); // save land to db
         }
-        this.vehicleService.addVehicle(vehicle); //save vehicle to db
       }
-    }
 
-    let assetDetails: AssetDetailsDTO[] | undefined = combinedFormDto.assetDetails;
-    if (assetDetails !== undefined) {
-      for (let assetDetail of assetDetails) {
-        const asset: AssetDTO = {
-          assetDetails: assetDetail.assetDetails,
-          assetOwnerNic: this.getIdFromName(people, assetDetail.assetOwnerName),
-          assetValue: assetDetail.assetValue || 0,
-          assetMonthlyIncome: assetDetail.assetMonthlyIncome || 0
+      let vehicleDetails: VehicleDetailsDTO[] | undefined = combinedFormDto.vehicleDetails;
+      if (vehicleDetails !== undefined) {
+        for (let vehicleDetail of vehicleDetails) {
+          const vehicle: VehicleDTO = {
+            vehicleType: vehicleDetail.vehicleType || "",
+            vehicleOwnerNic: this.getIdFromName(people, vehicleDetail.vehicleOwnerName),
+            vehicleValue: vehicleDetail.vehicleValue || 0,
+            vehicleMonthlyIncome: vehicleDetail.vehicleMonthlyIncome || 0
+          }
+          this.vehicleService.addVehicle(vehicle); //save vehicle to db
         }
-        this.assetService.addAsset(asset); //save
       }
-    }
 
-    let businessDetails: BusinessDTO[] | undefined = combinedFormDto.businessDetails;
-    if (businessDetails !== undefined) {
-      for (let businessDetail of businessDetails) {
-        const business: BusinessModelDTO = {
-          ownerNic: this.getIdFromName(people, businessDetail.businessOwner),
-          businessNature: businessDetail.businessNature || "",
-          businessName: businessDetail.businessName || "",
-          employeeCount: businessDetail.employeeCount || 0,
-          businessAddress: businessDetail.businessAddress || "",
-          monthlyIncome: businessDetail.monthlyIncome || 0,
-          businessOtherDetails: businessDetail.businessOtherDetails || "",
+      let assetDetails: AssetDetailsDTO[] | undefined = combinedFormDto.assetDetails;
+      if (assetDetails !== undefined) {
+        for (let assetDetail of assetDetails) {
+          const asset: AssetDTO = {
+            assetDetails: assetDetail.assetDetails,
+            assetOwnerNic: this.getIdFromName(people, assetDetail.assetOwnerName),
+            assetValue: assetDetail.assetValue || 0,
+            assetMonthlyIncome: assetDetail.assetMonthlyIncome || 0
+          }
+          this.assetService.addAsset(asset); //save
         }
-        this.businessService.addBusiness(business); //save
       }
-    }
 
-    let otherActivities: OtherActivitiesDTO[] | undefined = combinedFormDto.otherActivities;
-    if (otherActivities !== undefined) {
-      for (let otherActivity of otherActivities) {
-        const talent: TalentDTO = {
-          nic: this.getIdFromName(people, otherActivity.ownerName),
-          name: otherActivity.activityName || "",
-          address: otherActivity.activityAddress || "",
-          description: otherActivity.additionalDetails || "",
-          income: otherActivity.monthlyIncome || 0
+      let businessDetails: BusinessDTO[] | undefined = combinedFormDto.businessDetails;
+      if (businessDetails !== undefined) {
+        for (let businessDetail of businessDetails) {
+          const business: BusinessModelDTO = {
+            ownerNic: this.getIdFromName(people, businessDetail.businessOwner),
+            businessNature: businessDetail.businessNature || "",
+            businessName: businessDetail.businessName || "",
+            employeeCount: businessDetail.employeeCount || 0,
+            businessAddress: businessDetail.businessAddress || "",
+            monthlyIncome: businessDetail.monthlyIncome || 0,
+            businessOtherDetails: businessDetail.businessOtherDetails || "",
+          }
+          this.businessService.addBusiness(business); //save
         }
-        this.talentService.addTalent(talent); //save
       }
+
+      let otherActivities: OtherActivitiesDTO[] | undefined = combinedFormDto.otherActivities;
+      if (otherActivities !== undefined) {
+        for (let otherActivity of otherActivities) {
+          const talent: TalentDTO = {
+            nic: this.getIdFromName(people, otherActivity.ownerName),
+            name: otherActivity.activityName || "",
+            address: otherActivity.activityAddress || "",
+            description: otherActivity.additionalDetails || "",
+            income: otherActivity.monthlyIncome || 0
+          }
+          this.talentService.addTalent(talent); //save
+        }
+      }
+
+      console.log('Combined Form Data:', combinedFormDto);
+
+      Swal.fire({
+        title: "සාර්ථකයි!",
+        text: "ඔබේ දත්ත සුරක්ෂිතව සුරකින ලදි.",
+        icon: "success",
+        confirmButtonText: "හරි",
+        confirmButtonColor: "#4CAF50",
+        backdrop: true,
+        timer: 3000,
+        showClass: {
+          popup: "animate__animated animate__fadeInDown"
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUp"
+        }
+      });
+      this.resetForms();
+    } else {
+      Swal.fire({
+        title: "අවවාදයයි!",
+        text: "නිවසේ විස්තර හිස්ය. කරුණාකර පුරවන්න.",
+        icon: "warning",
+        confirmButtonText: "හරි",
+        confirmButtonColor: "#FFA500",
+        backdrop: true,
+        timer: 3000,
+        showClass: {
+          popup: "animate__animated animate__fadeInDown"
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUp"
+        }
+      });
     }
-
-    console.log('Combined Form Data:', combinedFormDto);
-
-    this.resetForms();
   }
 
   private getIdFromName(people: PersonDto[], name: string) {
