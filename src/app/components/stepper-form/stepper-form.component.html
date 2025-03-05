@@ -1,4 +1,4 @@
-<div class="wrapper p-8 bg-gray-50 rounded-lg shadow-xl max-w-7xl mx-auto mt-10 bg-gradient-to-r from-blue-100 via-white to-blue-300">
+<div class="wrapper p-8 rounded-lg shadow-xl w-full mx-auto bg-gradient-to-r from-blue-300 via-white to-green-300">
   <h1 class="text-3xl font-bold text-gray-800 mb-4 text-center">SMART - හපුරුදෙණිය</h1>
   <h2 class="text-2xl font-semibold text-gray-700 mb-8 text-center">පවුල් තොරතුරු දත්ත පත්‍රිකාව</h2>
 
@@ -8,22 +8,17 @@
       <form [formGroup]="firstFormGroup" class="space-y-6">
         <ng-template matStepLabel class="text-lg font-semibold text-gray-700">මූලික තොරතුරු</ng-template>
 
+        <h1 class="text-6xl text-center font-extrabold">මූලික තොරතුරු</h1>
         <!-- First row with two fields -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <mat-form-field appearance="fill" class="w-full">
             <mat-label class="text-sm">ගෘහ මූලික අංකය</mat-label>
-            <input matInput placeholder="65" formControlName="firstCtrl" required class="input-text" />
-            <mat-error *ngIf="firstFormGroup.get('firstCtrl')?.hasError('required')" class="text-red-500 text-sm">
-              අංකය අවශ්‍යයි.
-            </mat-error>
+            <input matInput placeholder="65" formControlName="firstCtrl" class="input-text" />
           </mat-form-field>
 
           <mat-form-field appearance="fill" class="w-full">
             <mat-label class="text-sm">ගම</mat-label>
-            <input matInput placeholder="හපුරුදෙණිය" formControlName="secondCtrl" required class="input-text" />
-            <mat-error *ngIf="firstFormGroup.get('secondCtrl')?.hasError('required')" class="text-red-500 text-sm">
-              ගම අවශ්‍යයි.
-            </mat-error>
+            <input matInput placeholder="හපුරුදෙණිය" formControlName="secondCtrl" class="input-text" />
           </mat-form-field>
         </div>
 
@@ -31,18 +26,12 @@
         <div class="space-y-6">
           <mat-form-field appearance="fill" class="w-full">
             <mat-label class="text-sm">ගෘහ මූලිකයාගේ නම</mat-label>
-            <input matInput placeholder="මුල් නම , අවසාන නම " formControlName="thirdCtrl" required class="input-text" />
-            <mat-error *ngIf="firstFormGroup.get('thirdCtrl')?.hasError('required')" class="text-red-500 text-sm">
-              නම අවශ්‍යයි.
-            </mat-error>
+            <input matInput placeholder="මුල් නම , අවසාන නම " formControlName="thirdCtrl" class="input-text" />
           </mat-form-field>
 
           <mat-form-field appearance="fill" class="w-full">
             <mat-label class="text-sm">ලිපිනය</mat-label>
-            <input matInput placeholder="නම , හපුරුදෙණිය" formControlName="fourthCtrl" required class="input-text" />
-            <mat-error *ngIf="firstFormGroup.get('fourthCtrl')?.hasError('required')" class="text-red-500 text-sm">
-              ලිපිනය අවශ්‍යයි.
-            </mat-error>
+            <input matInput placeholder="නම , හපුරුදෙණිය" formControlName="fourthCtrl" class="input-text" />
           </mat-form-field>
         </div>
 
@@ -50,47 +39,48 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <mat-form-field appearance="fill" class="w-full">
             <mat-label class="text-sm">දුරකථන අංකය</mat-label>
-            <input matInput placeholder="දුරකථන අංකය" formControlName="fifthCtrl" required class="input-text" />
-            <mat-error *ngIf="firstFormGroup.get('fifthCtrl')?.hasError('required')" class="text-red-500 text-sm">
-              දුරකථන අංකය අවශ්‍යයි.
-            </mat-error>
+            <input matInput placeholder="දුරකථන අංකය" formControlName="fifthCtrl" class="input-text" />
           </mat-form-field>
 
           <mat-form-field appearance="fill" class="w-full">
             <mat-label class="text-sm">වට්ස්ඇප් අංකය</mat-label>
-            <input matInput placeholder="වට්ස්ඇප් අංකය" formControlName="sixthCtrl" required class="input-text" />
-            <mat-error *ngIf="firstFormGroup.get('sixthCtrl')?.hasError('required')" class="text-red-500 text-sm">
-              වට්ස්ඇප් අංකය අවශ්‍යයි.
-            </mat-error>
+            <input matInput placeholder="වට්ස්ඇප් අංකය" formControlName="sixthCtrl" class="input-text" />
           </mat-form-field>
         </div>
 
-        <div class="flex justify-end space-x-4">
-          <button mat-button matStepperNext (click)="markStepComplete(step1)" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all">
-            Next
+        <div class="fixed bottom-6 right-6 flex">
+          <!-- Next Button -->
+          <button
+            mat-button
+            matStepperNext
+            (click)="markStepComplete(step1)"
+            class="flex items-center gap-4 text-white text-xl px-10 py-4 rounded-full btn-gradient active:scale-95"
+            style="background: linear-gradient(to right, var(--next-btn-start), var(--next-btn-end));"
+          >
+            <span class="font-bold text-5xl">ඊළඟ</span>
+            <span class="text-5xl">➡️</span>
           </button>
         </div>
+
       </form>
     </mat-step>
-
-<!--Step 2-->
+    <!--Step 2-->
     <mat-step [stepControl]="secondFormGroup" #step2>
       <form [formGroup]="secondFormGroup" class="space-y-6">
         <ng-template matStepLabel class="text-lg font-semibold text-gray-700">පුද්ගල තොරතුරු</ng-template>
+
+        <h1 class="text-6xl text-center font-extrabold">පුද්ගල තොරතුරු</h1>
 
         <!-- First row with two fields -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <mat-form-field appearance="fill" class="w-full">
             <mat-label class="text-sm">නම</mat-label>
-            <input matInput placeholder="මුල් නම , අවසාන නම" formControlName="firstCtrl" required class="input-text" />
-            <mat-error *ngIf="secondFormGroup.get('firstCtrl')?.hasError('required')" class="text-red-500 text-sm">
-              නම අවශ්‍යයි.
-            </mat-error>
+            <input matInput placeholder="මුල් නම , අවසාන නම" formControlName="firstCtrl" class="input-text" />
           </mat-form-field>
 
           <mat-form-field appearance="fill" class="w-full">
             <mat-label class="text-sm">ගෘහ මූලිකයොට ඇති නෑකම</mat-label>
-            <mat-select formControlName="relationCtrl" required class="input-text">
+            <mat-select formControlName="relationCtrl" class="input-text">
               <mat-option value="" disabled>නෑකම තෝරන්න</mat-option>
               <mat-option value="ගෘහ මූලික">ගෘහ මූලික</mat-option>
               <mat-option value="තාත්තා">තාත්තා</mat-option>
@@ -101,9 +91,6 @@
               <mat-option value="ඥාතී">ඥාතී</mat-option>
               <mat-option value="වෙනත්">වෙනත්</mat-option>
             </mat-select>
-            <mat-error *ngIf="secondFormGroup.get('relationCtrl')?.hasError('required')" class="text-red-500 text-sm">
-              නෑ කම තෙරිය යුතුයි.
-            </mat-error>
           </mat-form-field>
         </div>
 
@@ -111,20 +98,14 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <mat-form-field appearance="fill" class="w-full">
             <mat-label class="text-sm">උපන් දිනය</mat-label>
-            <input matInput [matDatepicker]="picker" placeholder="07/11/2002" formControlName="thirdCtrl" required class="input-text" />
+            <input matInput [matDatepicker]="picker" placeholder="07/11/2002" formControlName="thirdCtrl" class="input-text" />
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
-            <mat-error *ngIf="secondFormGroup.get('thirdCtrl')?.hasError('required')" class="text-red-500 text-sm">
-              උපන් දිනය අවශ්‍යයි.
-            </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="fill" class="w-full">
             <mat-label class="text-sm">ජා.හැ. අංකය</mat-label>
-            <input matInput placeholder="200219300925" formControlName="fourthCtrl" required class="input-text" />
-            <mat-error *ngIf="secondFormGroup.get('fourthCtrl')?.hasError('required')" class="text-red-500 text-sm">
-              ජා.හැ. අංකය අවශ්‍යයි.
-            </mat-error>
+            <input matInput placeholder="200219300925" formControlName="fourthCtrl" class="input-text" />
           </mat-form-field>
         </div>
 
@@ -132,30 +113,24 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <mat-form-field appearance="fill" class="w-full">
             <mat-label class="text-sm">ජාතිය</mat-label>
-            <mat-select formControlName="fifthCtrl" required class="input-text">
+            <mat-select formControlName="fifthCtrl" class="input-text">
               <mat-option value="සිංහල">සිංහල</mat-option>
               <mat-option value="දෙමළ">දෙමළ</mat-option>
               <mat-option value="මුස්ලිම්">මුස්ලිම්</mat-option>
               <mat-option value="බර්ගර්">බර්ගර්</mat-option>
               <mat-option value="වෙනත්">වෙනත්</mat-option>
             </mat-select>
-            <mat-error *ngIf="secondFormGroup.get('fifthCtrl')?.hasError('required')" class="text-red-500 text-sm">
-              ජාතිය අවශ්‍යයි.
-            </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="fill" class="w-full">
             <mat-label class="text-sm">ආගම</mat-label>
-            <mat-select formControlName="sixthCtrl" required class="input-text">
+            <mat-select formControlName="sixthCtrl" class="input-text">
               <mat-option value="බෞද්ධ">බෞද්ධ</mat-option>
               <mat-option value="හින්දු">හින්දු</mat-option>
               <mat-option value="ඉස්ලාම්">ඉස්ලාම්</mat-option>
               <mat-option value="ක්‍රිස්තු">ක්‍රිස්තු</mat-option>
               <mat-option value="වෙනත්">වෙනත්</mat-option>
             </mat-select>
-            <mat-error *ngIf="secondFormGroup.get('sixthCtrl')?.hasError('required')" class="text-red-500 text-sm">
-              ආගම අවශ්‍යයි.
-            </mat-error>
           </mat-form-field>
         </div>
 
@@ -228,23 +203,39 @@
             </tbody>
           </table>
         </div>
-        <div class="flex justify-between space-x-4">
-          <button mat-button matStepperPrevious class="bg-gray-400 text-white px-6 py-2 rounded-md hover:bg-gray-500 transition-all">
-            Back
+        <div class="fixed bottom-6 left-6 right-6 flex justify-between">
+          <!-- Back Button -->
+          <button
+            mat-button
+            matStepperPrevious
+            class="flex items-center gap-4 text-white text-xl px-10 py-4 rounded-full btn-gradient active:scale-95"
+            style="background: linear-gradient(to right, var(--back-btn-start), var(--back-btn-end));"
+          >
+            <span class="text-5xl">⬅️</span>
+            <span class="font-bold text-5xl"> ආපසු</span>
           </button>
-          <button mat-button matStepperNext (click)="markStepComplete(step2)" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all">
-            Next
+
+          <!-- Next Button -->
+          <button
+            mat-button
+            matStepperNext
+            (click)="markStepComplete(step2)"
+            class="flex items-center gap-4 text-white text-xl px-10 py-4 rounded-full btn-gradient active:scale-95"
+            style="background: linear-gradient(to right, var(--next-btn-start), var(--next-btn-end));"
+          >
+            <span class="font-bold text-5xl">ඊළඟ</span>
+            <span class="text-5xl">➡️</span>
           </button>
         </div>
-
-
       </form>
     </mat-step>
-
 <!--Step 3-->
     <mat-step [stepControl]="thirdFormGroup" #step3>
       <form [formGroup]="thirdFormGroup" class="space-y-6">
         <ng-template matStepLabel class="text-lg font-semibold text-gray-700">නිවාස තොරතුරු</ng-template>
+
+        <h1 class="text-6xl text-center font-extrabold">නිවාස තොරතුරු</h1>
+
 
         <!-- First row with two fields -->
         <div class="grid grid-cols-1 gap-4 p-4 bg-white rounded-lg shadow-md">
@@ -279,7 +270,7 @@
               <textarea
                 formControlName="housingTypeDescription"
                 id="description1" rows="3" placeholder="මෙතන විස්තරයක් ඇතුලත් කරන්න..."
-                        class="border border-gray-300 rounded-md p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-200"></textarea>
+                class="border border-gray-300 rounded-md p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-200"></textarea>
             </div>
           </div>
         </div>
@@ -288,35 +279,35 @@
           <mat-label class="text-lg font-semibold mb-2">බිත්ති වල ස්වභාවය</mat-label>
           <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-6">
 
-          <mat-radio-group
-            formControlName="wallType"
-            aria-label="Select an option" class="flex flex-wrap items-center space-x-4">
-            <mat-radio-button value="1" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
-              <span class="ml-2">බ්ලොක් ගල්</span>
-            </mat-radio-button>
-            <mat-radio-button value="2" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
-              <span class="ml-2">මැටි ගඩොල්</span>
-            </mat-radio-button>
-            <mat-radio-button value="3" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
-              <span class="ml-2">වරිච්චි</span>
-            </mat-radio-button>
-            <mat-radio-button value="4" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
-              <span class="ml-2">ලෑළි</span>
-            </mat-radio-button>
-            <mat-radio-button value="5" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
-              <span class="ml-2">ටකරන්</span>
-            </mat-radio-button>
-            <mat-radio-button value="6" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
-              <span class="ml-2">වෙනත්</span>
-            </mat-radio-button>
-          </mat-radio-group>
-          <div class="flex flex-col sm:mt-0 mt-4">
-            <label for="description2" class="text-sm font-medium text-gray-700 mb-1">විස්තරය:</label>
-            <textarea id="description2"
-                      formControlName="wallTypeDescription"
-                      rows="3" placeholder="මෙතන විස්තරයක් ඇතුලත් කරන්න..."
-                      class="border border-gray-300 rounded-md p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-200"></textarea>
-          </div>
+            <mat-radio-group
+              formControlName="wallType"
+              aria-label="Select an option" class="flex flex-wrap items-center space-x-4">
+              <mat-radio-button value="1" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">බ්ලොක් ගල්</span>
+              </mat-radio-button>
+              <mat-radio-button value="2" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">මැටි ගඩොල්</span>
+              </mat-radio-button>
+              <mat-radio-button value="3" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">වරිච්චි</span>
+              </mat-radio-button>
+              <mat-radio-button value="4" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">ලෑළි</span>
+              </mat-radio-button>
+              <mat-radio-button value="5" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">ටකරන්</span>
+              </mat-radio-button>
+              <mat-radio-button value="6" class="flex items-center p-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
+                <span class="ml-2">වෙනත්</span>
+              </mat-radio-button>
+            </mat-radio-group>
+            <div class="flex flex-col sm:mt-0 mt-4">
+              <label for="description2" class="text-sm font-medium text-gray-700 mb-1">විස්තරය:</label>
+              <textarea id="description2"
+                        formControlName="wallTypeDescription"
+                        rows="3" placeholder="මෙතන විස්තරයක් ඇතුලත් කරන්න..."
+                        class="border border-gray-300 rounded-md p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-200"></textarea>
+            </div>
           </div>
         </div>
 
@@ -523,22 +514,43 @@
         </div>
 
         <div class="flex justify-end space-x-4">
-          <button mat-button matStepperNext (click)="markStepComplete(step3)" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all">
-            Next
-          </button>
-
           <button mat-raised-button color="primary" (click)="onManualSubmit()" type="button">
             Submit
           </button>
         </div>
+
+        <div class="fixed bottom-6 left-6 right-6 flex justify-between">
+          <!-- Back Button -->
+          <button
+            mat-button
+            matStepperPrevious
+            class="flex items-center gap-4 text-white text-xl px-10 py-4 rounded-full btn-gradient active:scale-95"
+            style="background: linear-gradient(to right, var(--back-btn-start), var(--back-btn-end));"
+          >
+            <span class="text-5xl">⬅️</span>
+            <span class="font-bold text-5xl"> ආපසු</span>
+          </button>
+
+          <!-- Next Button -->
+          <button
+            mat-button
+            matStepperNext
+            (click)="markStepComplete(step3)"
+            class="flex items-center gap-4 text-white text-xl px-10 py-4 rounded-full btn-gradient active:scale-95"
+            style="background: linear-gradient(to right, var(--next-btn-start), var(--next-btn-end));"
+          >
+            <span class="font-bold text-5xl">ඊළඟ</span>
+            <span class="text-5xl">➡️</span>
+          </button>
+        </div>
       </form>
     </mat-step>
-
 <!--     Step 4-->
     <mat-step [stepControl]="form" #step4>
       <form [formGroup]="form" class="space-y-4">
         <ng-template matStepLabel class="text-lg font-semibold text-gray-700">දීමනා පිළිබඳ විස්තර</ng-template>
 
+        <h1 class="text-6xl text-center font-extrabold">දීමනා පිළිබඳ විස්තර</h1>
 
         <!-- Institution Name Field -->
         <div class="flex flex-col space-y-2">
@@ -547,9 +559,6 @@
             <option value="" disabled>Select an institution</option>
             <option *ngFor="let person of peopleData" [value]="person.nic">{{ person.name }}</option>
           </select>
-          <div *ngIf="form.get('name')?.invalid && form.get('name')?.touched" class="text-red-500 text-xs">
-            අයතේ නම අවශ්‍යයි.
-          </div>
         </div>
 
         <!-- Categories Section -->
@@ -629,7 +638,6 @@
           <button
             type="submit"
             (click)="onSubmit1()"
-            [disabled]="form.invalid"
             class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all"
           >
             Submit
@@ -670,9 +678,28 @@
           </tbody>
         </table>
       </div>
-      <div class="flex justify-end space-x-4">
-        <button mat-button matStepperNext (click)="markStepComplete(step4)" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all">
-          Next
+      <div class="fixed bottom-6 left-6 right-6 flex justify-between">
+        <!-- Back Button -->
+        <button
+          mat-button
+          matStepperPrevious
+          class="flex items-center gap-4 text-white text-xl px-10 py-4 rounded-full btn-gradient active:scale-95"
+          style="background: linear-gradient(to right, var(--back-btn-start), var(--back-btn-end));"
+        >
+          <span class="text-5xl">⬅️</span>
+          <span class="font-bold text-5xl"> ආපසු</span>
+        </button>
+
+        <!-- Next Button -->
+        <button
+          mat-button
+          matStepperNext
+          (click)="markStepComplete(step4)"
+          class="flex items-center gap-4 text-white text-xl px-10 py-4 rounded-full btn-gradient active:scale-95"
+          style="background: linear-gradient(to right, var(--next-btn-start), var(--next-btn-end));"
+        >
+          <span class="font-bold text-5xl">ඊළඟ</span>
+          <span class="text-5xl">➡️</span>
         </button>
       </div>
     </mat-step>
@@ -681,6 +708,7 @@
     <mat-step [stepControl]="mainForm" #step5>
       <form [formGroup]="mainForm" class="space-y-4" (ngSubmit)="onSubmit()">
         <ng-template matStepLabel class="text-lg font-semibold text-gray-700">විදෙශ්ගත පුද්ගලයින් පිළිබද විස්තර</ng-template>
+        <h1 class="text-6xl text-center font-extrabold">විදෙශ්ගත පුද්ගලයින් පිළිබද විස්තර</h1>
 
         <!-- Institution Name Field -->
         <div class="flex flex-col space-y-2">
@@ -786,9 +814,28 @@
         </table>
       </div>
 
-      <div class="flex justify-end space-x-4">
-        <button mat-button matStepperNext (click)="markStepComplete(step5)" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all">
-          Next
+      <div class="fixed bottom-6 left-6 right-6 flex justify-between">
+        <!-- Back Button -->
+        <button
+          mat-button
+          matStepperPrevious
+          class="flex items-center gap-4 text-white text-xl px-10 py-4 rounded-full btn-gradient active:scale-95"
+          style="background: linear-gradient(to right, var(--back-btn-start), var(--back-btn-end));"
+        >
+          <span class="text-5xl">⬅️</span>
+          <span class="font-bold text-5xl"> ආපසු</span>
+        </button>
+
+        <!-- Next Button -->
+        <button
+          mat-button
+          matStepperNext
+          (click)="markStepComplete(step5)"
+          class="flex items-center gap-4 text-white text-xl px-10 py-4 rounded-full btn-gradient active:scale-95"
+          style="background: linear-gradient(to right, var(--next-btn-start), var(--next-btn-end));"
+        >
+          <span class="font-bold text-5xl">ඊළඟ</span>
+          <span class="text-5xl">➡️</span>
         </button>
       </div>
     </mat-step>
@@ -796,6 +843,7 @@
     <mat-step [stepControl]="landForm" #stepLand>
       <form [formGroup]="landForm" class="space-y-4" (ngSubmit)="onSubmitLand()">
         <ng-template matStepLabel class="text-lg font-semibold text-gray-700">ඉඩම් විස්තර</ng-template>
+        <h1 class="text-6xl text-center font-extrabold">ඉඩම් විස්තර</h1>
 
         <!-- අයිතිය Field -->
         <div class="flex flex-col space-y-2">
@@ -943,9 +991,28 @@
       </div>
 
       <!-- Next Button -->
-      <div class="flex justify-end space-x-4">
-        <button mat-button matStepperNext (click)="markStepComplete(stepLand)" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all">
-          ඊළඟ
+      <div class="fixed bottom-6 left-6 right-6 flex justify-between">
+        <!-- Back Button -->
+        <button
+          mat-button
+          matStepperPrevious
+          class="flex items-center gap-4 text-white text-xl px-10 py-4 rounded-full btn-gradient active:scale-95"
+          style="background: linear-gradient(to right, var(--back-btn-start), var(--back-btn-end));"
+        >
+          <span class="text-5xl">⬅️</span>
+          <span class="font-bold text-5xl"> ආපසු</span>
+        </button>
+
+        <!-- Next Button -->
+        <button
+          mat-button
+          matStepperNext
+          (click)="markStepComplete(stepLand)"
+          class="flex items-center gap-4 text-white text-xl px-10 py-4 rounded-full btn-gradient active:scale-95"
+          style="background: linear-gradient(to right, var(--next-btn-start), var(--next-btn-end));"
+        >
+          <span class="font-bold text-5xl">ඊළඟ</span>
+          <span class="text-5xl">➡️</span>
         </button>
       </div>
     </mat-step>
@@ -953,6 +1020,8 @@
     <mat-step [stepControl]="vehicleForm" #stepVehicle>
       <form [formGroup]="vehicleForm" class="space-y-4" (ngSubmit)="onSubmitVehicle()">
         <ng-template matStepLabel class="text-lg font-semibold text-gray-700">වාහන විස්තර</ng-template>
+
+        <h1 class="text-6xl text-center font-extrabold">වාහන විස්තර</h1>
 
         <!-- වාහන වර්ගය Field -->
         <div class="flex flex-col space-y-2">
@@ -1047,9 +1116,28 @@
       </div>
 
       <!-- Next Button -->
-      <div class="flex justify-end space-x-4">
-        <button mat-button matStepperNext (click)="markStepComplete(stepVehicle)" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all">
-          ඊළඟ
+      <div class="fixed bottom-6 left-6 right-6 flex justify-between">
+        <!-- Back Button -->
+        <button
+          mat-button
+          matStepperPrevious
+          class="flex items-center gap-4 text-white text-xl px-10 py-4 rounded-full btn-gradient active:scale-95"
+          style="background: linear-gradient(to right, var(--back-btn-start), var(--back-btn-end));"
+        >
+          <span class="text-5xl">⬅️</span>
+          <span class="font-bold text-5xl"> ආපසු</span>
+        </button>
+
+        <!-- Next Button -->
+        <button
+          mat-button
+          matStepperNext
+          (click)="markStepComplete(stepVehicle)"
+          class="flex items-center gap-4 text-white text-xl px-10 py-4 rounded-full btn-gradient active:scale-95"
+          style="background: linear-gradient(to right, var(--next-btn-start), var(--next-btn-end));"
+        >
+          <span class="font-bold text-5xl">ඊළඟ</span>
+          <span class="text-5xl">➡️</span>
         </button>
       </div>
     </mat-step>
@@ -1057,6 +1145,8 @@
     <mat-step [stepControl]="assetForm" #stepAsset>
       <form [formGroup]="assetForm" class="space-y-4" (ngSubmit)="onSubmitAsset()">
         <ng-template matStepLabel class="text-lg font-semibold text-gray-700">අනෙකුත් ප්‍රාග්ධන වත්කම්</ng-template>
+
+        <h1 class="text-6xl text-center font-extrabold">අනෙකුත් ප්‍රාග්ධන වත්කම්</h1>
 
         <!-- වත්කම් විස්තර Field -->
         <div class="flex flex-col space-y-2">
@@ -1128,6 +1218,7 @@
         </div>
       </form>
 
+
       <!-- Submitted Data Table -->
       <div *ngIf="submittedAssetData.length > 0" class="mt-6">
         <table class="table-auto w-full border-collapse">
@@ -1151,9 +1242,28 @@
       </div>
 
       <!-- Next Button -->
-      <div class="flex justify-end space-x-4">
-        <button mat-button matStepperNext (click)="markStepComplete(stepAsset)" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all">
-          ඊළඟ
+      <div class="fixed bottom-6 left-6 right-6 flex justify-between">
+        <!-- Back Button -->
+        <button
+          mat-button
+          matStepperPrevious
+          class="flex items-center gap-4 text-white text-xl px-10 py-4 rounded-full btn-gradient active:scale-95"
+          style="background: linear-gradient(to right, var(--back-btn-start), var(--back-btn-end));"
+        >
+          <span class="text-5xl">⬅️</span>
+          <span class="font-bold text-5xl"> ආපසු</span>
+        </button>
+
+        <!-- Next Button -->
+        <button
+          mat-button
+          matStepperNext
+          (click)="markStepComplete(stepAsset)"
+          class="flex items-center gap-4 text-white text-xl px-10 py-4 rounded-full btn-gradient active:scale-95"
+          style="background: linear-gradient(to right, var(--next-btn-start), var(--next-btn-end));"
+        >
+          <span class="font-bold text-5xl">ඊළඟ</span>
+          <span class="text-5xl">➡️</span>
         </button>
       </div>
     </mat-step>
@@ -1161,6 +1271,8 @@
     <mat-step [stepControl]="businessForm" #stepBusiness>
       <form [formGroup]="businessForm" class="space-y-4" (ngSubmit)="onSubmitBusiness()">
         <ng-template matStepLabel class="text-lg font-semibold text-gray-700">ව්‍යාපාර හා ස්වයං රැකියා </ng-template>
+
+        <h1 class="text-6xl text-center font-extrabold">ව්‍යාපාර හා ස්වයං රැකියා</h1>
 
         <!-- ස්වභාවය Field -->
         <div class="flex flex-col space-y-2">
@@ -1291,16 +1403,36 @@
         </table>
       </div>
 
-      <!-- Next Button -->
-      <div class="flex justify-end space-x-4">
-        <button mat-button matStepperNext (click)="markStepComplete(stepBusiness)" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all">
-          ඊළඟ
+      <div class="fixed bottom-6 left-6 right-6 flex justify-between">
+        <!-- Back Button -->
+        <button
+          mat-button
+          matStepperPrevious
+          class="flex items-center gap-4 text-white text-xl px-10 py-4 rounded-full btn-gradient active:scale-95"
+          style="background: linear-gradient(to right, var(--back-btn-start), var(--back-btn-end));"
+        >
+          <span class="text-5xl">⬅️</span>
+          <span class="font-bold text-5xl"> ආපසු</span>
+        </button>
+
+        <!-- Next Button -->
+        <button
+          mat-button
+          matStepperNext
+          (click)="markStepComplete(stepBusiness)"
+          class="flex items-center gap-4 text-white text-xl px-10 py-4 rounded-full btn-gradient active:scale-95"
+          style="background: linear-gradient(to right, var(--next-btn-start), var(--next-btn-end));"
+        >
+          <span class="font-bold text-5xl">ඊළඟ</span>
+          <span class="text-5xl">➡️</span>
         </button>
       </div>
     </mat-step>
 
     <mat-step [stepControl]="otherActivitiesForm" #stepOtherActivities>
       <form [formGroup]="otherActivitiesForm" class="space-y-4" (ngSubmit)="onSubmitOtherActivities()">
+
+        <h1 class="text-6xl text-center font-extrabold">වෙනත් විශේෂ හැකියා/වෘත්තීන්/ක්‍රියාකාරකම් විස්තර</h1>
 
         <!-- හිමිකරුගේ නම -->
         <div class="flex flex-col space-y-2">
@@ -1392,11 +1524,33 @@
       </div>
 
       <!-- Next Button -->
-      <div class="flex justify-end space-x-4">
-        <button mat-button matStepperNext (click)="markStepComplete(stepOtherActivities)" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all">
-          ඊළඟ
+      <div class="fixed bottom-6 left-6 right-6 flex justify-between">
+        <!-- Back Button -->
+        <button
+          mat-button
+          matStepperPrevious
+          class="flex items-center gap-4 text-white text-xl px-10 py-4 rounded-full btn-gradient active:scale-95"
+          style="background: linear-gradient(to right, var(--back-btn-start), var(--back-btn-end));"
+        >
+          <span class="text-5xl">⬅️</span>
+          <span class="font-bold text-5xl"> ආපසු</span>
+        </button>
+
+        <!-- Next Button -->
+        <button
+          mat-button
+          matStepperNext
+          (click)="markStepComplete(stepOtherActivities)"
+          class="flex items-center gap-4 text-white text-xl px-10 py-4 rounded-full btn-gradient active:scale-95"
+          style="background: linear-gradient(to right, var(--next-btn-start), var(--next-btn-end));"
+        >
+          <span class="font-bold text-5xl">ඊළඟ</span>
+          <span class="text-5xl">➡️</span>
         </button>
       </div>
+
+
+
     </mat-step>
     <!-- Done Step -->
     <mat-step>

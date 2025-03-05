@@ -46,6 +46,11 @@ import {MatStepLabel, MatStepperNext, MatStepperPrevious} from "@angular/materia
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
 import {MatOption} from "@angular/material/core";
 import {MatSelect} from "@angular/material/select";
+import { FilterDataComponent } from './components/filter-data/filter-data.component';
+import { DeemanaDetailsComponent } from './components/deemana-details/deemana-details.component';
+import { ForeignersDetailsComponent } from './components/foreigners-details/foreigners-details.component';
+import { HomeDetailsComponent } from './components/home-details/home-details.component';
+import { PersonDetailsComponent } from './components/person-details/person-details.component';
 
 
 
@@ -76,6 +81,11 @@ import {MatSelect} from "@angular/material/select";
     SelfEmploymentComponentComponent,
     SkillsComponent,
     SpecialNotesComponent,
+    FilterDataComponent,
+    DeemanaDetailsComponent,
+    ForeignersDetailsComponent,
+    HomeDetailsComponent,
+    PersonDetailsComponent,
 
   ],
   imports: [

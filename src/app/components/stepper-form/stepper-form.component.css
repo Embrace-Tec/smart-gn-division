@@ -1,3 +1,19 @@
 .mat-mdc-form-field {
   margin-top: 16px;
 }
+:root {
+  --back-btn-start: #9b5de5; /* Purple Gradient Start */
+  --back-btn-end: #8338ec; /* Purple Gradient End */
+  --next-btn-start: #06d6a0; /* Green Gradient Start */
+  --next-btn-end: #118ab2; /* Green Gradient End */
+}
+
+.btn-gradient {
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-gradient:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  transform: scale(1.05);
+}
