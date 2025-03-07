@@ -40,4 +40,58 @@ export class DonationReceivedService {
       .collection<DonationReceived>(this.receivedCollection, ref => ref.where('nic', '==', nic))
       .valueChanges();
   }
+
+  getAswesumaList(): Observable<DonationReceived[]>{
+    return this.firestore
+          .collection<DonationReceived>(this.receivedCollection, ref => ref.where('aswesumaValue', '>', 0))
+          .valueChanges();
+    }
+
+  getCancerList(): Observable<DonationReceived[]>{
+      return this.firestore
+            .collection<DonationReceived>(this.receivedCollection, ref => ref.where('cancerValue', '>', 0))
+            .valueChanges();
+      }
+
+     getDisabledList(): Observable<DonationReceived[]>{
+          return this.firestore
+                .collection<DonationReceived>(this.receivedCollection, ref => ref.where('disabledValue', '>', 0))
+                .valueChanges();
+     }
+
+     getEducationSupportList(): Observable<DonationReceived[]>{
+                  return this.firestore
+                        .collection<DonationReceived>(this.receivedCollection, ref => ref.where('educationSupportValue', '>', 0))
+                        .valueChanges();
+     }
+
+     getElderlyList(): Observable<DonationReceived[]>{
+                                  return this.firestore
+                                        .collection<DonationReceived>(this.receivedCollection, ref => ref.where('elderlyValue', '>', 0))
+                                        .valueChanges();
+     }
+
+     getKidneyAssistanceList(): Observable<DonationReceived[]>{
+        return this.firestore
+        .collection<DonationReceived>(this.receivedCollection, ref => ref.where('kidneyAssistanceValue', '>', 0))
+        .valueChanges();
+     }
+
+    getMedicalAssistanceList(): Observable<DonationReceived[]>{
+           return this.firestore
+           .collection<DonationReceived>(this.receivedCollection, ref => ref.where('medicalAssistanceValue', '>', 0))
+           .valueChanges();
+    }
+
+  getPublicAssistanceList(): Observable<DonationReceived[]>{
+             return this.firestore
+             .collection<DonationReceived>(this.receivedCollection, ref => ref.where('publicAssistanceValue', '>', 0))
+             .valueChanges();
+      }
+
+    getSamurdhiList(): Observable<DonationReceived[]>{
+                 return this.firestore
+                 .collection<DonationReceived>(this.receivedCollection, ref => ref.where('samurdhiValue', '>', 0))
+                 .valueChanges();
+          }
 }

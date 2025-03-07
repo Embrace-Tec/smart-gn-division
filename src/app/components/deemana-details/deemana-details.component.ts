@@ -1,11 +1,18 @@
 import { Component } from '@angular/core';
-
+import { DonationReceived } from '@app/models/donation.received.model';
+import {DonationReceivedService} from "@app/services/donations-received.service";
 @Component({
   selector: 'app-deemana-details',
   templateUrl: './deemana-details.component.html',
   styleUrl: './deemana-details.component.css'
 })
 export class DeemanaDetailsComponent {
+
+  constructor(private donationReceivedService:DonationReceivedService){
+    }
+
+    private donations :DonationReceived[]|null=null;
+
   // Deemana (Welfare) options in Sinhala
   deemanaOptions = [
     { id: 1, name: 'අස්වැසුම' },
@@ -20,7 +27,7 @@ export class DeemanaDetailsComponent {
   ];
 
   // Selected Deemana type
-  selectedDeemana: string | null = null;
+  selectedDeemana: number = 0;
 
   // Example data for table
   tableData = [
@@ -52,9 +59,24 @@ export class DeemanaDetailsComponent {
 
   // Filter table data based on selected Deemana
   get filteredTableData() {
-    if (this.selectedDeemana) {
-      return this.tableData.filter(row => row.value === this.selectedDeemana);
-    }
+    if(this.selectedDeemana===1){
+      this.donationReceivedService.getAswesumaList().subscribe({
+        next: (data) => {
+          this.donations = data;
+          console.log('Donations:', this.donations);
+
+          for (var donation in this.donations){
+            console.log(donation);
+          }
+        },
+        error: (err) => {
+          console.error('Error fetching donations:', err);
+        }
+      });
+      }
+//     if (this.selectedDeemana) {
+//       return this.tableData.filter(row => row.value === this.selectedDeemana);
+//     }
     return [];
   }
 }
