@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { DonationReceived } from '@app/models/donation.received.model';
-import {DonationReceivedService} from "@app/services/donations-received.service";
+import { Person } from '@app/models/person.model';
+import { DonationReceivedService } from "@app/services/donations-received.service";
+import { PersonService } from '@app/services/person.service';
 @Component({
   selector: 'app-deemana-details',
   templateUrl: './deemana-details.component.html',
@@ -8,10 +10,17 @@ import {DonationReceivedService} from "@app/services/donations-received.service"
 })
 export class DeemanaDetailsComponent {
 
-  constructor(private donationReceivedService:DonationReceivedService){
-    }
+  onDeemanaSelected($event: any) {
+    console.log("in deemana selected");
+    console.log(this.selectedDeemana);
+    this.getfilteredTableData();
+  }
 
-    private donations :DonationReceived[]|null=null;
+  constructor(private donationReceivedService: DonationReceivedService, private personService: PersonService) {
+  }
+
+  private donations: DonationReceived[] | null = null;
+  private persons: Person[] | null = [];
 
   // Deemana (Welfare) options in Sinhala
   deemanaOptions = [
@@ -58,25 +67,41 @@ export class DeemanaDetailsComponent {
   ];
 
   // Filter table data based on selected Deemana
-  get filteredTableData() {
-    if(this.selectedDeemana===1){
+  getfilteredTableData() {
+    console.log("in get filtered data");
+    if (Number(this.selectedDeemana) === 1) {
       this.donationReceivedService.getAswesumaList().subscribe({
         next: (data) => {
-          this.donations = data;
-          console.log('Donations:', this.donations);
+          if (Array.isArray(data)) {
+            this.donations = data;
+            console.log('Donations:', this.donations);
 
-          for (var donation in this.donations){
-            console.log(donation);
+            if (this.persons!.length > 0) { this.persons!.length = 0; }
+            
+            for (const donation of this.donations) {
+              this.personService.getPersonByNic(donation.nic).subscribe({
+                next: (person) => {
+                  if (person) {
+                    console.log('Person found:', person);
+                    this.persons?.push(person); // Store it if needed
+                  } else {
+                    console.log('Person not found');
+                  }
+                },
+                error: (err) => {
+                  console.error('Error fetching person:', err);
+                }
+              });
+            }
+          } else {
+            console.error("Expected an array but got:", data);
           }
         },
         error: (err) => {
           console.error('Error fetching donations:', err);
         }
       });
-      }
-//     if (this.selectedDeemana) {
-//       return this.tableData.filter(row => row.value === this.selectedDeemana);
-//     }
-    return [];
+    }
   }
+
 }
