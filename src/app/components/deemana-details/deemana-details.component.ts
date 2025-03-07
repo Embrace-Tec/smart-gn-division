@@ -77,9 +77,9 @@ export class DeemanaDetailsComponent {
             console.log('Donations:', this.donations);
 
             if (this.persons!.length > 0) { this.persons!.length = 0; }
-            
+
             for (const donation of this.donations) {
-              this.personService.getPersonByNic(donation.nic).subscribe({
+              this.personService.getPersonByNic(donation.nic.toUpperCase()).subscribe({
                 next: (person) => {
                   if (person) {
                     console.log('Person found:', person);
