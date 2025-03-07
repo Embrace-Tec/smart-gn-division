@@ -46,13 +46,8 @@ export class ThirdComponent {
 
 
   openNewWindow() {
-    if (this.checkNicExist()) {
       this.sendEmail();
       this.router.navigate(['/last']);
-    } else {
-      alert("NIC not found");
-    }
-
   }
 
   backHomeWindow() {
