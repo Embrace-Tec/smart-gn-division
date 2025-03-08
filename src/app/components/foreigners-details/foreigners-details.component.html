@@ -9,20 +9,26 @@
       <table class="min-w-full table-auto text-center">
         <thead class="bg-gradient-to-r from-green-400 to-teal-500 text-white">
         <tr>
-          <th class="py-3 px-6 text-lg font-semibold">2. පුද්ගල නම</th>
-          <th class="py-3 px-6 text-lg font-semibold">3. උපන් දිනය</th>
-          <th class="py-3 px-6 text-lg font-semibold">4. ජා.හැ. අංකය</th>
-          <th class="py-3 px-6 text-lg font-semibold">5. ජාතිය</th>
-          <th class="py-3 px-6 text-lg font-semibold">6. ආගම</th>
+          <th class="py-3 px-6 text-lg font-semibold">1. පුද්ගල නම</th>
+          <th class="py-3 px-6 text-lg font-semibold">2. රට</th>
+          <th class="py-3 px-6 text-lg font-semibold">3. ජා.හැ. අංකය</th>
+          <th class="py-3 px-6 text-lg font-semibold">4. ජාතිය</th>
+          <th class="py-3 px-6 text-lg font-semibold">5. ආගම</th>
+          <th class="py-3 px-6 text-lg font-semibold">6. හේතුව</th>
+          <th class="py-3 px-6 text-lg font-semibold">7. අවුරුද්ද</th>
+          <th class="py-3 px-6 text-lg font-semibold">8. වැඩි ව්ස්තර</th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let row of foreignersData" class="hover:bg-gray-50">
+        <tr *ngFor="let row of displayMigratedPersonList" class="hover:bg-gray-50">
           <td class="py-3 px-6 border-b">{{ row.name }}</td>
-          <td class="py-3 px-6 border-b">{{ row.dob }}</td>
-          <td class="py-3 px-6 border-b">{{ row.id }}</td>
-          <td class="py-3 px-6 border-b">{{ row.ethnicity }}</td>
+          <td class="py-3 px-6 border-b">{{ row.country }}</td>
+          <td class="py-3 px-6 border-b">{{ row.nic }}</td>
+          <td class="py-3 px-6 border-b">{{ row.race }}</td>
           <td class="py-3 px-6 border-b">{{ row.religion }}</td>
+          <td class="py-3 px-6 border-b">{{ row.reason }}</td>
+          <td class="py-3 px-6 border-b">{{ row.year }}</td>
+          <td class="py-3 px-6 border-b">{{ row.remark }}</td>
         </tr>
         </tbody>
       </table>
