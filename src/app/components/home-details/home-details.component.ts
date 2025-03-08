@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { House } from '@app/models/house.model';
+import { Person } from '@app/models/person.model';
+import { HouseService } from '@app/services/house.service';
+import { PersonService } from '@app/services/person.service';
 
 @Component({
   selector: 'app-home-details',
@@ -6,6 +10,15 @@ import { Component } from '@angular/core';
   styleUrl: './home-details.component.css'
 })
 export class HomeDetailsComponent {
+
+  personsInHouse: Person[] = [];
+
+  private house: House | undefined;
+
+  constructor(private personService: PersonService, private houseService: HouseService) {
+
+  }
+
   Data = [
     {
       name: 'John Doe',
@@ -36,4 +49,24 @@ export class HomeDetailsComponent {
       religion: 'Orthodox Christian'
     }
   ];
+  houseNo: string = "";
+
+  loadHouseDetails() {
+    
+    if (this.houseNo) {
+      this.personsInHouse.length = 0;
+
+      this.personService.getPersonsByHouseNo(this.houseNo).subscribe(
+        (data) => {
+          this.personsInHouse = data;
+          console.log('Persons:', this.personsInHouse);
+        },
+        (error) => {
+          console.error('Error fetching persons:', error);
+        }
+      );
+    }
+
+
+  }
 }
