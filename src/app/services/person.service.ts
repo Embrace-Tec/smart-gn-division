@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { Person, PersonDTO } from '../models/person.model';
-import {map} from "rxjs/operators"; // Adjust the path as needed
+import { map } from "rxjs/operators"; // Adjust the path as needed
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +10,7 @@ import {map} from "rxjs/operators"; // Adjust the path as needed
 export class PersonService {
   private personCollection = 'persons'; // Firestore collection name
 
-  constructor(private firestore: AngularFirestore) {}
+  constructor(private firestore: AngularFirestore) { }
 
   // Add a new person
   addPerson(personDTO: PersonDTO): Promise<void> {
@@ -46,6 +46,15 @@ export class PersonService {
       .pipe(
         map((persons) => (persons.length > 0 ? persons[0] : undefined)) // Return first match
       );
+  }
+
+  // Get persons by house number
+  getPersonsByHouseNo(houseNo: string): Observable<Person[]> {
+    return this.firestore
+      .collection<Person>(this.personCollection, (ref) =>
+        ref.where('houseNo', '==', houseNo) // Query by house number
+      )
+      .valueChanges(); // Returns an Observable of a list of persons
   }
 
   // Update an existing person
