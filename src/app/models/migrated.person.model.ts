@@ -15,3 +15,14 @@ export interface MigratedPersonDTO {
   remark: string;
 }
 
+export interface DisplayMigratedPersonDTO{
+  nic: string; // National ID
+  name:string;
+  religion:string;
+  race:string;
+  country: string;
+  reason: string;
+  year:number;
+  remark: string;
+}
+
