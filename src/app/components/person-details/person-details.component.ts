@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Person } from '@app/models/person.model';
+import { PersonService } from '@app/services/person.service';
 
 @Component({
   selector: 'app-person-details',
@@ -6,6 +8,31 @@ import { Component } from '@angular/core';
   styleUrl: './person-details.component.css'
 })
 export class PersonDetailsComponent {
+  persons: Person[] = [];
+  constructor(private personService: PersonService) {
+
+  }
+
+  ngOnInit() {
+    this.loadPeople();
+  }
+
+  private loadPeople() {
+    this.personService.getPersons().subscribe((data) => {
+      console.log("Fetched Persons:", data);
+      this.persons = data; // ✅ Store data for use in HTML
+    });
+    // this.personService.getPersons().subscribe((data) => {
+    //   console.log("Fetched Persons:", data);
+    //   this.persons = data.map(person => ({
+    //     ...person,
+    //     // ✅ Convert Firestore Timestamp to readable Date format
+    //     dob: person.dob?.seconds
+    //       ? new Date(person.dob.seconds * 1000).toISOString().split('T')[0]
+    //       : person.dob
+    //   }));
+    // });
+  }
   Data = [
     {
       name: 'John Doe',
