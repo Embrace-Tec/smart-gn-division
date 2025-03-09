@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import emailjs from '@emailjs/browser';
 import { emailJSConfig } from '../../../environments/environment';
-import { PersonService } from '@app/services/person.service';
 
 @Component({
   selector: 'app-sixth',
@@ -10,13 +9,11 @@ import { PersonService } from '@app/services/person.service';
   styleUrls: ['./sixth.component.css']
 })
 export class SixthComponent {
-  constructor(private router: Router, private personService: PersonService) {}
-
   activeInput: HTMLInputElement | null = null;
   userId: string = '';
   phoneNumber: string = '';
-  idError: boolean = false;
-  phoneError: boolean = false;
+
+  constructor(private router: Router) {}
 
   showKeyboard(inputId: string): void {
     this.activeInput = document.getElementById(inputId) as HTMLInputElement | null;
@@ -38,56 +35,63 @@ export class SixthComponent {
   addToInput(value: string): void {
     if (this.activeInput) {
       this.activeInput.value += value;
+      if (this.activeInput.id === 'nicText') {
+        this.userId = this.activeInput.value;
+      } else if (this.activeInput.id === 'phoneText') {
+        this.phoneNumber = this.activeInput.value;
+      }
     }
   }
 
   deleteLast(): void {
     if (this.activeInput) {
       this.activeInput.value = this.activeInput.value.slice(0, -1);
+      if (this.activeInput.id === 'nicText') {
+        this.userId = this.activeInput.value;
+      } else if (this.activeInput.id === 'phoneText') {
+        this.phoneNumber = this.activeInput.value;
+      }
     }
   }
 
-  validateAndSendEmail() {
-    if (!this.isValidIdOr4N(this.userId)) {
-      this.idError = true;
-      alert('කරුණාකර වලංගු හැදුනුම්පත් අංකය හෝ වලංගු දුරකථන අංකයක් ඇතුලත් කරන්න.');
-      return;
+  validateInputs(): boolean {
+    // Validate NIC
+    if (!this.isValidNIC(this.userId)) {
+      alert('⚠️ කරුණාකර වලංගු හැදුනුම්පත් අංකය ඇතුලත් කරන්න.');
+      return false;
     }
-    this.idError = false;
 
+    // Validate Phone Number
     if (!this.isValidPhoneNumber(this.phoneNumber)) {
-      this.phoneError = true;
-      alert('කරුණාකර වලංගු දුරකථන අංකයක් ඇතුලත් කරන්න.');
-      return;
+      alert('⚠️ කරුණාකර වලංගු දුරකථන අංකයක් ඇතුලත් කරන්න.');
+      return false;
     }
-    this.phoneError = false;
 
-    this.sendEmail();
+    return true;
   }
 
-  isValidIdOr4N(value: string): boolean {
-    const nicPattern = /^\d{9}[VvXx]$|^\d{12}$/;  // Sri Lankan NIC format
-    const fourNPattern = /^4N\d{4,8}$/;           // 4N number format
-    return nicPattern.test(value) || fourNPattern.test(value);
+  isValidNIC(value: string): boolean {
+    const nicPattern = /^\d{9}[VvXx]$|^\d{12}$/; // Sri Lankan NIC format
+    return nicPattern.test(value.trim());
   }
 
   isValidPhoneNumber(value: string): boolean {
     const phonePattern = /^\d{10}$/; // Sri Lankan phone number format (10 digits)
-    return phonePattern.test(value);
+    return phonePattern.test(value.trim());
   }
 
   sendEmail() {
     emailjs.send(emailJSConfig.serviceId, emailJSConfig.templateId, {
       from_nic: this.userId,
-      message: 'Service : හදසි මරණයක් පිළිබඳ දැනුම්දීම requested by NIC : ' + this.userId + ' Phone number : ' + this.phoneNumber
+      message: `Service: හදිසි මරණයක් පිළිබඳ දැනුම්දීම requested by NIC: ${this.userId}, Phone number: ${this.phoneNumber}`
     }, emailJSConfig.publicKey)
-      .then(response => console.log('Email sent!', response))
-      .catch(error => console.error('Error:', error));
+      .then(response => console.log('✅ Email sent!', response))
+      .catch(error => console.error('❌ Error:', error));
   }
 
   openNewWindow() {
-    this.validateAndSendEmail();
-    if (!this.idError && !this.phoneError) {
+    if (this.validateInputs()) {
+      this.sendEmail();
       this.router.navigate(['/last']);
     }
   }
