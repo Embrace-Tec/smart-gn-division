@@ -1,6 +1,7 @@
 export interface House {
   id: string;
   houseNo: string;
+  houseType:string;
   address: string;
   wallType: string;
   floorType: string;
@@ -16,6 +17,7 @@ export interface House {
 
 export interface HouseDTO {
   houseNo: string;
+  houseType:string;
   address: string;
   wallType: string|undefined;
   floorType: string;
