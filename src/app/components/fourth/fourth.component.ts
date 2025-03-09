@@ -67,8 +67,8 @@ export class FourthComponent {
 
   isValidIdOr4N(value: string): boolean {
     const nicPattern = /^\d{9}[VvXx]$|^\d{12}$/;  // Sri Lankan NIC format
-    const fourNPattern = /^4N\d{4,8}$/;           // 4N number format
-    return nicPattern.test(value) || fourNPattern.test(value);
+    // const fourNPattern = /^4N\d{4,8}$/;           // 4N number format
+    return nicPattern.test(value);
   }
 
   isValidPhoneNumber(value: string): boolean {

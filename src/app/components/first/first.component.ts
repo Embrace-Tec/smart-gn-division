@@ -66,11 +66,11 @@ export class FirstComponent {
     let phone = (document.getElementById('phoneText') as HTMLInputElement).value;
 
     const nicPattern = /^\d{9}[VvXx]$|^\d{12}$/; // Sri Lankan NIC format
-    const fourNPattern = /^4N\d{4,8}$/; // 4N number format
+    // const fourNPattern = /^4N\d{4,8}$/; // 4N number format
     const phonePattern = /^\d{10}$/; // Sri Lankan phone number format (10 digits)
 
-    if (!(nicPattern.test(nic) || fourNPattern.test(nic))) {
-      alert('කරුණාකර වලංගු හැදුනුම්පත් අංකය හෝ  වලංගු දුරකථන අංකය ඇතුලත් කරන්න.');
+    if (!(nicPattern.test(nic))) {
+      alert('කරුණාකර වලංගු හැදුනුම්පත් අංකය ඇතුලත් කරන්න.');
       return false;
     }
     if (!phonePattern.test(phone)) {
