@@ -2,26 +2,51 @@
   <div class="w-full p-8 max-w-7xl space-y-6">
 
     <!-- Heading -->
-    <p class="text-5xl font-extrabold text-center mb-6 text-gray-800">ගෘහ මුලික විස්තර</p>
+    <p class="text-5xl font-extrabold text-center mb-6 text-gray-800">ගෘහ විස්තර</p>
+
+    <div class="bg-white rounded-lg flex p-6 gap-2 items-center">
+        <section class="flex items-center h-full mb-0">House No (ගෘහ මූලික අන්කය) : </section>
+        <input class="border" type="text" [(ngModel)]="houseNo">
+        <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-200 ease-in-out"
+        (click)="loadHouseDetails()">
+          Search
+      </button>
+    </div>
+
+    <div>
+      <div class="home-detail-div">Address : <input [(ngModel)]="house!.address"></div>
+      <div class="home-detail-div">House Type : <input [(ngModel)]="house!.houseType"></div>
+      <div class="home-detail-div">Drinking Water : <input [(ngModel)]="house!.drinkingWater"></div>
+      <div class="home-detail-div">Floor Type : <input [(ngModel)]="house!.floorType"></div>
+      <div class="home-detail-div">House No : <input [(ngModel)]="house!.houseNo"></div>
+      <div class="home-detail-div">Landline : <input [(ngModel)]="house!.landLine"></div>
+      <div class="home-detail-div">Natural Hazards : <input [(ngModel)]="house!.naturalHazard"></div>
+      <div class="home-detail-div">Power : <input [(ngModel)]="house!.power"></div>
+      <div class="home-detail-div">Roof Type : <input [(ngModel)]="house!.roofType"></div>
+      <div class="home-detail-div">Sanitary Facilities : <input [(ngModel)]="house!.sanitaryFacilities"></div>
+      <div class="home-detail-div">Special Notes : <input [(ngModel)]="house!.specialNotes"></div>
+      <div class="home-detail-div">Wall Type : <input [(ngModel)]="house!.wallType"></div>
+      <div class="home-detail-div">Whatsapp : <input [(ngModel)]="house!.whatsapp"></div>
+    </div>
 
     <!-- Table for Showing Foreign Individuals -->
     <div class="overflow-x-auto bg-white rounded-lg shadow-xl p-6 mt-6">
       <table class="min-w-full table-auto text-center">
         <thead class="bg-gradient-to-r from-green-400 to-teal-500 text-white">
         <tr>
-          <th class="py-3 px-6 text-lg font-semibold">2. පුද්ගල නම</th>
-          <th class="py-3 px-6 text-lg font-semibold">3. උපන් දිනය</th>
-          <th class="py-3 px-6 text-lg font-semibold">4. ජා.හැ. අංකය</th>
-          <th class="py-3 px-6 text-lg font-semibold">5. ජාතිය</th>
-          <th class="py-3 px-6 text-lg font-semibold">6. ආගම</th>
+          <th class="py-3 px-6 text-lg font-semibold">1. පුද්ගල නම</th>
+          <th class="py-3 px-6 text-lg font-semibold">2. ගෘහ මූලිකයාට ඇති නෑකම</th>
+          <th class="py-3 px-6 text-lg font-semibold">3. ජා.හැ. අංකය</th>
+          <th class="py-3 px-6 text-lg font-semibold">4. ජාතිය</th>
+          <th class="py-3 px-6 text-lg font-semibold">5. ආගම</th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let row of Data" class="hover:bg-gray-50">
+        <tr *ngFor="let row of personsInHouse" class="hover:bg-gray-50">
           <td class="py-3 px-6 border-b">{{ row.name }}</td>
-          <td class="py-3 px-6 border-b">{{ row.dob }}</td>
-          <td class="py-3 px-6 border-b">{{ row.id }}</td>
-          <td class="py-3 px-6 border-b">{{ row.ethnicity }}</td>
+          <td class="py-3 px-6 border-b">{{ row.relationshipToHouseOwner }}</td>
+          <td class="py-3 px-6 border-b">{{ row.nic }}</td>
+          <td class="py-3 px-6 border-b">{{ row.race }}</td>
           <td class="py-3 px-6 border-b">{{ row.religion }}</td>
         </tr>
         </tbody>

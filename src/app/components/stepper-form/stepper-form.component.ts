@@ -333,6 +333,7 @@ export class StepperFormComponent {
       const houseDTO: HouseDTO = {
         houseNo: combinedFormDto.householdInfo.firstCtrl,
         address: combinedFormDto.householdInfo.fourthCtrl,
+        houseType:`${combinedFormDto.housingInfo?.housingType ?? ''} ${combinedFormDto.housingInfo?.housingTypeDescription ?? ''}`.trim(),
         wallType: `${combinedFormDto.housingInfo?.wallTypeDescription ?? ''} ${combinedFormDto.housingInfo?.wallType ?? ''}`.trim(),
         floorType: `${combinedFormDto.housingInfo?.floorTypeDescription ?? ''} ${combinedFormDto.housingInfo?.floorType ?? ''}`.trim(),
         roofType: `${combinedFormDto.housingInfo?.roofTypeDescription ?? ''} ${combinedFormDto.housingInfo?.roofType ?? ''}`.trim(),
