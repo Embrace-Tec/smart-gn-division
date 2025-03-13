@@ -3,81 +3,66 @@ import { DisplayMigratedPersonDTO, MigratedPerson } from '@app/models/migrated.p
 import { Person } from '@app/models/person.model';
 import { MigratedPersonService } from '@app/services/migrated-person.service';
 import { PersonService } from '@app/services/person.service';
-import { forkJoin ,of} from 'rxjs';
-import { tap, switchMap, map } from 'rxjs/operators';
+import { forkJoin } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-foreigners-details',
   templateUrl: './foreigners-details.component.html',
-  styleUrl: './foreigners-details.component.css'
+  styleUrls: ['./foreigners-details.component.css']
 })
 export class ForeignersDetailsComponent {
-
   migratedPersonsList: MigratedPerson[] = [];
-
   displayMigratedPersonList: DisplayMigratedPersonDTO[] = [];
 
-  constructor(private migratedPersonService: MigratedPersonService, private personService: PersonService) {
+  constructor(
+    private migratedPersonService: MigratedPersonService,
+    private personService: PersonService
+  ) {
     this.loadMigratedPeople();
   }
 
   private loadMigratedPeople() {
-    this.migratedPersonService.getMigratedPersons()
-      .pipe(
-        tap((migratedPersons: MigratedPerson[]) => 
-          console.log("Fetched Migrated Persons:", migratedPersons)
-        ),
-        switchMap((migratedPersons: MigratedPerson[]) => {
-          if (!migratedPersons || migratedPersons.length === 0) {
-            console.warn("No migrated persons found!");
-            return of([]); // Return empty observable
-          }
-  
-          // Filter out invalid NICs
-          const validPersons = migratedPersons.filter(person => person.nic);
-          console.log("Valid Migrated Persons with NICs:", validPersons);
-  
-          if (validPersons.length === 0) {
-            console.warn("No valid NICs found!");
-            return of([]);
-          }
-  
-          // Map to observables
-          const personObservables = validPersons.map(person =>
-            this.personService.getPersonByNic(person.nic).pipe(
-              map((personMod: Person | undefined) => {
-                if (!personMod) {
-                  console.warn(`No person found for NIC: ${person.nic}`);
-                  return null;
-                }
-                return {
-                  nic: person.nic,
-                  name: personMod.name!,
-                  religion: personMod.religion!,
-                  race: personMod.race!,
-                  country: person.country,
-                  reason: person.reason,
-                  year: person.year,
-                  remark: person.remark
-                } as DisplayMigratedPersonDTO;
-              })
-            )
-          );
-  
-          return forkJoin(personObservables);
-        })
-      )
-      .subscribe({
-        next: (displayPeople: (DisplayMigratedPersonDTO | null)[]) => {
-          this.displayMigratedPersonList = displayPeople.filter(person => person !== null) as DisplayMigratedPersonDTO[];
-          console.log("Final Display List:", this.displayMigratedPersonList);
-        },
-        error: (err) => {
-          console.error("Error fetching data:", err);
-        }
+    console.log('Fetching migrated people data...');
+
+    this.migratedPersonService.getMigratedPersons().subscribe((migratedPersons: MigratedPerson[]) => {
+      console.log('Migrated persons fetched:', migratedPersons);
+      this.migratedPersonsList = migratedPersons;
+
+      const personRequests = migratedPersons.map(person => {
+        console.log(`Fetching details for person NIC: ${person.nic}`);
+        return this.personService.getPersonById(person.nic); // Using nic as the ID
       });
+
+      forkJoin(personRequests).pipe(
+        map((persons: (Person | undefined)[]) => {
+          console.log('Person details fetched:', persons);
+
+          return migratedPersons.map((migratedPerson, index) => {
+            const person = persons[index]; // Safe access
+            const displayPerson: DisplayMigratedPersonDTO = {
+              name: person?.name ?? 'Unknown',
+              nic: person?.nic ?? migratedPerson.nic, // Use migratedPerson.nic as fallback
+              religion: person?.religion ?? 'Not Specified',
+              race: person?.race ?? 'Not Specified',
+              country: migratedPerson.country,
+              reason: migratedPerson.reason,
+              year: migratedPerson.year,
+              remark: migratedPerson.remark ?? 'No remarks'
+            };
+
+            console.log('Formatted DisplayMigratedPersonDTO:', displayPerson);
+            return displayPerson;
+          });
+        })
+      ).subscribe((displayList: DisplayMigratedPersonDTO[]) => {
+        console.log('Final Display List:', displayList);
+        this.displayMigratedPersonList = displayList;
+      }, error => {
+        console.error('Error occurred while fetching data:', error);
+      });
+    }, error => {
+      console.error('Error fetching migrated persons:', error);
+    });
   }
-  
-  
-  
 }

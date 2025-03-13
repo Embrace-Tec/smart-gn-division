@@ -9,8 +9,9 @@ import { PersonService } from '@app/services/person.service';
 })
 export class PersonDetailsComponent {
   persons: Person[] = [];
+  searchNIC: string = '';
   constructor(private personService: PersonService) {
-
+    this.filteredPersons = []; // Initially, no data is shown
   }
 
   ngOnInit() {
@@ -33,6 +34,17 @@ export class PersonDetailsComponent {
     //   }));
     // });
   }
+
+  filteredPersons: any[] = [];
+
+  filterPersons() {
+    if (this.searchNIC) {
+      this.filteredPersons = this.persons.filter(person => person.nic === this.searchNIC);
+    } else {
+      this.filteredPersons = []; // Clear the table if no NIC is entered
+    }
+  }
+
   Data = [
     {
       name: 'John Doe',

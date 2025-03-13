@@ -2,7 +2,7 @@
   <div class="w-full p-8 max-w-7xl space-y-6">
 
     <!-- Heading -->
-    <p class="text-5xl font-extrabold text-center mb-4 text-gray-800">Filter Data - Deemana</p>
+    <p class="text-5xl font-extrabold text-center mb-4 text-white">Filter Data - Deemana</p>
 
     <!-- Combo Box for Deemana Types -->
     <div class="flex justify-center">
@@ -22,7 +22,6 @@
         <tr>
           <th class="py-3 px-6 text-lg font-semibold">1. වටිනාකම්</th>
           <th class="py-3 px-6 text-lg font-semibold">2. පුද්ගල නම</th>
-          <th class="py-3 px-6 text-lg font-semibold">3. උපන් දිනය</th>
           <th class="py-3 px-6 text-lg font-semibold">4. ජා.හැ. අංකය</th>
           <th class="py-3 px-6 text-lg font-semibold">5. ජාතිය</th>
           <th class="py-3 px-6 text-lg font-semibold">6. ආගම</th>
@@ -30,12 +29,11 @@
         </thead>
         <tbody>
         <tr *ngFor="let row of tableData" class="hover:bg-gray-50">
-          <!-- <td class="py-3 px-6 border-b">{{ row.value }}</td>
+          <td class="py-3 px-6 border-b">{{ row.value }}</td>
           <td class="py-3 px-6 border-b">{{ row.name }}</td>
-          <td class="py-3 px-6 border-b">{{ row.dob }}</td>
-          <td class="py-3 px-6 border-b">{{ row.id }}</td>
+          <td class="py-3 px-6 border-b">{{ row.nic }}</td>
           <td class="py-3 px-6 border-b">{{ row.ethnicity }}</td>
-          <td class="py-3 px-6 border-b">{{ row.religion }}</td> -->
+          <td class="py-3 px-6 border-b">{{ row.religion }}</td>
         </tr>
         </tbody>
       </table>

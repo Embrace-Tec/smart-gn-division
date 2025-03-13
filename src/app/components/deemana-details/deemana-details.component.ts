@@ -3,21 +3,15 @@ import { DonationReceived } from '@app/models/donation.received.model';
 import { Person } from '@app/models/person.model';
 import { DonationReceivedService } from "@app/services/donations-received.service";
 import { PersonService } from '@app/services/person.service';
+
 @Component({
   selector: 'app-deemana-details',
   templateUrl: './deemana-details.component.html',
-  styleUrl: './deemana-details.component.css'
+  styleUrls: ['./deemana-details.component.css']
 })
 export class DeemanaDetailsComponent {
 
-  onDeemanaSelected($event: any) {
-    console.log("in deemana selected");
-    console.log(this.selectedDeemana);
-    this.getfilteredTableData();
-  }
-
-  constructor(private donationReceivedService: DonationReceivedService, private personService: PersonService) {
-  }
+  constructor(private donationReceivedService: DonationReceivedService, private personService: PersonService) {}
 
   private donations: DonationReceived[] | null = null;
   private persons: Person[] | null = [];
@@ -38,37 +32,18 @@ export class DeemanaDetailsComponent {
   // Selected Deemana type
   selectedDeemana: number = 0;
 
-  // Example data for table
-  tableData = [
-    {
-      value: 'අස්වැසුම',
-      name: 'සුමිත් පෙරේරා',
-      dob: '1980-05-12',
-      id: '123456789',
-      ethnicity: 'සිංහල',
-      religion: 'බUDAධි'
-    },
-    {
-      value: 'සමෘද්ධි',
-      name: 'අසල්වී',
-      dob: '1985-08-24',
-      id: '987654321',
-      ethnicity: 'මූලික',
-      religion: 'කතෝලික'
-    },
-    {
-      value: 'අස්වැසුම',
-      name: 'අයෂා නගිල්',
-      dob: '1992-02-15',
-      id: '1122334455',
-      ethnicity: 'සිංහල',
-      religion: 'විශිෂ්ට'
-    }
-  ];
+  // Combined table data
+  tableData: any[] = [];
+
+  // Handle Deemana selection
+  onDeemanaSelected($event: any) {
+    console.log("Deemana selected:", this.selectedDeemana);
+    this.getfilteredTableData();
+  }
 
   // Filter table data based on selected Deemana
   getfilteredTableData() {
-    console.log("in get filtered data");
+    console.log("Fetching filtered data...");
     if (Number(this.selectedDeemana) === 1) {
       this.donationReceivedService.getAswesumaList().subscribe({
         next: (data) => {
@@ -76,14 +51,398 @@ export class DeemanaDetailsComponent {
             this.donations = data;
             console.log('Donations:', this.donations);
 
-            if (this.persons!.length > 0) { this.persons!.length = 0; }
+            // Clear previous data
+            this.persons = [];
+            this.tableData = [];
+
+            // Fetch person details for each donation
+            for (const donation of this.donations) {
+              this.personService.getPersonByNic(donation.nic.toUpperCase()).subscribe({
+                next: (person) => {
+                  if (person) {
+                    console.log('Person found:', person);
+                    this.persons?.push(person);
+
+                    // Combine donation and person data
+                    const combinedData = {
+                      value: donation.aswesumaValue, // Example: Use the relevant donation value
+                      name: person.name,
+                      dob: person.dob,
+                      nic: person.nic,
+                      ethnicity: person.race,
+                      religion: person.religion
+                    };
+
+                    // Add to table data
+                    this.tableData.push(combinedData);
+                  } else {
+                    console.log('Person not found');
+                  }
+                },
+                error: (err) => {
+                  console.error('Error fetching person:', err);
+                }
+              });
+            }
+          } else {
+            console.error("Expected an array but got:", data);
+          }
+        },
+        error: (err) => {
+          console.error('Error fetching donations:', err);
+        }
+      });
+    }
+    else if (Number(this.selectedDeemana) === 2) {
+      this.donationReceivedService.getSamurdhiList().subscribe({
+        next: (data) => {
+          if (Array.isArray(data)) {
+            this.donations = data;
+            console.log('Donations:', this.donations);
+
+            this.persons = [];
+            this.tableData = [];
 
             for (const donation of this.donations) {
               this.personService.getPersonByNic(donation.nic.toUpperCase()).subscribe({
                 next: (person) => {
                   if (person) {
                     console.log('Person found:', person);
-                    this.persons?.push(person); // Store it if needed
+                    this.persons?.push(person);
+
+                    const combinedData = {
+                      value: donation.samurdhiValue,
+                      name: person.name,
+                      dob: person.dob,
+                      nic: person.nic,
+                      ethnicity: person.race,
+                      religion: person.religion
+                    };
+
+                    // Add to table data
+                    this.tableData.push(combinedData);
+                  } else {
+                    console.log('Person not found');
+                  }
+                },
+                error: (err) => {
+                  console.error('Error fetching person:', err);
+                }
+              });
+            }
+          } else {
+            console.error("Expected an array but got:", data);
+          }
+        },
+        error: (err) => {
+          console.error('Error fetching donations:', err);
+        }
+      });
+    }
+    else if (Number(this.selectedDeemana) === 3) {
+      this.donationReceivedService.getElderlyList().subscribe({
+        next: (data) => {
+          if (Array.isArray(data)) {
+            this.donations = data;
+            console.log('Donations:', this.donations);
+
+            this.persons = [];
+            this.tableData = [];
+
+            for (const donation of this.donations) {
+              this.personService.getPersonByNic(donation.nic.toUpperCase()).subscribe({
+                next: (person) => {
+                  if (person) {
+                    console.log('Person found:', person);
+                    this.persons?.push(person);
+
+                    const combinedData = {
+                      value: donation.elderlyValue,
+                      name: person.name,
+                      dob: person.dob,
+                      nic: person.nic,
+                      ethnicity: person.race,
+                      religion: person.religion
+                    };
+
+                    // Add to table data
+                    this.tableData.push(combinedData);
+                  } else {
+                    console.log('Person not found');
+                  }
+                },
+                error: (err) => {
+                  console.error('Error fetching person:', err);
+                }
+              });
+            }
+          } else {
+            console.error("Expected an array but got:", data);
+          }
+        },
+        error: (err) => {
+          console.error('Error fetching donations:', err);
+        }
+      });
+    }
+    else if (Number(this.selectedDeemana) === 4) {
+      this.donationReceivedService.getCancerList().subscribe({
+        next: (data) => {
+          if (Array.isArray(data)) {
+            this.donations = data;
+            console.log('Donations:', this.donations);
+
+            this.persons = [];
+            this.tableData = [];
+
+            for (const donation of this.donations) {
+              this.personService.getPersonByNic(donation.nic.toUpperCase()).subscribe({
+                next: (person) => {
+                  if (person) {
+                    console.log('Person found:', person);
+                    this.persons?.push(person);
+
+                    const combinedData = {
+                      value: donation.cancerValue,
+                      name: person.name,
+                      dob: person.dob,
+                      nic: person.nic,
+                      ethnicity: person.race,
+                      religion: person.religion
+                    };
+
+                    // Add to table data
+                    this.tableData.push(combinedData);
+                  } else {
+                    console.log('Person not found');
+                  }
+                },
+                error: (err) => {
+                  console.error('Error fetching person:', err);
+                }
+              });
+            }
+          } else {
+            console.error("Expected an array but got:", data);
+          }
+        },
+        error: (err) => {
+          console.error('Error fetching donations:', err);
+        }
+      });
+    }
+    else if (Number(this.selectedDeemana) === 5) {
+      this.donationReceivedService.getDisabledList().subscribe({
+        next: (data) => {
+          if (Array.isArray(data)) {
+            this.donations = data;
+            console.log('Donations:', this.donations);
+
+            this.persons = [];
+            this.tableData = [];
+
+            for (const donation of this.donations) {
+              this.personService.getPersonByNic(donation.nic.toUpperCase()).subscribe({
+                next: (person) => {
+                  if (person) {
+                    console.log('Person found:', person);
+                    this.persons?.push(person);
+
+                    const combinedData = {
+                      value: donation.disabledValue,
+                      name: person.name,
+                      dob: person.dob,
+                      nic: person.nic,
+                      ethnicity: person.race,
+                      religion: person.religion
+                    };
+
+                    // Add to table data
+                    this.tableData.push(combinedData);
+                  } else {
+                    console.log('Person not found');
+                  }
+                },
+                error: (err) => {
+                  console.error('Error fetching person:', err);
+                }
+              });
+            }
+          } else {
+            console.error("Expected an array but got:", data);
+          }
+        },
+        error: (err) => {
+          console.error('Error fetching donations:', err);
+        }
+      });
+    }
+    else if (Number(this.selectedDeemana) === 6) {
+      this.donationReceivedService.getKidneyAssistanceList().subscribe({
+        next: (data) => {
+          if (Array.isArray(data)) {
+            this.donations = data;
+            console.log('Donations:', this.donations);
+
+            this.persons = [];
+            this.tableData = [];
+
+            for (const donation of this.donations) {
+              this.personService.getPersonByNic(donation.nic.toUpperCase()).subscribe({
+                next: (person) => {
+                  if (person) {
+                    console.log('Person found:', person);
+                    this.persons?.push(person);
+
+                    const combinedData = {
+                      value: donation.kidneyAssistanceValue,
+                      name: person.name,
+                      dob: person.dob,
+                      nic: person.nic,
+                      ethnicity: person.race,
+                      religion: person.religion
+                    };
+
+                    // Add to table data
+                    this.tableData.push(combinedData);
+                  } else {
+                    console.log('Person not found');
+                  }
+                },
+                error: (err) => {
+                  console.error('Error fetching person:', err);
+                }
+              });
+            }
+          } else {
+            console.error("Expected an array but got:", data);
+          }
+        },
+        error: (err) => {
+          console.error('Error fetching donations:', err);
+        }
+      });
+    }
+    else if (Number(this.selectedDeemana) === 7) {
+      this.donationReceivedService.getPublicAssistanceList().subscribe({
+        next: (data) => {
+          if (Array.isArray(data)) {
+            this.donations = data;
+            console.log('Donations:', this.donations);
+
+            this.persons = [];
+            this.tableData = [];
+
+            for (const donation of this.donations) {
+              this.personService.getPersonByNic(donation.nic.toUpperCase()).subscribe({
+                next: (person) => {
+                  if (person) {
+                    console.log('Person found:', person);
+                    this.persons?.push(person);
+
+                    const combinedData = {
+                      value: donation.publicAssistanceValue,
+                      name: person.name,
+                      dob: person.dob,
+                      nic: person.nic,
+                      ethnicity: person.race,
+                      religion: person.religion
+                    };
+
+                    // Add to table data
+                    this.tableData.push(combinedData);
+                  } else {
+                    console.log('Person not found');
+                  }
+                },
+                error: (err) => {
+                  console.error('Error fetching person:', err);
+                }
+              });
+            }
+          } else {
+            console.error("Expected an array but got:", data);
+          }
+        },
+        error: (err) => {
+          console.error('Error fetching donations:', err);
+        }
+      });
+    }
+    else if (Number(this.selectedDeemana) === 8) {
+      this.donationReceivedService.getMedicalAssistanceList().subscribe({
+        next: (data) => {
+          if (Array.isArray(data)) {
+            this.donations = data;
+            console.log('Donations:', this.donations);
+
+            this.persons = [];
+            this.tableData = [];
+
+            for (const donation of this.donations) {
+              this.personService.getPersonByNic(donation.nic.toUpperCase()).subscribe({
+                next: (person) => {
+                  if (person) {
+                    console.log('Person found:', person);
+                    this.persons?.push(person);
+
+                    const combinedData = {
+                      value: donation.medicalAssistanceValue,
+                      name: person.name,
+                      dob: person.dob,
+                      nic: person.nic,
+                      ethnicity: person.race,
+                      religion: person.religion
+                    };
+
+                    // Add to table data
+                    this.tableData.push(combinedData);
+                  } else {
+                    console.log('Person not found');
+                  }
+                },
+                error: (err) => {
+                  console.error('Error fetching person:', err);
+                }
+              });
+            }
+          } else {
+            console.error("Expected an array but got:", data);
+          }
+        },
+        error: (err) => {
+          console.error('Error fetching donations:', err);
+        }
+      });
+    }
+    else if (Number(this.selectedDeemana) === 9) {
+      this.donationReceivedService.getEducationSupportList().subscribe({
+        next: (data) => {
+          if (Array.isArray(data)) {
+            this.donations = data;
+            console.log('Donations:', this.donations);
+
+            this.persons = [];
+            this.tableData = [];
+
+            for (const donation of this.donations) {
+              this.personService.getPersonByNic(donation.nic.toUpperCase()).subscribe({
+                next: (person) => {
+                  if (person) {
+                    console.log('Person found:', person);
+                    this.persons?.push(person);
+
+                    const combinedData = {
+                      value: donation.educationSupportValue,
+                      name: person.name,
+                      dob: person.dob,
+                      nic: person.nic,
+                      ethnicity: person.race,
+                      religion: person.religion
+                    };
+
+                    // Add to table data
+                    this.tableData.push(combinedData);
                   } else {
                     console.log('Person not found');
                   }
@@ -103,5 +462,4 @@ export class DeemanaDetailsComponent {
       });
     }
   }
-
 }
